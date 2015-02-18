@@ -62,10 +62,31 @@ and open the template in the editor.
             </nav>
         </div>
         <div class="container">
+            888
+            <?php
+            /*
+                $ppttype = ($_GET['ppttype']==="")? 1 : $_GET['ppttype'];
+                $near = ($_GET['near']==="")? 1 : $_GET['near'];
+                $fee = ($_GET['fee']==="")? 0 : $_GET['fee'];
+               
+                
+                
+                $json = file_get_contents(printf("/rentals/%u/%u/%u", $ppttype, $near, $fee ));
+                $data = json_decode($json, TRUE);
+                
+                echo $data;*/
+            
+             foreach (($rentals) as $rental) { ?>
+                 
+            <span>** <?= $rental->RentalID; ?></span>
+            <?php 
+               }
+            ?>
+            999
             <div class="row">
                 <div class="col-md-12">
                     <h3><strong>Search Result</strong></h3>
-                    <p>Your search for rooms near <em>PSU Phuket</em> returned <strong>362 matches</strong>.</p>
+                    <p>Your search for rooms near <em>PSU Phuket</em> returned <strong><?= $count; ?> matches</strong>.</p>
                 </div>
             </div>
             <br>

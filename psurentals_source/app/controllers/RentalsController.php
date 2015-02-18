@@ -2,6 +2,10 @@
 
 class RentalsController extends BaseController {
 
+    public function getIndex() {
+        return "Hello";
+    }
+    
     public function getPropertyType() {
         $results = DB::select("select * from propertytype");
         return Response::json(array('result' => $results));

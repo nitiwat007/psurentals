@@ -1,0 +1,14 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 ก.พ. 2558, 14:32:32
+    Author     : Nontapon
+*/
+
+input[type="number"][class="form-control"] {
+    width: 100px;
+    text-align: right;
+}
