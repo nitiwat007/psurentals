@@ -1,6 +1,6 @@
 $(function () {
     getRentalDataEdit();
-    alert("Test Git");
+    alert("Test Git5555");
 });
 $(function () {
     getRentalDataEdit();
