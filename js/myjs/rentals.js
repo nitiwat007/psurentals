@@ -486,7 +486,7 @@ function uploadFile() {
                         success: function (d) {
                             pictures.push(d.result);
                             $("#upload_thumbnail").append("<div class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                    "<img src='../psurentals_uploads/" + d.result + "' alt=''></a></div>");
+                                    "<img src='../psurentals/psurentals_uploads/" + d.result + "' alt=''></a></div>");
                         },
                         error: function (xhr, status, error) {
                             alert("Error1 uploadFile : " + xhr.responseText);

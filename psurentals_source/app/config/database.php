@@ -23,7 +23,7 @@ return array(
       | you may use many connections at once using the Database library.
       |
      */
-    'default' => 'mysql',
+    'default' => 'host251',
     /*
       |--------------------------------------------------------------------------
       | Database Connections
@@ -48,6 +48,16 @@ return array(
         'mysql' => array(
             'driver' => 'mysql',
             'host' => 'localhost',
+            'database' => 'psurentals',
+            'username' => 'itdevadmin',
+            'password' => 'itdev12345*',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+        ),
+        'host251' => array(
+            'driver' => 'mysql',
+            'host' => '192.168.192.251',
             'database' => 'psurentals',
             'username' => 'itdevadmin',
             'password' => 'itdev12345*',

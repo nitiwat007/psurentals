@@ -5,6 +5,12 @@ $(function () {
         window.location.href = "rentalslist";
     });
 });
+function dateTimePicker() {
+    $("#txtAvailableFrom").datepicker();
+    $("#txtAvailableFrom").datepicker("option", "dateFormat", "dd/mm/yy");
+    $("#txtLeaseEndDate").datepicker();
+    $("#txtLeaseEndDate").datepicker("option", "dateFormat", "dd/mm/yy");
+}
 function getRentalDataEdit() {
     var RentalID = localStorage.getItem("RentalID");
     $.ajax({
@@ -19,7 +25,18 @@ function getRentalDataEdit() {
                 getPropertyType(d.result[i - 1].PropertyTypeID, d.result[i - 1].ID);
                 $("#txtAddress").val(d.result[i - 1].Address);
                 getAmphoe(d.result[i - 1].AmphoeID);
+                $AvailableDate = d.result[i - 1].AvailableDate.split('-');
+                $AvailableDateNew = $AvailableDate[2] + "/" + $AvailableDate[1] + "/" + $AvailableDate[0];
+                $("#txtAvailableFrom").datepicker();
+                $("#txtAvailableFrom").datepicker("option", "dateFormat", "dd/mm/yy");
+                $("#txtAvailableFrom").datepicker('setDate', $AvailableDateNew);
             }
+            var distanceLength = d.distance.length;
+            for (var i = 1; i <= distanceLength; i++) {
+                $("#txtDistanceTo").val(d.distance[i - 1].Distance);
+            }
+            dateTimePicker();
+
         },
         error: function (xhr, status, error) {
             alert("Error1 getRentalData : " + xhr.responseText);

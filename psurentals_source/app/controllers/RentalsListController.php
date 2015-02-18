@@ -14,7 +14,8 @@ class RentalsListController extends BaseController {
     
     public function getRentalDataEdit($RentalID) {
         $results = DB::select("select * from vrental vr, vproperty vpt where vr.PropertyID=vpt.ID and vr.RentalID='$RentalID'");
-        return Response::json(array('result' => $results));
+        $distance = DB::select("select * from distance where RID='$RentalID'");
+        return Response::json(array('result' => $results, 'distance' => $distance));
     }
     
 }
