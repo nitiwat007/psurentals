@@ -1,6 +1,6 @@
 $(function () {
     getRentalDataEdit();
-
+    alert("Test Git");
 });
 function getRentalDataEdit() {
     var RentalID = localStorage.getItem("RentalID");
