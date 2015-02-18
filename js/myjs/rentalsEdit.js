@@ -1,10 +1,9 @@
 $(function () {
     getRentalDataEdit();
-    alert("Test Git5555");
-});
-$(function () {
-    getRentalDataEdit();
-    alert("Test Git 2");
+    $("#btn_backtolist").click(function (event) {
+        event.preventDefault();
+        window.location.href = "rentalslist";
+    });
 });
 function getRentalDataEdit() {
     var RentalID = localStorage.getItem("RentalID");
@@ -40,7 +39,7 @@ function getProperty($PropertyTypeID, PropertyID) {
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlProperty").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].PropertyNameEN + " / " + d.result[i - 1].PropertyNameTH + "</option>");
             }
-            $("#ddlProperty option[value='"+PropertyID+"']").attr("selected", "selected");
+            $("#ddlProperty option[value='" + PropertyID + "']").attr("selected", "selected");
         },
         error: function (xhr, status, error) {
             alert("Error1 getProperty : " + xhr.responseText);
