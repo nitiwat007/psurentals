@@ -74,48 +74,105 @@ class RentalsListController extends BaseController {
         $WhiteGoodProvidered = Input::get('chkWhiteGoodsProvider');
         $OtherFacilities = Input::get('chkOtherFacilities');
         $PreferredTenant = Input::get('chkPreferredTenant');
-        
-        $results = DB::update("update rental set "
-                ."ProviderID='$provide_id' "
-                .",ModifiedBy='$ModifiedBy' "
-                .",ModifiedDate='$ModifiedDate' "
-                .",Title='$Title' "
-                .",Details='$Details' "
-                .",PropertyID='$PropertyID' "
-                .",Address='$Address' "
-                .",AmphoeID='$AmphoeID' "
-                .",AvailableDate='$AvailableDate' "
-                .",MonthlyRentalFeeFrom='$MonthlyRentalFeeFrom' "
-                .",MonthlyRentalFeeTo='$MonthlyRentalFeeTo' "
-                .",LeaseFrom='$LeaseFrom' "
-                .",LeaseTo='$LeaseTo' "
-                .",LeaseEndDate='$LeaseEndDate' "
-                .",HasLeaseAgreement='$HasLeaseAgreement' "
-                .",BondFrom='$BondFrom' "
-                .",BondTo='$BondTo' "
-                .",SecurityBondFrom='$SecurityBondFrom' "
-                .",SecurityBondTo='$SecurityBondTo' "
-                .",CanDailyRental='$CanDailyRental' "
-                .",DailyRentalFeeFrom='$DailyRentalFeeFrom' "
-                .",DailyRentalFeeTo='$DailyRentalFeeTo' "
-                .",CurrentOccupant='$CurrentOccupant' "
-                .",Vacancy='$Vacancy' "
-                .",BedroomFurnishing='$BedroomFurnishing' "
-                .",NumOfBathrooms='$NumOfBathrooms' "
-                .",MaleTenant='$MaleTenant' "
-                .",FemaleTenant='$FemaleTenant' "
-                .",PreferGender='$PreferGender' "
-                .",Smoking='$Smoking' "
-                .",Pet='$Pet' "
-                .",URL='$URL' "
-                .",WaterRate='$WaterRate' "
-                .",PowerRate='$PowerRate' "
-                .",Status='$Status' "
-                ."where RentalID='$RentalID'");   
-        
-        
 
+        $results = DB::update("update rental set "
+                        . "ProviderID='$provide_id' "
+                        . ",ModifiedBy='$ModifiedBy' "
+                        . ",ModifiedDate='$ModifiedDate' "
+                        . ",Title='$Title' "
+                        . ",Details='$Details' "
+                        . ",PropertyID='$PropertyID' "
+                        . ",Address='$Address' "
+                        . ",AmphoeID='$AmphoeID' "
+                        . ",AvailableDate='$AvailableDate' "
+                        . ",MonthlyRentalFeeFrom='$MonthlyRentalFeeFrom' "
+                        . ",MonthlyRentalFeeTo='$MonthlyRentalFeeTo' "
+                        . ",LeaseFrom='$LeaseFrom' "
+                        . ",LeaseTo='$LeaseTo' "
+                        . ",LeaseEndDate='$LeaseEndDate' "
+                        . ",HasLeaseAgreement='$HasLeaseAgreement' "
+                        . ",BondFrom='$BondFrom' "
+                        . ",BondTo='$BondTo' "
+                        . ",SecurityBondFrom='$SecurityBondFrom' "
+                        . ",SecurityBondTo='$SecurityBondTo' "
+                        . ",CanDailyRental='$CanDailyRental' "
+                        . ",DailyRentalFeeFrom='$DailyRentalFeeFrom' "
+                        . ",DailyRentalFeeTo='$DailyRentalFeeTo' "
+                        . ",CurrentOccupant='$CurrentOccupant' "
+                        . ",Vacancy='$Vacancy' "
+                        . ",BedroomFurnishing='$BedroomFurnishing' "
+                        . ",NumOfBathrooms='$NumOfBathrooms' "
+                        . ",MaleTenant='$MaleTenant' "
+                        . ",FemaleTenant='$FemaleTenant' "
+                        . ",PreferGender='$PreferGender' "
+                        . ",Smoking='$Smoking' "
+                        . ",Pet='$Pet' "
+                        . ",URL='$URL' "
+                        . ",WaterRate='$WaterRate' "
+                        . ",PowerRate='$PowerRate' "
+                        . ",Status='$Status' "
+                        . "where RentalID='$RentalID'");
+
+        $this->updateRoomList($RoomList, $RentalID);
+        $this->updateBedroomList($BedroomList, $RentalID);
         return Response::json(array('result' => $results));
+    }
+
+    function updateRoomList($RoomList, $rid) {
+
+        $roomsResult = $this->getRooms();
+        for ($i = 0; $i < sizeof($roomsResult); $i++) {
+            $roomsID = $roomsResult[$i]->ID;
+            $resultsDelete = DB::delete("delete from rentalmultioptions where RID='$rid' and OID='$roomsID'");
+        }
+        if ($RoomList != "") {
+            $pre_results_split = explode(",", $RoomList);
+            for ($i = 0; $i < sizeof($pre_results_split); $i++) {
+                $results_split = explode("-", $pre_results_split[$i]);
+                $oid = $results_split[0];
+                $amount = $results_split[2];
+                $results = DB::table('rentalmultioptions')->insert(
+                        array('RID' => $rid
+                            , 'OID' => $oid
+                            , 'Avaliable' => $amount
+                        )
+                );
+            }
+        }
+    }
+
+    function updateBedroomList($BedroomList, $rid) {
+
+        $bedroomsResult = $this->getBedroomsAvailable();
+        for ($i = 0; $i < sizeof($bedroomsResult); $i++) {
+            $bedroomsID = $bedroomsResult[$i]->ID;
+            $resultsDelete = DB::delete("delete from rentalmultioptions where RID='$rid' and OID='$bedroomsID'");
+        }
+
+        if ($BedroomList != "") {
+            $pre_results_split = explode(",", $BedroomList);
+            for ($i = 0; $i < sizeof($pre_results_split); $i++) {
+                $results_split = explode("-", $pre_results_split[$i]);
+                $oid = $results_split[0];
+                $amount = $results_split[2];
+                $results = DB::table('rentalmultioptions')->insert(
+                        array('RID' => $rid
+                            , 'OID' => $oid
+                            , 'Avaliable' => $amount
+                        )
+                );
+            }
+        }
+    }
+
+    function getRooms() {
+        $results = DB::select("select * from vroom");
+        return $results;
+    }
+
+    public function getBedroomsAvailable() {
+        $results = DB::select("select * from vbedroom");
+        return $results;
     }
 
     function get_Datetime_Now() {
@@ -138,9 +195,10 @@ class RentalsListController extends BaseController {
         return $datetime->format('Y\-m\-d\ h:i:s');
     }
 
-    public function test(){
-        
+    public function test() {
+
         $test = Input::get('test');
         return Response::json(array('result' => $test));
     }
+
 }

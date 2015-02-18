@@ -227,7 +227,7 @@ and open the template in the editor.
                                         <input type="number" class="form-control" id="txtNumberRooms" name="txtNumberRooms" placeholder="Number">
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" name="btnAddRooms" id="btnAddRooms" class="btn btn-default">Add</button>
+                                        <button type="button" name="btnAddRooms" id="btnAddRooms" class="btn btn-success">Add</button>
                                     </div>                                   
                                 </div>
                                 <input type="hidden" class="form-control" id="txtRoomsList" name="txtRoomsList">
@@ -261,7 +261,7 @@ and open the template in the editor.
                                         <input type="number" class="form-control" id="txtNumberBedroom" name="txtNumberBedroom" placeholder="Number">
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" name="btnAddBedroom" id="btnAddBedroom" class="btn btn-default">Add</button>
+                                        <button type="button" name="btnAddBedroom" id="btnAddBedroom" class="btn btn-success">Add</button>
                                     </div>
                                 </div>
                                 <input type="hidden" class="form-control" id="txtBedroomsList" name="txtBedroomsList">
@@ -413,7 +413,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="ddlProvider" class="col-sm-3 control-label" style="text-align:left"></label>
                                     <div class="col-sm-5">
-                                        <button type="submit" name="submit" class="btn btn-default">Update</button>
+                                        <button type="submit" name="submit" class="btn btn-success btn-block">Update</button>
                                     </div>
                                 </div>
                             </form>

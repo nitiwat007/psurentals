@@ -21,7 +21,7 @@ class RentalsController extends BaseController {
         $results = DB::select("select * from vroom");
         return Response::json(array('result' => $results));
     }
-
+    
     public function getBedroomsAvailable() {
         $results = DB::select("select * from vbedroom");
         return Response::json(array('result' => $results));
