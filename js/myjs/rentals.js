@@ -465,10 +465,6 @@ var pictures = [];
 function uploadFile() {
     $("#fileupload").change(function () {
         var file = this.files[0];
-//        var name = file.name;
-//        var size = file.size;
-//        var type = file.type;
-//alert(pictures.length);
         var pictureCheckLimit = pictures.length + this.files.length
         if (pictureCheckLimit <= 9) {
             for (var i = 0; i < this.files.length; i++) {

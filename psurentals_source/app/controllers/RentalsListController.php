@@ -6,16 +6,141 @@ class RentalsListController extends BaseController {
         $results = DB::select("select RentalID,Title,CreatedDate from rental where Status<>'rdl' order by CreatedDate desc");
         return Response::json(array('result' => $results));
     }
-    
+
     public function deleteRentals($RentalID) {
         $results = DB::update("update rental set Status='rdl' where RentalID='$RentalID'");
         return Response::json(array('result' => $results));
     }
-    
+
     public function getRentalDataEdit($RentalID) {
         $results = DB::select("select * from vrental vr, vproperty vpt where vr.PropertyID=vpt.ID and vr.RentalID='$RentalID'");
-        $distance = DB::select("select * from distance where RID='$RentalID'");
-        return Response::json(array('result' => $results, 'distance' => $distance));
+        $distance = DB::select("select * from vdistance where rentalID='$RentalID'");
+        $rooms = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=10");
+        $bedrooms = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=8");
+        $Utilities = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=1");
+        $WhiteGood = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=2");
+        $Facility = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=3");
+        $PreferredTenant = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=4");
+        $Picture = DB::select("select * from rentalpictures where RID='$RentalID'");
+        return Response::json(array('result' => $results, 'distance' => $distance
+                    , 'rooms' => $rooms, 'bedrooms' => $bedrooms
+                    , 'utilities' => $Utilities, 'whitegood' => $WhiteGood
+                    , 'facility' => $Facility, 'preferredtenant' => $PreferredTenant, 'picture' => $Picture));
     }
-    
+
+    public function updateRental($RentalID) {
+
+        $provide_id = Input::get('ddlProvider');
+        $ModifiedBy = Input::get('ddlProvider');
+        $ModifiedDate = $this->get_Datetime_Now();
+        $Title = Input::get('txtTitle');
+        $Details = Input::get('txtDescription');
+        $PropertyID = Input::get('ddlProperty');
+        $Address = Input::get('txtAddress');
+        $AmphoeID = Input::get('ddlAmphoe');
+        $AvailableDate = $this->changeFormatDate(Input::get('txtAvailableFrom'));
+        $MonthlyRentalFeeFrom = Input::get('txtRentalFeeFrom');
+        $MonthlyRentalFeeTo = Input::get('txtRentalFeeTo');
+        $LeaseFrom = Input::get('txtLeaseFrom');
+        $LeaseTo = Input::get('txtLeaseTo');
+        $LeaseEndDate = $this->changeFormatDate(Input::get('txtLeaseEndDate'));
+        $HasLeaseAgreement = Input::get('rdbWritenLease');
+        $BondFrom = Input::get('txtBondFrom');
+        $BondTo = Input::get('txtBondTo');
+        $SecurityBondFrom = Input::get('txtSecurityBondFrom');
+        $SecurityBondTo = Input::get('txtSecurityBondTo');
+        $CanDailyRental = Input::get('rdbCanDailyRental');
+        $DailyRentalFeeFrom = Input::get('txtRentFeePerDayFrom');
+        $DailyRentalFeeTo = Input::get('txtRentFeePerDayTo');
+        $CurrentOccupant = Input::get('txtOccupantsCurrent');
+        $Vacancy = Input::get('txtOccupantsVacancy');
+        $BedroomFurnishing = Input::get('ddlBedroomsFurnished');
+        $NumOfBathrooms = Input::get('txtBathrooms');
+        $MaleTenant = Input::get('txtCurrentNumberOfMaleTenants');
+        $FemaleTenant = Input::get('txtCurrentNumberOffemaleTenants');
+        $PreferGender = Input::get('rdbPreferredGender');
+        $Smoking = Input::get('ddlSmoking');
+        $Pet = Input::get('ddlPets');
+        $URL = Input::get('txtURL');
+        $WaterRate = Input::get('txtWaterRate');
+        $PowerRate = Input::get('txtPowerRate');
+        $Status = "rwt"; //Waiting for Approve
+        $RoomList = Input::get('txtRoomsList');
+        $BedroomList = Input::get('txtBedroomsList');
+        $ImageList = Input::get('txtImageList');
+        $DistanceTo = Input::get('txtDistanceTo');
+
+        $Utilities = Input::get('chkUtilities');
+        $WhiteGoodProvidered = Input::get('chkWhiteGoodsProvider');
+        $OtherFacilities = Input::get('chkOtherFacilities');
+        $PreferredTenant = Input::get('chkPreferredTenant');
+        
+        $results = DB::update("update rental set "
+                ."ProviderID='$provide_id' "
+                .",ModifiedBy='$ModifiedBy' "
+                .",ModifiedDate='$ModifiedDate' "
+                .",Title='$Title' "
+                .",Details='$Details' "
+                .",PropertyID='$PropertyID' "
+                .",Address='$Address' "
+                .",AmphoeID='$AmphoeID' "
+                .",AvailableDate='$AvailableDate' "
+                .",MonthlyRentalFeeFrom='$MonthlyRentalFeeFrom' "
+                .",MonthlyRentalFeeTo='$MonthlyRentalFeeTo' "
+                .",LeaseFrom='$LeaseFrom' "
+                .",LeaseTo='$LeaseTo' "
+                .",LeaseEndDate='$LeaseEndDate' "
+                .",HasLeaseAgreement='$HasLeaseAgreement' "
+                .",BondFrom='$BondFrom' "
+                .",BondTo='$BondTo' "
+                .",SecurityBondFrom='$SecurityBondFrom' "
+                .",SecurityBondTo='$SecurityBondTo' "
+                .",CanDailyRental='$CanDailyRental' "
+                .",DailyRentalFeeFrom='$DailyRentalFeeFrom' "
+                .",DailyRentalFeeTo='$DailyRentalFeeTo' "
+                .",CurrentOccupant='$CurrentOccupant' "
+                .",Vacancy='$Vacancy' "
+                .",BedroomFurnishing='$BedroomFurnishing' "
+                .",NumOfBathrooms='$NumOfBathrooms' "
+                .",MaleTenant='$MaleTenant' "
+                .",FemaleTenant='$FemaleTenant' "
+                .",PreferGender='$PreferGender' "
+                .",Smoking='$Smoking' "
+                .",Pet='$Pet' "
+                .",URL='$URL' "
+                .",WaterRate='$WaterRate' "
+                .",PowerRate='$PowerRate' "
+                .",Status='$Status' "
+                ."where RentalID='$RentalID'");   
+        
+        
+
+        return Response::json(array('result' => $results));
+    }
+
+    function get_Datetime_Now() {
+        $tz_object = new DateTimeZone('Asia/Bangkok');
+        //date_default_timezone_set('Brazil/East');
+
+        $datetime = new DateTime();
+        $datetime->setTimezone($tz_object);
+        return $datetime->format('Y\-m\-d\ h:i:s');
+    }
+
+    function changeFormatDate($dateInput) {
+        $tz_object = new DateTimeZone('Asia/Bangkok');
+
+        $arr = explode('/', $dateInput);
+        $newDate = $arr[2] . '-' . $arr[1] . '-' . $arr[0];
+
+        $datetime = new DateTime($newDate);
+        $datetime->setTimezone($tz_object);
+        return $datetime->format('Y\-m\-d\ h:i:s');
+    }
+
+    public function test(){
+        
+        $test = Input::get('test');
+        return Response::json(array('result' => $test));
+    }
 }
