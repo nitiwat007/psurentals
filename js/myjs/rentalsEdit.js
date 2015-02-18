@@ -2,6 +2,10 @@ $(function () {
     getRentalDataEdit();
     alert("Test Git");
 });
+$(function () {
+    getRentalDataEdit();
+    alert("Test Git 2");
+});
 function getRentalDataEdit() {
     var RentalID = localStorage.getItem("RentalID");
     $.ajax({
