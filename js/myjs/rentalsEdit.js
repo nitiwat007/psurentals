@@ -118,7 +118,7 @@ function getRentalDataEdit() {
             for (var i = 1; i <= bedroomLength; i++) {
                 var bedroomsID = d.bedrooms[i - 1].OID;
                 var bedroomsName = d.bedrooms[i - 1].OptionNameEN + " / " + d.bedrooms[i - 1].OptionNameTH;
-                var bedroomsAvailable = d.rooms[i - 1].Avaliable;
+                var bedroomsAvailable = d.bedrooms[i - 1].Avaliable;
                 bedrooms.push(bedroomsID + "-" + bedroomsName + "-" + bedroomsAvailable);
                 showBedroomsSelect();
                 deleteBedroomSelected();
@@ -389,9 +389,9 @@ function getProperty($PropertyTypeID, PropertyID) {
             $("#ddlProperty option[value='" + PropertyID + "']").attr("selected", "selected");
         },
         error: function (xhr, status, error) {
-            alert("Error1 getProperty : " + xhr.responseText);
-            alert("Error2 getProperty : " + status);
-            alert("Error3 getProperty : " + error);
+//            alert("Error1 getProperty : " + xhr.responseText);
+//            alert("Error2 getProperty : " + status);
+//            alert("Error3 getProperty : " + error);
         }
     });
 }
@@ -414,10 +414,10 @@ function getPropertyType(PropertyTypeID, PropertyID) {
             });
         },
         error: function (xhr, status, error) {
-            getPropertyType();
-            alert("Error1 getPropertyType : " + xhr.responseText);
-            alert("Error2 getPropertyType : " + status);
-            alert("Error3 getPropertyType : " + error);
+            //getPropertyType();
+//            alert("Error1 getPropertyType : " + xhr.responseText);
+//            alert("Error2 getPropertyType : " + status);
+//            alert("Error3 getPropertyType : " + error);
         }
     });
 }
@@ -474,9 +474,6 @@ function getBedroomsAvailable() {
         },
         error: function (xhr, status, error) {
             getBedroomsAvailable();
-//            alert("Error1 getBedroomsAvailable : " + xhr.responseText);
-//            alert("Error2 getBedroomsAvailable : " + status);
-//            alert("Error3 getBedroomsAvailable : " + error);
         }
     });
 }
@@ -513,7 +510,7 @@ function showRoomsSelect() {
     $("#tb_RoomsSelected tbody").html("");
     var roomsLength = rooms.length;
     for (var i = 1; i <= roomsLength; i++) {
-        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-small confirm'>Delete</button>";
+        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-danger btn-sm'>Delete</button>";
         var rooms_split = rooms[i - 1].split("-");
         $("#tb_RoomsSelected tbody").append("<tr><td>" + i + "</td><td>" + rooms_split[1] + "</td><td>" + rooms_split[2] + "</td><td>" + action_delete + "</td></tr>");
     }
@@ -554,8 +551,9 @@ function addBedroomSelected() {
 function showBedroomsSelect() {
     $("#tb_BedroomSelected tbody").html("");
     var bedroomsLength = bedrooms.length;
+    
     for (var i = 1; i <= bedroomsLength; i++) {
-        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-small confirm'>Delete</button>";
+        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-danger btn-sm'>Delete</button>";
         var bedrooms_split = bedrooms[i - 1].split("-");
         $("#tb_BedroomSelected tbody").append("<tr><td>" + i + "</td><td>" + bedrooms_split[1] + "</td><td>" + bedrooms_split[2] + "</td><td>" + action_delete + "</td></tr>");
     }
