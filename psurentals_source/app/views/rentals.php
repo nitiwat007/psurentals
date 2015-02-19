@@ -311,9 +311,9 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtWaterRate" class="col-sm-3 control-label" style="text-align:left">Power Rate <br> ค่าไฟ</label>
+                                    <label for="txtPowerRate" class="col-sm-3 control-label" style="text-align:left">Power Rate <br> ค่าไฟ</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtWaterRate" name="txtPowerRate" placeholder="Power Rate">
+                                        <input type="number" class="form-control" id="txtPowerRate" name="txtPowerRate" placeholder="Power Rate">
                                     </div>
                                 </div>
                                 <div class="form-group">

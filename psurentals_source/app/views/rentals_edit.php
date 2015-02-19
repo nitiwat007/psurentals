@@ -82,7 +82,7 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form id="frmRentals"  name="frmRentals" class="form-horizontal">                               
+                            <form id="frmRentalsUpdate"  name="frmRentalsUpdate" class="form-horizontal">                               
                                 <div class="form-group">
                                     <label for="txtTitle" class="col-sm-3 control-label" style="text-align:left">Title <br> หัวเรื่อง</label>
                                     <div class="col-sm-7">
@@ -311,9 +311,9 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtWaterRate" class="col-sm-3 control-label" style="text-align:left">Power Rate <br> ค่าไฟ</label>
+                                    <label for="txtPowerRate" class="col-sm-3 control-label" style="text-align:left">Power Rate <br> ค่าไฟ</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtWaterRate" name="txtPowerRate" placeholder="Power Rate">
+                                        <input type="number" class="form-control" id="txtPowerRate" name="txtPowerRate" placeholder="Power Rate">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -413,7 +413,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="ddlProvider" class="col-sm-3 control-label" style="text-align:left"></label>
                                     <div class="col-sm-5">
-                                        <button type="submit" name="submit" class="btn btn-default">Submit</button>
+                                        <button type="submit" name="submit" class="btn btn-default">Update</button>
                                     </div>
                                 </div>
                             </form>
