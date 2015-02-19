@@ -18,9 +18,12 @@ $(function () {
     });
     updateRental();
 });
-function updateRental(){
+function updateRental() {
     $("#frmRentalsUpdate").submit(function (event) {
         event.preventDefault();
+        Pace.restart();
+        $("#submit").text("Updateing.....");
+        $("#submit").attr('disabled', 'disabled');
         $("#txtRoomsList").val(rooms);
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
@@ -30,12 +33,15 @@ function updateRental(){
             data: $("#frmRentalsUpdate").serialize(),
             url: "updaterental/" + RentalID,
             success: function (d) {
-                alert(d.result);
+                //alert("Data Updated.");
+                //Pace.stop();
+                location.reload();
             },
             error: function (xhr, status, error) {
                 alert("Error1 newRentals : " + xhr.responseText);
                 alert("Error2 newRentals : " + status);
                 alert("Error3 newRentals : " + error);
+                $("#submit").removeAttr('disabled');
             }
         });
     });
@@ -47,7 +53,6 @@ function dateTimePicker() {
     $("#txtLeaseEndDate").datepicker("option", "dateFormat", "dd/mm/yy");
 }
 function getRentalDataEdit() {
-    
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -152,8 +157,45 @@ function getRentalDataEdit() {
             for (var i = 1; i <= pictureLength; i++) {
                 //$("#" + d.picture[i-1].OID).prop('checked', true);
                 pictures.push(d.picture[i - 1].Picture);
-                $("#upload_thumbnail").append("<div class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                        "<img src='../psurentals/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''></a></div>");
+                $("#upload_thumbnail").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                        "<img id='" + d.picture[i - 1].Picture + "' src='../psurentals/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''></a></div>");
+                $("#" + d.picture[i - 1].Picture).click(function (event) {
+                    event.preventDefault();
+                    //alert($(this).attr("id"));
+                    var pictureID=$(this).attr("id");
+                    $.confirm({
+                        text: "Are you sure you want to delete this Picture?",
+                        confirm: function (button) {
+                            // do something
+//                            $.ajax({
+//                                type: "DELETE",
+//                                dataType: "json",
+//                                url: "deleterentals/" + encodeURIComponent(RentalID),
+//                                success: function (d) {
+//                                    getRentals();
+//                                },
+//                                error: function (xhr, status, error) {
+//                                    alert("Error1 : " + xhr.responseText);
+//                                    alert("Error2 : " + status);
+//                                    alert("Error3 : " + error);
+//                                }
+//                            });
+                            //var c_value = $(this).val();
+                            //pictures.splice(c_value, 1);
+                            //alert(pictureID);
+                            var pictureIndex=$.inArray(pictureID,pictures);
+                            pictures.splice(pictureIndex, 1);
+                            $("#div_" + pictureID).remove();
+                            //alert(pictureIndex);
+                        },
+                        cancel: function (button) {
+                            // do something
+                        },
+                        confirmButton: "Yes I am",
+                        cancelButton: "No",
+                        post: true
+                    });
+                });
             }
             uploadFile();
         },
@@ -184,7 +226,11 @@ function uploadFile() {
                         success: function (d) {
                             pictures.push(d.result);
                             $("#upload_thumbnail").append("<div class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                    "<img src='../psurentals/psurentals_uploads/" + d.result + "' alt=''></a></div>");
+                                    "<img id='" + d.result + "' src='../psurentals/psurentals_uploads/" + d.result + "' alt=''></a></div>");
+                            $("#" + d.result).click(function (event) {
+                                event.preventDefault();
+                                alert($(this).attr("id"));
+                            });
                         },
                         error: function (xhr, status, error) {
                             alert("Error1 uploadFile : " + xhr.responseText);
@@ -208,7 +254,7 @@ function getSmoking() {
         dataType: "json",
         url: "smoke",
         success: function (d) {
-            $("#ddlSmoking").append("<option value=0>-- Select / เลือก --</option>");
+            //$("#ddlSmoking").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlSmoking").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].NameEN + " / " + d.result[i - 1].NameTH + "</option>");
@@ -226,7 +272,7 @@ function getPets() {
         dataType: "json",
         url: "pets",
         success: function (d) {
-            $("#ddlPets").append("<option value=0>-- Select / เลือก --</option>");
+            //$("#ddlPets").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlPets").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].NameEN + " / " + d.result[i - 1].NameTH + "</option>");
@@ -244,7 +290,7 @@ function getProvider() {
         dataType: "json",
         url: "provider",
         success: function (d) {
-            $("#ddlProvider").append("<option value=0>-- Select / เลือก --</option>");
+            //$("#ddlProvider").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlProvider").append("<option value=" + d.result[i - 1].UserID + ">" + d.result[i - 1].FirstName + " " + d.result[i - 1].LastName + "</option>");
@@ -363,7 +409,7 @@ function getBedroomFurnished(BedroomFurnishing) {
         dataType: "json",
         url: "bedroomfurnished",
         success: function (d) {
-            $("#ddlBedroomsFurnished").append("<option value=0>-- Select / เลือก --</option>");
+            //$("#ddlBedroomsFurnished").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlBedroomsFurnished").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].NameEN + " / " + d.result[i - 1].NameTH + "</option>");
@@ -428,7 +474,7 @@ function getAmphoe(AmphoeID) {
         dataType: "json",
         url: "amphoe",
         success: function (d) {
-            $("#ddlAmphoe").append("<option value=0>-- Select / เลือก --</option>");
+            //$("#ddlAmphoe").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlAmphoe").append("<option value=" + d.result[i - 1].AmphoeID + ">" + d.result[i - 1].AmphoeNameEN + " / " + d.result[i - 1].AmphoeNameTH + "</option>");
@@ -448,7 +494,7 @@ function getRooms() {
         dataType: "json",
         url: "rooms",
         success: function (d) {
-            $("#ddlRooms").append("<option value=0>-- Select / เลือก --</option>");
+            //$("#ddlRooms").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlRooms").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].NameEN + " / " + d.result[i - 1].NameTH + "</option>");
@@ -466,7 +512,7 @@ function getBedroomsAvailable() {
         dataType: "json",
         url: "bedrooms",
         success: function (d) {
-            $("#ddlBedroomsAvailable").append("<option value=0>-- Select / เลือก --</option>");
+            //$("#ddlBedroomsAvailable").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlBedroomsAvailable").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].NameEN + " / " + d.result[i - 1].NameTH + "</option>");
@@ -551,7 +597,7 @@ function addBedroomSelected() {
 function showBedroomsSelect() {
     $("#tb_BedroomSelected tbody").html("");
     var bedroomsLength = bedrooms.length;
-    
+
     for (var i = 1; i <= bedroomsLength; i++) {
         var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-danger btn-sm'>Delete</button>";
         var bedrooms_split = bedrooms[i - 1].split("-");

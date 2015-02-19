@@ -14,6 +14,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="js/jquery-ui/jquery-ui.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/myjs/rentalsEdit.js"></script>
+        <script src="js/confirm/jquery.confirm.js"></script>
         <script src="js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="js/fileupload/js/jquery.iframe-transport.js"></script>
         <script src="js/fileupload/js/jquery.fileupload-ui.js"></script>
@@ -391,8 +392,8 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="txtDescription" class="col-sm-3 control-label" style="text-align:left">Description <br> รายละเอียด</label>
-                                    <div class="col-sm-8">
-                                        <textarea id="txtDescription" name="txtDescription" class="form-control" rows="12" placeholder="Description / รายละเอียด"></textarea>
+                                    <div class="col-sm-9">
+                                        <textarea id="txtDescription" name="txtDescription" class="form-control" rows="30" placeholder="Description / รายละเอียด"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -425,7 +426,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="ddlProvider" class="col-sm-3 control-label" style="text-align:left"></label>
                                     <div class="col-sm-5">
-                                        <button type="submit" name="submit" class="btn btn-success btn-block">Update</button>
+                                        <button type="submit" id="submit" name="submit" class="btn btn-success">Update</button>
                                     </div>
                                 </div>
                             </form>

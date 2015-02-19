@@ -115,7 +115,30 @@ class RentalsListController extends BaseController {
 
         $this->updateRoomList($RoomList, $RentalID);
         $this->updateBedroomList($BedroomList, $RentalID);
+        $this->updateUtilitiesList($Utilities, $RentalID);
+        $this->updateOtherFacilitiesList($OtherFacilities, $RentalID);
+        $this->updateWhiteGoodProvideredList($WhiteGoodProvidered, $RentalID);
+        $this->updatePreferredTenantList($PreferredTenant, $RentalID);
+        $this->updateImageList($ImageList, $RentalID);
+        $this->updateDistance($DistanceTo,$RentalID,$this->getCampusByAmphoe($AmphoeID));
+
         return Response::json(array('result' => $results));
+    }
+
+    function getCampusByAmphoe($AmphoeID) {
+        $results = DB::select("select * from vcampus where AmphoeID='$AmphoeID'");
+        return $results[0]->ID;
+    }
+
+    function updateDistance($DistanceTo, $rid, $cid) {
+
+        $resultsDelete = DB::delete("delete from distance where RID='$rid' and CID='$cid'");
+        $results = DB::table('distance')->insert(
+                array('RID' => $rid
+                    , 'CID' => $cid
+                    , 'Distance' => $DistanceTo
+                )
+        );
     }
 
     function updateRoomList($RoomList, $rid) {
@@ -165,6 +188,90 @@ class RentalsListController extends BaseController {
         }
     }
 
+    function updateUtilitiesList($UtilitiesList, $rid) {
+
+        $UtilitiesListResult = $this->getUtilityIncludedInRent();
+        for ($i = 0; $i < sizeof($UtilitiesListResult); $i++) {
+            $UtilitiesListID = $UtilitiesListResult[$i]->ID;
+            $resultsDelete = DB::delete("delete from rentalmultioptions where RID='$rid' and OID='$UtilitiesListID'");
+        }
+        if ($UtilitiesList != "") {
+            for ($i = 0; $i < sizeof($UtilitiesList); $i++) {
+                $oid = $UtilitiesList[$i];
+                $results = DB::table('rentalmultioptions')->insert(
+                        array('RID' => $rid
+                            , 'OID' => $oid
+                            , 'Avaliable' => 1
+                        )
+                );
+            }
+        }
+    }
+
+    function updateWhiteGoodProvideredList($WhiteGoodProvideredList, $rid) {
+
+        $WhiteGoodProvideredListResult = $this->getWhiteGoogdsProvided();
+        for ($i = 0; $i < sizeof($WhiteGoodProvideredListResult); $i++) {
+            $WhiteGoodProvideredListID = $WhiteGoodProvideredListResult[$i]->ID;
+            $resultsDelete = DB::delete("delete from rentalmultioptions where RID='$rid' and OID='$WhiteGoodProvideredListID'");
+        }
+
+        if ($WhiteGoodProvideredList != "") {
+            for ($i = 0; $i < sizeof($WhiteGoodProvideredList); $i++) {
+                $oid = $WhiteGoodProvideredList[$i];
+                $results = DB::table('rentalmultioptions')->insert(
+                        array('RID' => $rid
+                            , 'OID' => $oid
+                            , 'Avaliable' => 1
+                        )
+                );
+            }
+        }
+    }
+
+    function updateOtherFacilitiesList($OtherFacilitiesList, $rid) {
+
+        $OtherFacilitiesListResult = $this->getOtherFacilities();
+        for ($i = 0; $i < sizeof($OtherFacilitiesListResult); $i++) {
+            $OtherFacilitiesListID = $OtherFacilitiesListResult[$i]->ID;
+            $resultsDelete = DB::delete("delete from rentalmultioptions where RID='$rid' and OID='$OtherFacilitiesListID'");
+        }
+
+        if ($OtherFacilitiesList != "") {
+            for ($i = 0; $i < sizeof($OtherFacilitiesList); $i++) {
+                $oid = $OtherFacilitiesList[$i];
+                $results = DB::table('rentalmultioptions')->insert(
+                        array('RID' => $rid
+                            , 'OID' => $oid
+                            , 'Avaliable' => 1
+                        )
+                );
+            }
+        }
+    }
+
+    function updatePreferredTenantList($PreferredTenantList, $rid) {
+
+        $PreferredTenantListResult = $this->getPerferredTenant();
+        for ($i = 0; $i < sizeof($PreferredTenantListResult); $i++) {
+            $PreferredTenantListID = $PreferredTenantListResult[$i]->ID;
+            $resultsDelete = DB::delete("delete from rentalmultioptions where RID='$rid' and OID='$PreferredTenantListID'");
+        }
+
+        if ($PreferredTenantList != "") {
+            for ($i = 0; $i < sizeof($PreferredTenantList); $i++) {
+                $oid = $PreferredTenantList[$i];
+
+                $results = DB::table('rentalmultioptions')->insert(
+                        array('RID' => $rid
+                            , 'OID' => $oid
+                            , 'Avaliable' => 1
+                        )
+                );
+            }
+        }
+    }
+
     function getRooms() {
         $results = DB::select("select * from vroom");
         return $results;
@@ -173,6 +280,49 @@ class RentalsListController extends BaseController {
     public function getBedroomsAvailable() {
         $results = DB::select("select * from vbedroom");
         return $results;
+    }
+
+    public function getUtilityIncludedInRent() {
+        $results = DB::select("select * from vutility");
+        return $results;
+    }
+
+    public function getWhiteGoogdsProvided() {
+        $results = DB::select("select * from vwhitegoods");
+        return $results;
+    }
+
+    public function getOtherFacilities() {
+        $results = DB::select("select * from vfacility");
+        return $results;
+    }
+
+    public function getPerferredTenant() {
+        $results = DB::select("select * from vtenant");
+        return $results;
+    }
+
+    public function getRentalPicture($rid) {
+        $results = DB::select("select * from rentalpictures where RID='$rid'");
+        return $results;
+    }
+
+    function updateImageList($ImageList, $rid) {
+
+        $ImageListResult = $this->getRentalPicture($rid);
+        for ($i = 0; $i < sizeof($ImageListResult); $i++) {
+            //$$ImageListResultID = $ImageListResult[$i]->ID;
+            $resultsDelete = DB::delete("delete from rentalpictures where RID='$rid'");
+        }
+
+        $pre_results_split = explode(",", $ImageList);
+        for ($i = 0; $i < sizeof($pre_results_split); $i++) {
+            $results = DB::table('rentalpictures')->insert(
+                    array('RID' => $rid
+                        , 'Picture' => $pre_results_split[$i]
+                    )
+            );
+        }
     }
 
     function get_Datetime_Now() {
@@ -196,7 +346,6 @@ class RentalsListController extends BaseController {
     }
 
     public function test() {
-
         $test = Input::get('test');
         return Response::json(array('result' => $test));
     }
