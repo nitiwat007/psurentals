@@ -10,6 +10,7 @@ and open the template in the editor.
         <script src="js/jquery-1.11.2.min.js"></script>       
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/psurentals.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
 
         <title></title>
@@ -63,27 +64,27 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <div class="well">
-                        <form class="form-inline">
+                        <form id="frmSearch" name="frmSearch" class="form-inline" action="rentals" method="GET" >
                             <div class="form-group">
                                 <label class="" for="exampleInputEmail2"> Find a / ค้นหา </label>
-                                <select class="form-control">
-                                    <option>room</option>
-                                    <option>property</option>
+                                <select name="ppttype" class="form-control">
+                                    <option value="1">room</option>
+                                    <option value="2">property</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="" for="exampleInputEmail2"> near / ใกล้ </label>
-                                <select class="form-control">
-                                    <option>Phuket / ภูเก็ต</option>
-                                    <option>Hatyai / หาดใหญ่</option>
-                                    <option>Trang / ตรัง</option>
-                                    <option>Suratthani / สุราษฎร์ธานี</option>
-                                    <option>Pattani / ปัตตานี</option>
+                                <label for="exampleInputEmail2"> near / ใกล้ </label>
+                                <select name="near" class="form-control">
+                                    <option value="1">Phuket / ภูเก็ต</option>
+                                    <option value="2">Hatyai / หาดใหญ่</option>
+                                    <option value="3">Trang / ตรัง</option>
+                                    <option value="4">Suratthani / สุราษฎร์ธานี</option>
+                                    <option value="5">Pattani / ปัตตานี</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="" for="exampleInputPassword2"> for under / ค่าเช่าไม่เกิน </label>
-                                <input style='width:100px;' type="number" class="form-control"  id="exampleInputPassword2" placeholder="">
+                                <label class="" for="fee"> for under / ค่าเช่าไม่เกิน </label>
+                                <input name="fee" type="number" class="form-control" id="fee" placeholder="" value="1000" >
                             </div>
                             <div class="form-group">
                                 <label class="" for="exampleInputPassword2"> Baht per month / บาทต่อเดือน </label>

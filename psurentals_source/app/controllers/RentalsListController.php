@@ -122,6 +122,8 @@ class RentalsListController extends BaseController {
         $this->updateImageList($ImageList, $RentalID);
         $this->updateDistance($DistanceTo,$RentalID,$this->getCampusByAmphoe($AmphoeID));
 
+        $this->updateRoomList($RoomList, $RentalID);
+        $this->updateBedroomList($BedroomList, $RentalID);
         return Response::json(array('result' => $results));
     }
 
@@ -346,6 +348,7 @@ class RentalsListController extends BaseController {
     }
 
     public function test() {
+
         $test = Input::get('test');
         return Response::json(array('result' => $test));
     }
