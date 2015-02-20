@@ -75,6 +75,4 @@ Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
 Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
 
 //NR
-Route::get('rentals', array('uses' => 'RentalsControllerNR@index'));
-Route::get('rentals/search/{propertyType}/{near}/{rentalFeeUnder}', array('uses' => 'RentalsControllerNR@basicSearchRentals'));
-Route::get('user/{name?}', function($name='World') { return 'Hello ' .  $name; });
+include 'routes2.php';

@@ -12,3 +12,84 @@ input[type="number"][class="form-control"] {
     width: 100px;
     text-align: right;
 }
+
+header {
+    margin: 0 0 10px 0;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+
+header a:hover  {
+    text-decoration: none;
+    color: #333;
+    text-shadow: 2px 2px 4px #aaa;
+}
+
+header .psulogo {
+    display: inline-block;
+    max-height: 130px;
+    width: auto;
+    height: auto;
+    //max-width:60px;
+    margin-top:10px;
+    margin-bottom:0px;
+    vertical-align: top;
+    border: 0px;
+}
+
+header .title {
+    display: inline-block;
+    padding-top: 50px;
+    padding-left: 10px;
+    vertical-align: top;
+}
+
+header .title::after {
+    diaplay: block;
+}
+
+header h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0px;
+}
+
+header h2 {
+    font-size: 1.3em;
+    font-weight: 200;
+    margin: 5px 0;
+}
+
+header .maintitle {
+
+}
+
+header .subtitle {
+
+}
+
+.rentalList {
+
+}
+
+.rentalList .rentalCode {
+    display: block;
+    text-align: right;
+    font-size: 0.7em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.rentalList .rentalCode::after {
+    clear: both;
+}
+
+.rentalList a img.cover {
+    width: 90px; 
+    height: 90px; 
+    border: 1px #e4e4e4 solid; 
+    border-radius: 4px;
+}
