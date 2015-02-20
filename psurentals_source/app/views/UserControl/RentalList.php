@@ -6,31 +6,35 @@
  */
 //var_dump($rentals->find('RentalID' => 'cdbb4730-b71f-11e4-839b-6fb5eafd2fa8'));
 //var_dump($configs);
-
 //$titleLenght = 0;
+/*
+  foreach ($configs as $config) {
 
-foreach ($configs as $config) {
+  switch ($config->KeyName) {
+  case 'DefaultCampus':
+  $defaultCampus = $config->KeyValue;
+  echo $config->KeyName . $config->KeyValue;
+  break;
+  case 'ListPerPage':
+  $listPerPage = $config->KeyValue;
+  echo $config->KeyName . $config->KeyValue;
+  break;
+  case 'LimitTitleLength':
+  $titleLenght = $config->KeyValue;
+  echo $config->KeyName . $config->KeyValue;
+  break;
+  case 'LimitDescriptionLength':
+  $descLenght = $config->KeyValue;
+  echo $config->KeyName . $config->KeyValue;
+  default:
+  break;
+  }
+  } */
 
-    switch ($config->KeyName) {
-        case 'DefaultCampus':
-            $defaultCampus = $config->KeyValue;
-            echo $config->KeyName . $config->KeyValue;
-            break;
-        case 'ListPerPage':
-            $listPerPage = $config->KeyValue;
-            echo $config->KeyName . $config->KeyValue;
-            break;
-        case 'LimitTitleLength':
-            $titleLenght = $config->KeyValue;
-            echo $config->KeyName . $config->KeyValue;
-            break;
-        case 'LimitDescriptionLength':
-            $descLenght = $config->KeyValue;
-            echo $config->KeyName . $config->KeyValue;
-        default:
-            break;
-    }
-}
+$defaultCampus = $configs->getDefaultCampusID();
+$listPerPage = $configs->getListPerPage();
+$titleLenght = $configs->getLimitTitleLength();
+$descLenght = $configs->getLimitDescriptionLength();
 
 foreach ($rentals as $rental) {
     ?>
@@ -77,4 +81,4 @@ foreach ($rentals as $rental) {
 <?php }
 ?>
 
-<?php // echo $rentals->links();  ?>
+<?php // echo $rentals->links();   ?>

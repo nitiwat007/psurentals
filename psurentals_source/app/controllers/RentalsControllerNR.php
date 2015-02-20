@@ -48,8 +48,8 @@ class RentalsControllerNR extends BaseController {
                     ->Where('MonthlyRentalFeeTo', '>=', $rentalFeeUnder);
         }
 
-        //return $query->paginate($config->getListPerPage());
-        return $query->select('vrental.*' , 'vrentalcover.Picture')->get();
+        return $query->paginate($config->getListPerPage());
+        //return $query->select('vrental.*' , 'vrentalcover.Picture')->get();
         //return Response::json(array('result' => $results));
     }
     
