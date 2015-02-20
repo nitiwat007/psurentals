@@ -8,8 +8,8 @@ class RentalsListController extends BaseController {
     }
     
     public function getRentalPage() {
-        $ConfigurationController=new ConfigurationController();
-        $getListPerPage=$ConfigurationController->getListPerPage();
+        $ConfigurationAPIController=new ConfigurationAPIController();
+        $getListPerPage=$ConfigurationAPIController->getListPerPage();
         $results = DB::table('rental')->where('Status','<>','rdl')->paginate($getListPerPage);       
         return $results;
     }

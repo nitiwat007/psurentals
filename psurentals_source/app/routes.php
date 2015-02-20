@@ -77,3 +77,4 @@ Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmph
 
 //NR
 include 'routes2.php';
+include 'routeapi.php';

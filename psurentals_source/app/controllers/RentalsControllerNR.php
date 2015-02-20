@@ -15,7 +15,7 @@ class RentalsControllerNR extends BaseController {
     }
 
     public function basicSearchRentals($propTypeID, $nearCampus, $rentalFeeUnder) {
-        $config = new ConfigurationController();
+        $config = new ConfigurationAPIController();
 
         if ($nearCampus === '' || ctype_space($nearCampus) || !is_numeric($nearCampus)) {
             $nearCampus = $config->getDefaultCampusID();
@@ -40,7 +40,7 @@ class RentalsControllerNR extends BaseController {
 
         $query = DB::table('vrental')
                 ->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')
-                ->where('Status', '=', 'rwt')
+                //->where('Status', '=', 'rwt')
                 ->where('PropertyTypeID', '=', $propTypeID)
                 ->where('AmphoeID', '=', $amphoeID);
         if ($rentalFeeUnder > 0) {

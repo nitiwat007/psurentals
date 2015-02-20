@@ -30,7 +30,7 @@
   break;
   }
   } */
-
+$configs = new ConfigurationAPIController();
 $defaultCampus = $configs->getDefaultCampusID();
 $listPerPage = $configs->getListPerPage();
 $titleLenght = $configs->getLimitTitleLength();
@@ -80,5 +80,3 @@ foreach ($rentals as $rental) {
 
 <?php }
 ?>
-
-<?php // echo $rentals->links();   ?>

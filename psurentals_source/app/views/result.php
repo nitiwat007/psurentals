@@ -24,7 +24,16 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <h3><strong>Search Result</strong></h3>
-                    <p>Your search for rooms near <em>PSU Phuket</em> returned <strong><?= $count; ?> matches</strong>.</p>
+                    <p>Your search for rooms near 
+                        <em>
+                        <?php
+                            $campus = (new CampusAPIController())->getCampusByID(Input::get('near'));
+                            if (! is_null($campus)) {
+                                echo sprintf("%s (%s)", $campus[0]->ShortNameEN, $campus[0]->ShortNameTH);
+                            } else echo "PSU"
+                        ?>
+                        </em> 
+                       returned <?= $rentals->getTotal(); ?> <strong> matches</strong>.</p>
                 </div>
             </div>
             <br>
@@ -49,7 +58,6 @@ and open the template in the editor.
                     ?>
 
                     <?php require 'UserControl/RentalList.php'; ?>
-
                 </div>
 
                 <div class="col-md-3">
@@ -83,6 +91,12 @@ and open the template in the editor.
                     </p>
                 </div>
             </div>
+             <?php
+                    foreach ($_GET as $key => $value) {
+                        $rentals->appends([$key => $value]);
+                    }
+                    echo $rentals->links();
+                    ?>
             <ul id="pagination-demo" class="pagination-sm"></ul>
             <hr>         
             <div class="row">

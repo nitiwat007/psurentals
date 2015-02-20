@@ -42,6 +42,6 @@ class PagesController extends BaseController {
         }
 
         //return $searchResults;
-        return View::make('result', ['rentals' => $searchResults, 'count' => count($searchResults), 'configs' => new ConfigurationController()]); //DB::table('configuration')->get()]);
+        return View::make('result', ['rentals' => $searchResults ]); //DB::table('configuration')->get()]);
     }
 }

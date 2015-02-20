@@ -76,6 +76,22 @@ class RentalsController extends BaseController {
         $results = DB::select("select * from vcampus where AmphoeID='$AmphoeID'");
         return $results[0]->ID;
     }
+    
+     //NR
+    private function getCampusQuery() {
+        return DB::table('vcampus');
+    }
+    
+    //NR
+    function getCampus() {
+        return $this->getCampusQuery()->get();
+    }
+    
+    //NR
+    function getCampusByID($CampusID) {
+        return $CampusID;
+        //return DB::table('vcampus')->where('ID','=',$CampusID)->first();
+    }
 
     public function newtRentals() {
 
