@@ -292,13 +292,17 @@ class RentalsController extends BaseController {
 
     function changeFormatDate($dateInput) {
         $tz_object = new DateTimeZone('Asia/Bangkok');
-
-        $arr = explode('/', $dateInput);
+        if($dateInput<>""){
+            $arr = explode('/', $dateInput);
         $newDate = $arr[2] . '-' . $arr[1] . '-' . $arr[0];
 
         $datetime = new DateTime($newDate);
         $datetime->setTimezone($tz_object);
         return $datetime->format('Y\-m\-d\ h:i:s');
+        }else{
+            return "";
+        }
+        
     }
 
     function uploadFile() {

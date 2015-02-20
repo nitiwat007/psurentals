@@ -429,6 +429,12 @@ and open the template in the editor.
                                         <button type="submit" id="submit" name="submit" class="btn btn-success">Update</button>
                                     </div>
                                 </div>
+<!--                                <div class="form-group">
+                                    <label for="ddlProvider" class="col-sm-3 control-label" style="text-align:left"></label>
+                                    <div class="col-sm-9">
+                                        <div class="alert alert-success" role="alert">Data updated.</div>
+                                    </div>
+                                </div>-->
                             </form>
                         </div>
                     </div>

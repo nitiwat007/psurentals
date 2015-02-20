@@ -18,6 +18,7 @@ and open the template in the editor.
         <script src="js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="js/fileupload/js/jquery.iframe-transport.js"></script>
         <script src="js/fileupload/js/jquery.fileupload-ui.js"></script>
+        <script src="/js/jquery.twbsPagination.js"></script>
         <title>PSU Rentals</title>
     </head>
     <body>
@@ -88,6 +89,7 @@ and open the template in the editor.
 
                         </tbody>
                     </table>
+                    <ul id="pagination" class="pagination-sm"></ul>
                 </div>
             </div>
             <hr>
@@ -101,7 +103,7 @@ and open the template in the editor.
                 <div class="col-md-4">
                     <?php include 'UserControl/Contact.php'; ?>
                 </div>
-            </div>
+            </div>           
             <hr>
             <footer>
                 <div class="row">

@@ -158,7 +158,7 @@ function getRentalDataEdit() {
                 //$("#" + d.picture[i-1].OID).prop('checked', true);
                 pictures.push(d.picture[i - 1].Picture);
                 $("#upload_thumbnail").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                        "<img id='" + d.picture[i - 1].Picture + "' src='../psurentals/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''></a></div>");
+                        "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''></a></div>");
                 $("#" + d.picture[i - 1].Picture).click(function (event) {
                     event.preventDefault();
                     //alert($(this).attr("id"));
@@ -226,7 +226,7 @@ function uploadFile() {
                         success: function (d) {
                             pictures.push(d.result);
                             $("#upload_thumbnail").append("<div class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                    "<img id='" + d.result + "' src='../psurentals/psurentals_uploads/" + d.result + "' alt=''></a></div>");
+                                    "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt=''></a></div>");
                             $("#" + d.result).click(function (event) {
                                 event.preventDefault();
                                 alert($(this).attr("id"));

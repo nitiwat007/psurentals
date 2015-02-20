@@ -6,6 +6,13 @@ class RentalsListController extends BaseController {
         $results = DB::select("select RentalID,Title,CreatedDate from rental where Status<>'rdl' order by CreatedDate desc");
         return Response::json(array('result' => $results));
     }
+    
+    public function getRentalPage() {
+        $ConfigurationController=new ConfigurationController();
+        $getListPerPage=$ConfigurationController->getListPerPage();
+        $results = DB::table('rental')->where('Status','<>','rdl')->paginate($getListPerPage);       
+        return $results;
+    }
 
     public function deleteRentals($RentalID) {
         $results = DB::update("update rental set Status='rdl' where RentalID='$RentalID'");

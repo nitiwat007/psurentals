@@ -55,6 +55,7 @@ Route::get('smoke', array('uses' => 'RentalsController@getSmoking'));
 Route::get('pets', array('uses' => 'RentalsController@getPets'));
 Route::get('provider', array('uses' => 'RentalsController@getProvider'));
 Route::get('getrentals', array('uses' => 'RentalsListController@getRentals'));
+Route::get('getrentalspage', array('uses' => 'RentalsListController@getRentalPage'));
 
 //RENTALS EDIT
 Route::get('getrentaldataedit/{RentalID}', array('uses' => 'RentalsListController@getRentalDataEdit'));
