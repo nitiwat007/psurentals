@@ -72,6 +72,11 @@ class RentalsController extends BaseController {
         return Response::json(array('result' => $results));
     }
     
+    public function getStatus() {
+        $results = DB::select("select * from status");
+        return Response::json(array('result' => $results));
+    }
+    
     function getCampusByAmphoe($AmphoeID) {
         $results = DB::select("select * from vcampus where AmphoeID='$AmphoeID'");
         return $results[0]->ID;

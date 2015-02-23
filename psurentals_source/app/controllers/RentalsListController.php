@@ -10,7 +10,11 @@ class RentalsListController extends BaseController {
     public function getRentalPage() {
         $ConfigurationAPIController=new ConfigurationAPIController();
         $getListPerPage=$ConfigurationAPIController->getListPerPage();
-        $results = DB::table('rental')->where('Status','<>','rdl')->paginate($getListPerPage);       
+        $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
+        $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
+        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','<>','rdl')->paginate($getListPerPage);       
+        $results["titleLenght"]=$titleLenght;
+        $results["descLenght"]=$descLenght;
         return $results;
     }
 
@@ -71,7 +75,7 @@ class RentalsListController extends BaseController {
         $URL = Input::get('txtURL');
         $WaterRate = Input::get('txtWaterRate');
         $PowerRate = Input::get('txtPowerRate');
-        $Status = "rwt"; //Waiting for Approve
+        $Status = Input::get('ddlStatus'); //Waiting for Approve
         $RoomList = Input::get('txtRoomsList');
         $BedroomList = Input::get('txtBedroomsList');
         $ImageList = Input::get('txtImageList');

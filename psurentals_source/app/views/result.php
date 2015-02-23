@@ -97,7 +97,7 @@ and open the template in the editor.
                     }
                     echo $rentals->links();
                     ?>
-            <ul id="pagination-demo" class="pagination-sm"></ul>
+<!--            <ul id="pagination-demo" class="pagination-sm"></ul>-->
             <hr>         
             <div class="row">
                 <div class="col-md-4">

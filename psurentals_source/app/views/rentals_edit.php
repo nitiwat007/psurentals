@@ -416,6 +416,14 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="ddlStatus" class="col-sm-3 control-label" style="text-align:left">Status</label>
+                                    <div class="col-sm-5">
+                                        <select id="ddlStatus" name="ddlStatus" class="form-control">
+                                            <option>-- Select --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="ddlProvider" class="col-sm-3 control-label" style="text-align:left">Provider</label>
                                     <div class="col-sm-5">
                                         <select id="ddlProvider" name="ddlProvider" class="form-control">

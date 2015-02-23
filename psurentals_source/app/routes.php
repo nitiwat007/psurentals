@@ -53,6 +53,7 @@ Route::get('gender', array('uses' => 'RentalsController@getPreferredGender'));
 Route::get('tenant', array('uses' => 'RentalsController@getPerferredTenant'));
 Route::get('smoke', array('uses' => 'RentalsController@getSmoking'));
 Route::get('pets', array('uses' => 'RentalsController@getPets'));
+Route::get('status', array('uses' => 'RentalsController@getStatus'));
 Route::get('provider', array('uses' => 'RentalsController@getProvider'));
 Route::get('getrentals', array('uses' => 'RentalsListController@getRentals'));
 Route::get('getrentalspage', array('uses' => 'RentalsListController@getRentalPage'));

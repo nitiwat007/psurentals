@@ -10,6 +10,7 @@ $(function () {
     getPerferredTenant();
     getSmoking();
     getPets();
+    getStatus();
     getProvider();
     getRentalDataEdit();
     $("#btn_backtolist").click(function (event) {
@@ -99,6 +100,7 @@ function getRentalDataEdit() {
                 $("#ddlSmoking option[value='" + d.result[i - 1].Smoking + "']").attr("selected", "selected");
                 $("#ddlPets option[value='" + d.result[i - 1].Pet + "']").attr("selected", "selected");
                 $("#ddlProvider option[value='" + d.result[i - 1].ProviderID + "']").attr("selected", "selected");
+                $("#ddlStatus option[value='" + d.result[i - 1].Status + "']").attr("selected", "selected");
                 $("#txtDescription").val(d.result[i - 1].Details);
                 $("#txtURL").val(d.result[i - 1].URL);
             }
@@ -280,6 +282,25 @@ function getPets() {
         },
         error: function (xhr, status, error) {
             getPets();
+        }
+    });
+}
+
+function getStatus() {
+    $("#ddlStatus").html("");
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "status",
+        success: function (d) {
+            //$("#ddlPets").append("<option value=0>-- Select / เลือก --</option>");
+            var resultLength = d.result.length;
+            for (var i = 1; i <= resultLength; i++) {
+                $("#ddlStatus").append("<option value=" + d.result[i - 1].StatusCode + ">" + d.result[i - 1].StatusNameEN + " / " + d.result[i - 1].StatusNameTH + "</option>");
+            }
+        },
+        error: function (xhr, status, error) {
+            getStatus();
         }
     });
 }

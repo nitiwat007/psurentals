@@ -12,56 +12,20 @@ function getRentals(page) {
         dataType: "json",
         url: "getrentalspage?page=" + page,
         success: function (d) {
-
-            var resultLength = d.data.length;
+            $("#divRentalList").html("");
+            var resultLength = (Object.keys(d.data).length - 2);
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
-                var no=i;
-                if(page>1){
-                    no=i+(d.from-1)
-                };
-                var action_delete = "<button id='delete' value='" + RentalID + "' class='btn btn-small confirm btn-xs btn-danger'>Delete</button>";
-                var action_edit = "<button id='edit' value='" + RentalID + "' class='btn btn-small confirm btn-xs btn-warning'>Edit</button>";
-                $("#tb_rentalsList tbody").append("<tr><td>" + no + "</td><td>" + d.data[i - 1].Title + "</td><td>" + action_delete + " " + action_edit + "</td></tr>");
-                $("table#tb_rentalsList button").click(function (event) {
+                var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
+                var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
+                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
+                $("#" + RentalID).click(function (event) {
                     event.preventDefault();
-                    var cid = $(this).attr('id');
-                    if (cid === "delete") {
-                        $.confirm({
-                            text: "Are you sure you want to delete ?",
-                            confirm: function (button) {
-                                // do something
-                                $.ajax({
-                                    type: "DELETE",
-                                    dataType: "json",
-                                    url: "deleterentals/" + encodeURIComponent(RentalID),
-                                    success: function (d) {
-                                        getRentals();
-                                        Pagination(d.total, d.per_page);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        alert("Error1 : " + xhr.responseText);
-                                        alert("Error2 : " + status);
-                                        alert("Error3 : " + error);
-                                    }
-                                });
-                            },
-                            cancel: function (button) {
-                                // do something
-                            },
-                            confirmButton: "Yes I am",
-                            cancelButton: "No",
-                            post: true
-                        });
-                    } else if (cid === "edit") {
-                        localStorage.setItem("RentalID", $(this).val());
-                        window.location.href = "rentalsedit";
-                    }
+                    localStorage.setItem("RentalID", RentalID);
+                    window.location.href = "rentalsedit";
                 });
-
             }
             Pagination(d.total, d.per_page);
-
         },
         error: function (xhr, status, error) {
             alert("Error1 getRentals : " + xhr.responseText);
@@ -70,6 +34,19 @@ function getRentals(page) {
         }
     });
 }
+function rentalListControl(imgPath, rentalID, Title, Detail) {
+
+    var imgPath = "/psurentals_uploads/" + imgPath;
+    var rentalListControl = "<div class='panel panel-default rentalList'>"
+            + "<div class='panel-body'>"
+            + "<div class='media'>"
+            + "<a class='media-left' href='#'><img alt='' src='" + imgPath + "' class='cover' >"
+            + "</a>"
+            + "<div class='media-body'><h4 class='media-heading'>"
+            + "<a id='" + rentalID + "' href=''>" + Title + "</a>"
+            + "</h4>" + Detail + "</div><br></div></div></div>";
+    $("#divRentalList").append(rentalListControl);
+}
 function Pagination(totalData, perPage) {
     var totalPages = Math.ceil((totalData / perPage));
     $('#pagination').twbsPagination({
@@ -77,6 +54,10 @@ function Pagination(totalData, perPage) {
         visiblePages: 7,
         onPageClick: function (event, page) {
             getRentals(page);
+            //window.location.href = "#header";
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
         }
     });
 }

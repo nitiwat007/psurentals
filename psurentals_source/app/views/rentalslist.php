@@ -7,22 +7,24 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <script src="js/jquery-1.11.2.min.js"></script>   
-        <script src="js/jquery-ui/jquery-ui.js"></script>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="js/jquery-ui/jquery-ui.css">
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/myjs/rentalsList.js"></script>
-        <script src="js/confirm/jquery.confirm.js"></script>
-        <script src="js/fileupload/js/vendor/jquery.ui.widget.js"></script>
-        <script src="js/fileupload/js/jquery.iframe-transport.js"></script>
-        <script src="js/fileupload/js/jquery.fileupload-ui.js"></script>
+        <script src="/js/jquery-1.11.2.min.js"></script>   
+        <script src="/js/jquery-ui/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/bootstrap/css/jquery-ui.structure.css">
+        <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="/css/psurentals.css">
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/myjs/rentalsList.js"></script>
+        <script src="/js/confirm/jquery.confirm.js"></script>
+        <script src="/js/fileupload/js/vendor/jquery.ui.widget.js"></script>
+        <script src="/js/fileupload/js/jquery.iframe-transport.js"></script>
+        <script src="/js/fileupload/js/jquery.fileupload-ui.js"></script>
         <script src="/js/jquery.twbsPagination.js"></script>
         <title>PSU Rentals</title>
     </head>
     <body>
-        <header>
+        <header id="header">
             <div class="container">
                 <div class="row">
                     <div class="col-md-1">
@@ -35,7 +37,7 @@ and open the template in the editor.
                 </div>
             </div>
         </header>
-        <div class="container">
+        <div id="navbar" class="container">
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
@@ -66,32 +68,47 @@ and open the template in the editor.
                 </div>
             </nav>
         </div>
-        <div class="container">
+        <div id="mainRentals" class="container">
             <div class="row">
-                <div class="col-md-12 col-md-offset-0">
-                    <h3><strong>Rentals Information</strong></h3>
-                    <table id="tb_rentalsList" class="table table-condensed table-hover">
-                        <thead>
-                            <tr>
-                                <td colspan="3">
-                                    <button type="button" id="btn_newrentals" class="btn btn-defaultg col-md-offset-11 btn-success">
-                                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> New
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>No.</th>
-                                <th>Title</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div id="divRentalRoleMenu" class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Provider</strong></div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">Rentals</a>
+                            <a href="#" class="list-group-item">New Rentals</a>
+                            <a href="#" class="list-group-item">Profile</a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Inspector</strong></div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">Wait for approve</a>
+                            <a href="#" class="list-group-item">Rentals</a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Admin</strong></div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">God</a>
+                        </div>
+                    </div>
 
-                        </tbody>
-                    </table>
-                    <ul id="pagination" class="pagination-sm"></ul>
+                </div>
+                <div  class="col-md-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Your Rentals / ประกาศทั้งหมดของคุณ</strong></div>
+                        <div id="divRentalList" class="panel-body">
+
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-9 col-md-offset-3">
+                    <ul id="pagination" class="pagination-sm"></ul>
+                </div>
+            </div>              
+
             <hr>
             <div class="row">
                 <div class="col-md-4">
