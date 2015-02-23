@@ -1,10 +1,18 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//NR
-Route::get('rentals/results', array('uses' => 'PagesController@searchRentalResults'));
-Route::get('testRoles', function() { return View::make('testRoles'); });
+
+/**
+ * Description of iProvider
+ *
+ * @author Nontapon
+ */
+interface iProvider {
+
+    public function IsInRoles($userroles, $roles);
+    
+}
