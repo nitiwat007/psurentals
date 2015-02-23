@@ -15,7 +15,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/js/myjs/SecurityManager.js"></script>
+        <script src="/js/myjs/SecurityManagerMenu.js"></script>
         <script src="/js/myjs/rentalsList.js"></script>
         <script src="/js/confirm/jquery.confirm.js"></script>
         <script src="/js/fileupload/js/vendor/jquery.ui.widget.js"></script>

@@ -78,7 +78,7 @@ Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmph
 
 
 //ROLE PROVIDER
-Route::get('isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
+Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
 
 //NR
 include 'routes2.php';
