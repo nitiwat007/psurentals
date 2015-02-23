@@ -61,21 +61,5 @@ function Pagination(totalData, perPage) {
         }
     });
 }
-//function getRole(){
-//    $.ajax({
-//        type: "GET",
-//        dataType: "json",
-//        url: "http://api.phuket.psu.ac.th/roleprovider/service/getroles/ee49eee0-8c02-11e4-8d14-3d05c02b9d37/nitiwat.t",
-//        success: function (d) {
-//            alert(d.result[0].role_name_thai);
-//        },
-//        error: function (xhr, status, error) {
-//            getSmoking();
-////            alert("Error1 getSmoking : " + xhr.responseText);
-////            alert("Error2 getSmoking : " + status);
-////            alert("Error3 getSmoking : " + error);
-//        }
-//    });
-//}
 
 

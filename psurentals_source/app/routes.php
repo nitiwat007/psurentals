@@ -76,6 +76,10 @@ Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
 //TEST
 Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
 
+
+//ROLE PROVIDER
+Route::get('isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
+
 //NR
 include 'routes2.php';
 include 'routeapi.php';

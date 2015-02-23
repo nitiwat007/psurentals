@@ -18,7 +18,7 @@ and open the template in the editor.
         <script src="js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="js/fileupload/js/jquery.iframe-transport.js"></script>
         <script src="js/fileupload/js/jquery.fileupload-ui.js"></script>
-         <link href="js/pace/CenterAtom.css" rel="stylesheet" />
+        <link href="js/pace/CenterAtom.css" rel="stylesheet" />
         <script src="js/pace/pace.js"></script>
         <script type="text/javascript">
             paceOptions = {

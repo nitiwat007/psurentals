@@ -15,12 +15,25 @@ and open the template in the editor.
         <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/myjs/SecurityManager.js"></script>
         <script src="/js/myjs/rentalsList.js"></script>
         <script src="/js/confirm/jquery.confirm.js"></script>
         <script src="/js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="/js/fileupload/js/jquery.iframe-transport.js"></script>
         <script src="/js/fileupload/js/jquery.fileupload-ui.js"></script>
         <script src="/js/jquery.twbsPagination.js"></script>
+        <link href="js/pace/CenterAtom.css" rel="stylesheet" />
+        <script src="js/pace/pace.js"></script>
+        <script type="text/javascript">
+            paceOptions = {
+                ajax: true,
+                startOnPageLoad: false,
+                restartOnRequestAfter: false,
+                elements: {
+                    selectors: ['body']
+                }
+            };
+        </script>
         <title>PSU Rentals</title>
     </head>
     <body>
@@ -71,7 +84,7 @@ and open the template in the editor.
         <div id="mainRentals" class="container">
             <div class="row">
                 <div id="divRentalRoleMenu" class="col-md-3">
-                    <div class="panel panel-default">
+<!--                    <div class="panel panel-default">
                         <div class="panel-heading"><strong>Provider</strong></div>
                         <div class="list-group">
                             <a href="#" class="list-group-item">Rentals</a>
@@ -91,8 +104,7 @@ and open the template in the editor.
                         <div class="list-group">
                             <a href="#" class="list-group-item">God</a>
                         </div>
-                    </div>
-
+                    </div>-->
                 </div>
                 <div  class="col-md-9">
                     <div class="panel panel-default">
