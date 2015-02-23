@@ -7,11 +7,12 @@
  */
 
 /**
- * Description of Provider
+ * Description of PSUPKTProvider
  *
  * @author Nontapon
  */
-class Provider implements iProvider {
+class PSUPKTRoleProvider extends Provider {
+
     /**
      * 
      * @var Singleton
@@ -22,6 +23,18 @@ class Provider implements iProvider {
         // Your "heavy" initialization stuff here
     }
 
+    public static function getRoles($username) {
+        //how to get data from 
+        //http://api.phuket.psu.ac.th/roleprovider/service/getroles/%7Bappkey%7D/%7Busername%7D
+        
+        $config = new ConfigurationAPIController();
+        $appKey = $config->getApplicationKey();
+        $providerURL = $config->getRoleProviderURL();
+        
+        return file_get_contents(sprintf("%s/%s/%s", $providerURL, $appKey, $username));
+        //return ['doctor', 'admin'];
+    }
+
     public static function getInstance() {
         if (is_null(self::$instance)) {
             self::$instance = new self();
@@ -29,17 +42,11 @@ class Provider implements iProvider {
         return self::$instance;
     }
 
-    
-    public static function getRoles($username) {
-        return ['Not Implemented'];
-    }
-    
-    //put your code here
     public static function isInRoles($userroles, $roles) {
-        try {
+         try {
             foreach ($userroles as $urole) {
                 foreach ($roles as $role) {
-                    if ($urole === $role) {
+                    if ($urole->role === $role) {
                         return TRUE;
                     }
                 }
@@ -48,6 +55,8 @@ class Provider implements iProvider {
             //echo $exc->getTraceAsString();
             return FALSE;
         }
+        
+        return "FALSE";
     }
 
 }

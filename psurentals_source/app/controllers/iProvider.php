@@ -13,6 +13,7 @@
  */
 interface iProvider {
 
-    public function IsInRoles($userroles, $roles);
+    public static function getRoles($username);
+    public static function isInRoles($userroles, $roles);
     
 }
