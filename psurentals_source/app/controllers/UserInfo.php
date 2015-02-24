@@ -8,8 +8,13 @@
 
 class UserInfo
 {
-    public $name;
+    public $userName;
     public $isAuthentication;
-    public $successAuthenticationProvider;      
+    public $successAuthenticationProvider;
+    public $profileProvider;
+    public $fullName;
+    public $email;
+    public $organization;
+    public $position;
     public $roles;
 }
