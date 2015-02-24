@@ -36,6 +36,10 @@ $listPerPage = $configs->getListPerPage();
 $titleLenght = $configs->getLimitTitleLength();
 $descLenght = $configs->getLimitDescriptionLength();
 
+/*
+ * ข้อมูลที่รับเข้ามาจะอยู่ภายใต้ตัวแปรชื่อ $rentals
+ * เพื่อวนแสดง List ของ rentals
+ */
 foreach ($rentals as $rental) {
     ?>
     <span></span><br />   
@@ -43,9 +47,13 @@ foreach ($rentals as $rental) {
     <div class="panel panel-default rentalList">
         <div class="panel-body">
             <div class="media">
+                <input id="hrental<?= $rental->RentalID; ?>" type="hidden" value='<?= json_encode($rental) ?>' />
                 <span class='rentalCode'><?= $rental->RentalID; ?></span>
                 <a class="media-left" href="#">
                     <?php
+                    /*
+                     * Prepare URL for picture
+                     */
                     $host = explode('/', $_SERVER['SERVER_PROTOCOL'])[0] . '://' . $_SERVER['HTTP_HOST'];
                     //$url =  $host . '/rentals/cover/' . $rental->RentalID;
                     //echo $url;
@@ -58,21 +66,31 @@ foreach ($rentals as $rental) {
                     <img alt="" src='<?= $imgPath ?>' class='cover' >
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading"><a href="/rentals/view/<?= $rental->RentalID ?>">
+                    <h4 class="media-heading"><a class="title" id="<?= $rental->RentalID ?>" href="/detail">
                             <?php
                             if (strlen($rental->Title) > $titleLenght) {
                                 echo substr($rental->Title, 0, $titleLenght - 3) . "...";
                             } else
                                 echo $rental->Title;
                             ?></a></h4>
-                            <?php
+                    <div class="monthlyfee">
+                        <span class="monthlyfeefrom"><?= $rental->MonthlyRentalFeeFrom ?></span>
+                        <?php
+                        if ($rental->MonthlyRentalFeeFrom != $rental->MonthlyRentalFeeTo) {
+                            echo '<span class="monthlyfeeto">' . $rental->MonthlyRentalFeeTo . '</span>';
+                        }
+                        ?>
+                    </div>
+
+                    <?php
                     if (strlen($rental->Details) > $descLenght) {
                         echo substr($rental->Details, 0, $descLenght - 3) . "...";
                     } else
                         echo $rental->Details;
                     ?>
                 </div>
-                <br>
+                <div id="status" class="status <?= $rental->Status ?>" style="display: none;">
+                            <?= $rental->StatusNameEN . " / " . $rental->StatusNameTH ?></div>
             </div>
         </div>
     </div>
@@ -80,3 +98,21 @@ foreach ($rentals as $rental) {
 
 <?php }
 ?>
+    
+<script>
+    $(function () {
+        var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if (userInfo.isAuthentication) {
+            $(".status").show();
+        } else
+            $(".status").hide();
+        
+        $(".title").click(function(event) {
+            event.preventDefault();
+            var rental =  $("#hrental" + $(this).attr('id'));
+            localStorage.setItem("currentRental", rental.val());
+            alert(JSON.parse(rental.val()).Title);
+            window.location.href = $(this).attr('href');
+        })
+    });
+</script>

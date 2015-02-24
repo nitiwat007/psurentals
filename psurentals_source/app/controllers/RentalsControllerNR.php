@@ -40,7 +40,7 @@ class RentalsControllerNR extends BaseController {
 
         $query = DB::table('vrental')
                 ->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')
-                //->where('Status', '=', 'rwt')
+                ->where('Status', '=', 'rap')
                 ->where('PropertyTypeID', '=', $propTypeID)
                 ->where('AmphoeID', '=', $amphoeID);
         if ($rentalFeeUnder > 0) {

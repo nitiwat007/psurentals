@@ -93,3 +93,37 @@ header .subtitle {
     border: 1px #e4e4e4 solid; 
     border-radius: 4px;
 }
+
+.rentalList .monthlyfee {
+    font-weight: bold;
+    color: darkslategrey;
+}
+
+.rentalList .monthlyfee::before {
+    content: "Fee : ";
+}
+
+.rentalList .monthlyfee::after {
+    content: " Baht/Month";
+}
+
+.rentalList .monthlyfeeto::before {
+    content: " - ";
+}
+
+.rentalList .status {
+    margin-top: 10px;
+    float: right;
+    padding: 5px 20px;
+    text-align: right;
+    border-radius: 25px;
+}
+
+.rentalList .status::after {
+    clear: both;
+}
+
+.rentalList .status.rap {
+    color: white;
+    background-color: green;
+}
