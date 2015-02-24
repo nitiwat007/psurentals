@@ -1,18 +1,17 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-class PSUPKTAuthenProvider implements iAuthentication  {
-    
+class PSUPKTProfileProvider extends ProfileProvider {
     function __construct() {
         
     }
-    
-    public function ValidateUser($username, $password) {
+
+    function getUserDetails($username, $password) {
         $config = new ConfigurationAPIController();
         
         //do something with PSU Passport
@@ -28,8 +27,8 @@ class PSUPKTAuthenProvider implements iAuthentication  {
         
         $context = stream_context_create($opts);
         
-        $function = $config->getAuthenOperation();
-        $client = new SoapClient($config->getAuthenServiceURL(), 
+        $function = $config->getProfileOperation();
+        $client = new SoapClient($config->getProfileServiceURL(), 
                 array('stream_context' => $context,
                       'cache_wsdl' => WSDL_CACHE_NONE));
         $request = array(
@@ -37,22 +36,15 @@ class PSUPKTAuthenProvider implements iAuthentication  {
             'password' => $password
         );
         $result = $client->$function($request);
-        $authen = $result->$config->getAuthenResultProperty();
-
-//        if ($authen) {
-//            
-//        } else {
-//            return Response::json(array('login_status' => $authen, 'username' => $username));
-//        }       
+        $profile = $result->config->getProfileResultProperty();
         
-        //and then
-        if ($authen) {
+        if (is_null($profile)) {
             $userInfo = new UserInfo();
-            $userInfo->userName = $username;
+            $userInfo->name = $username;
         } else {
             return null;
         }
         return $userInfo;
     }
-}
 
+}

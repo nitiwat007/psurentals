@@ -5,7 +5,7 @@
         if(userInfo==null){
             $("#loginName").text("Sign In");
         }else{
-            $("#loginName").text(userInfo.name);
+            $("#loginName").text(userInfo.userName);
         }
         
     });

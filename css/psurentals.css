@@ -117,6 +117,7 @@ header .subtitle {
     padding: 5px 20px;
     text-align: right;
     border-radius: 25px;
+    color: white;
 }
 
 .rentalList .status::after {
@@ -124,6 +125,38 @@ header .subtitle {
 }
 
 .rentalList .status.rap {
+    background-color: green;
+}
+
+.rentalList .status.rco {
+    background-color: gray;
+}
+
+.rentalList .status.rup {
+    background-color: red;
+}
+
+.rentalList .status.rwt {
+    background-color: yellow;
+}
+
+.user .status {
+    margin-top: 10px;
+    float: right;
+    padding: 5px 20px;
+    text-align: right;
+    border-radius: 25px;
     color: white;
+}
+
+.user .status::after {
+    clear: both;
+}
+
+.user .status.ubk {
+    background-color: red;
+}
+
+.user .status.uno {
     background-color: green;
 }

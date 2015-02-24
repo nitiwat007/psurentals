@@ -53,15 +53,44 @@ class ConfigurationAPIController extends BaseController {
         return $obj->KeyValue;
     }
     
+    /*
+     * Role Provider
+     */
     public function getApplicationKey() {
         return Config::get('aaa.applicationKey');
     }
     
-    public function getRoleProviderURL () {
+    public function getRoleProviderURL() {
         return Config::get('aaa.roleProviderURL'); 
     }
     
-    public function getAuthenServiceURL () {
+    /*
+     *  Authentication Provider
+     */
+    public function getAuthenServiceURL() {
         return Config::get('aaa.authenServiceURL');
+    }
+      
+    public function getAuthenOperation() {
+        return Config::get('aaa.authenOperation');
+    }
+    
+    public function getAuthenResultProperty() {
+        return Config::get('aaa.authenResultProperty');
+    }
+    
+    /*
+     * Profile Provider
+     */
+    public function getProfileServiceURL() {
+        return Config::get('aaa.profileServiceURL');
+    }
+    
+    public function getProfileOperation() {
+        return Config::get('aaa.profileOperation');
+    }
+    
+    public function getProfileResultProperty() {
+        return Config::get('aaa.profileResultProperty');
     }
 }
