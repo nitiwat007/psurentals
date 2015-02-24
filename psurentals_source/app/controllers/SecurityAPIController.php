@@ -20,16 +20,25 @@ class SecurityAPIController extends BaseController {
 
     private $userInfo;
     private $authenProviders;
-    private $roleProvider;
-
+    private $roleProviders;
+    
+    private static $instance;
+    
     function __construct() {
         //ตัวอย่างการสร้าง Class และเรียกใช้แบบปกติ
-        $this->authenProviders = [new PSUPKTAuthenProvider()];
+        $this->authenProviders = [new LocalAuthenProvider(), new PSUPKTAuthenProvider()];
         
         //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
-        $this->roleProvider = PSUPKTRoleProvider::getInstance();
+        $this->roleProviders = [PSUPKTRoleProvider::getInstance()];
     }
     
+    public static function getInstance() {
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
     //function __construct($username, $password) {
 //        //Local Authentication
 //        $this->userInfo = null;
@@ -58,30 +67,36 @@ class SecurityAPIController extends BaseController {
     
     public function authentication($username, $password) {
          //Local Authentication
-        $this->userInfo = null;
+        $this->userInfo = new UserInfo();
+        $this->userInfo->name = $username;
+        $this->userInfo->isAuthentication = FALSE;
         
+        //วนลูปตรวจสอบกับ Authen Provider ทั้งหมดที่ลงทะเบียนไว้
         foreach ($this->authenProviders as $aprovider) {
-            $this->userInfo = $this->providerAuthentication($username, $password, $aprovider);
+            $result = $this->providerAuthentication($username, $password, $aprovider);
             
-            if (! is_null($this->userInfo)) {
-                break;
+            if (! is_null($result)) {
+                $this->userInfo->isAuthentication = TRUE;
+                $this->userInfo->successAuthenticationProvider = get_class($aprovider);
             }
         }
         
-        if (is_null($this->userInfo)) {
-            //Remote Authentication
-            //ตัวอย่างการสร้าง Class แบบปกติ
-            $this->userInfo = $this->providerAuthentication($username, $password, $this->authenProvider);
-        }
-        
-        if (! is_null($this->userInfo)) {
+        //return Response::json(['userInfo' => $this->userInfo]);
+        if ( $this->userInfo->isAuthentication) {
             //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
-            
-            //$userInfo->roles = [];
-            $this->userInfo->roles = $this->getUserRoles($username, $this->roleProvider);
+            $roles = [];
+            foreach ($this->roleProviders as $rprovider) {                
+                $result = $this->getUserRoles($username, $rprovider);
+                
+                array_push($roles, $result);
+            }
+            $this->userInfo->roles = $roles;
         }
-        
         return $this->userInfo;
+    }
+    
+    public function authenticationJSON($username, $password) {
+        return Response::json(['userInfo' => $this->authentication($username, $password)]);
     }
     
     private function providerAuthentication($username, $password, iAuthentication $provider) {
@@ -89,7 +104,7 @@ class SecurityAPIController extends BaseController {
         return $provider->ValidateUser($username, $password);
     }
 
-    private function getUserRoles($username, iProvider $provider) {
+    private function getUserRoles($username, iRoleProvider $provider) {
         return $provider->getRoles($username);
     }
 
@@ -100,9 +115,20 @@ class SecurityAPIController extends BaseController {
         return $this->userInfo;
     }
     
-    public function isInRoles($roles) {
-        return $this->roleProvider->isInRoles($this->user->roles, $roles);
+    public static function isInRoles($userInfo, $rolesNameEN) {
+        $result = FALSE;
+        foreach (SecurityAPIController::getInstance()->roleProviders as $rprovider) {
+            $result = $rprovider->isInRoles($userInfo->name, $rolesNameEN);
+            if ($result) {
+                break;
+            }
+        }
+        return $result;
     }
     
-
+    public function isInRolesJSON($userName, $rolesNameEN) {
+       $userInfo = new UserInfo();
+       $userInfo->name=$userName;
+        return Response::json(['IsInRoles' => SecurityAPIController::isInRoles($userInfo, $rolesNameEN)]);
+    }
 }

@@ -18,6 +18,10 @@ class PSUPKTAuthenProvider implements iAuthentication  {
         $opts = array(
             'http' => array(
                 'user_agent' => 'PHPSoapClient'
+            ),
+            'ssl' => array(
+                'verify_peer'       => false,
+                'verify_peer_name'  => false,
             )
         );
         
