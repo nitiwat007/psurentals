@@ -38,6 +38,9 @@ Route::post('/upload', function() {
 Route::get('/rentalsedit', function() {
     return View::make('rentals_edit');
 });
+Route::get('/login', function() {
+    return View::make('login');
+});
 
 //RENTALS GET
 Route::get('propertytype', array('uses' => 'RentalsController@getPropertyType'));
@@ -79,6 +82,7 @@ Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmph
 
 //ROLE PROVIDER
 Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
+Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
 
 //NR
 include 'routes2.php';

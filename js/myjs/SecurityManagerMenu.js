@@ -1,4 +1,5 @@
 $(function () {
+    dataTest();
     getMenu();
 });
 function getProviderMenu() {

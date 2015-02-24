@@ -19,5 +19,21 @@ class TestRoleController extends BaseController {
         }
         return Response::json(['result' => $isInRoles]);
     }
+    
+    function authen($username,$password){
+        
+        $function = "Authenticate";
+        $client = new SoapClient("https://passport.phuket.psu.ac.th/Authentication/Authentication.asmx?wsdl");
+        $request = array(
+            'username' => $username,
+            'password' => $password
+        );
+        $result = $client->$function($request);
+        $authen = $result->AuthenticateResult;
+
+        
+        
+        return Response::json(['result' => $authen]);
+    }
 
 }

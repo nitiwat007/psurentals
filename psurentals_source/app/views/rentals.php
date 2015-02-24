@@ -7,16 +7,16 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <script src="js/jquery-1.11.2.min.js"></script>   
-        <script src="js/jquery-ui/jquery-ui.js"></script>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="js/jquery-ui/jquery-ui.css">
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/myjs/rentals.js"></script>
-        <script src="js/fileupload/js/vendor/jquery.ui.widget.js"></script>
-        <script src="js/fileupload/js/jquery.iframe-transport.js"></script>
-        <script src="js/fileupload/js/jquery.fileupload-ui.js"></script>
+        <script src="/js/jquery-1.11.2.min.js"></script>   
+        <script src="/js/jquery-ui/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/myjs/rentals.js"></script>
+        <script src="/js/fileupload/js/vendor/jquery.ui.widget.js"></script>
+        <script src="/js/fileupload/js/jquery.iframe-transport.js"></script>
+        <script src="/js/fileupload/js/jquery.fileupload-ui.js"></script>
         <title>PSU Rentals</title>
     </head>
     <body>
