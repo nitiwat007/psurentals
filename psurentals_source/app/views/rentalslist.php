@@ -65,17 +65,11 @@ and open the template in the editor.
                     <div class="collapse navbar-collapse" id="navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="#">Home</a>
-                            </li>
-                            <li>
-                                <a href="#">Menu2</a>
-                            </li>
-                            <li>
-                                <a href="#">Menu3</a>
+                                <a href="rentalslist">Home</a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" style="margin-right:20px;">
-                            <li><a href="../navbar/">Login or Register</a></li>
+                            <li><?php include 'UserControl/LoginName.php'; ?></li>
                         </ul>
                     </div>
                 </div>

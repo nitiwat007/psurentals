@@ -15,6 +15,7 @@ $(function () {
         getStatus();
         getProvider();
         getRentalDataEdit();
+        checkEditPermission();
         $("#btn_backtolist").click(function (event) {
             event.preventDefault();
             window.location.href = "rentalslist";
@@ -39,9 +40,9 @@ function updateRental() {
             data: $("#frmRentalsUpdate").serialize(),
             url: "updaterental/" + RentalID,
             success: function (d) {
-                //alert("Data Updated.");
+                //alert(d.result);
                 //Pace.stop();
-                location.reload();
+               location.reload();
             },
             error: function (xhr, status, error) {
                 alert("Error1 newRentals : " + xhr.responseText);
@@ -106,6 +107,7 @@ function getRentalDataEdit() {
                 $("#ddlPets option[value='" + d.result[i - 1].Pet + "']").attr("selected", "selected");
                 $("#ddlProvider option[value='" + d.result[i - 1].ProviderID + "']").attr("selected", "selected");
                 $("#ddlStatus option[value='" + d.result[i - 1].Status + "']").attr("selected", "selected");
+                $("#txtStatus").val(d.result[i - 1].Status);
                 $("#txtDescription").val(d.result[i - 1].Details);
                 $("#txtURL").val(d.result[i - 1].URL);
             }
@@ -293,6 +295,9 @@ function getPets() {
 
 function getStatus() {
     $("#ddlStatus").html("");
+    //$('#ddlStatus').attr('disabled', 'disabled');
+    //$('#ddlStatus').attr('readonly', true);
+    $('#ddlStatus').attr("disabled", true); 
     $.ajax({
         type: "GET",
         dataType: "json",

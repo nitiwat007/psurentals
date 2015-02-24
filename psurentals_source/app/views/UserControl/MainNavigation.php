@@ -23,7 +23,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" style="margin-right:20px;">
-                    <li><a href="../navbar/">Login or Register</a></li>
+                    <li><?php include 'LoginName.php'; ?></li>
                 </ul>
             </div>
         </div>

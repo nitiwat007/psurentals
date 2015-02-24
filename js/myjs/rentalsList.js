@@ -1,17 +1,21 @@
 $(function () {
-    getRentals();
-    checkRole();
-    $("#btn_newrentals").click(function (event) {
-        event.preventDefault();
-        window.location.href = "rentals";
-    });
+    if (userInfo.isAuthentication) {
+        getRentals();
+        checkRole();
+        $("#btn_newrentals").click(function (event) {
+            event.preventDefault();
+            window.location.href = "rentals";
+        });
+    } else {
+        window.location.href = "home";
+    }
 });
 function getRentals(page) {
     $("#tb_rentalsList tbody").html("");
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "getrentalspage/"+ userInfo.name +"?page=" + page,
+        url: "getrentalspage/" + userInfo.name + "?page=" + page,
         success: function (d) {
             $("#divRentalList").html("");
             var resultLength = (Object.keys(d.data).length - 2);

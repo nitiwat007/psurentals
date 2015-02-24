@@ -1,8 +1,9 @@
 var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+var roles = userInfo.roles;
 function checkRole() {
-    var roles = userInfo.roles;
+
     getProviderMenu();
-    for (var i = 0; i <= roles.length; i++) {
+    for (var i = 0; i < roles.length; i++) {
         switch (roles[i].nameEN) {
             case "Admin":
                 getAdminMenu();
@@ -46,6 +47,17 @@ function getAdminMenu() {
         $("#divRentalRoleMenu").append(Menu);
     }
 }
+function checkEditPermission() {
+    for (var i = 0; i < roles.length; i++) {
+        switch (roles[i].nameEN) {
+            case "Admin":
 
-
+                break;
+            case "Inspector":
+                //$('#ddlStatus').attr('readonly', false);
+                $('#ddlStatus').attr("disabled", false); 
+                break;
+        }
+    }
+}
 

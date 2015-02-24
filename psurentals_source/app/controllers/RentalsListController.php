@@ -76,6 +76,9 @@ class RentalsListController extends BaseController {
         $WaterRate = Input::get('txtWaterRate');
         $PowerRate = Input::get('txtPowerRate');
         $Status = Input::get('ddlStatus'); //Waiting for Approve
+        if($Status==null){
+            $Status=Input::get('txtStatus');
+        }
         $RoomList = Input::get('txtRoomsList');
         $BedroomList = Input::get('txtBedroomsList');
         $ImageList = Input::get('txtImageList');
