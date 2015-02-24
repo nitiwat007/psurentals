@@ -51,10 +51,11 @@ try {
      */
     $sm = new SecurityAPIController('nontapon.r', 'password');
     echo var_dump($sm->getUserInfo());
-    echo ("<p />");
-    echo $sm->getUserInfo()->roles;
+    
+    //echo ("<p />");
+    //echo $sm->getUserInfo()->roles;
     //echo var_dump($sm->getUserInfo()->roles);
-    echo ("Print roles<br />");
+    //echo ("Print roles<br />");
     
     //ตัวข้อมูลให้เป็น Array ยังไงอ่ะ ตอนนี้ติด Error ตรงนี้แหละ
     /*foreach ($sm->getUserInfo()->roles  as $key => $value) {

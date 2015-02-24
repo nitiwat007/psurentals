@@ -16,36 +16,75 @@
  * ถ้า Authen สำหรับ จะดึงข้อมูล Roles มาด้วย
  */
 
-class SecurityAPIController {
+class SecurityAPIController extends BaseController {
 
     private $userInfo;
-    private $authenProvider;
+    private $authenProviders;
     private $roleProvider;
 
-    function __construct($username, $password) {
-        //Local Authentication
+    function __construct() {
+        //ตัวอย่างการสร้าง Class และเรียกใช้แบบปกติ
+        $this->authenProviders = [new PSUPKTAuthenProvider()];
+        
+        //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
+        $this->roleProvider = PSUPKTRoleProvider::getInstance();
+    }
+    
+    //function __construct($username, $password) {
+//        //Local Authentication
+//        $this->userInfo = null;
+//        
+//        
+//        if (is_null($this->userInfo)) {
+//            //Remote Authentication
+//            //ตัวอย่างการสร้าง Class แบบปกติ
+//            $this->authenProvider = (new PSUPKTAuthenProvider());
+//            $this->userInfo = $this->authentication($username, $password, $this->authenProvider);
+//        }
+//        
+//        //Authentication Result, if success get User Roles
+//        if (is_null($this->userInfo)) {
+//            App::abort(401, 'Authentication Failed');
+//        } else {
+//            //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
+//            $this->roleProvider = PSUPKTRoleProvider::getInstance();
+//            //$userInfo->roles = [];
+//            $this->userInfo->roles = $this->getUserRoles($username, $this->roleProvider);
+//        }
+//        
+//        //Write UserInfo to Session
+//        Session[""] = $this->userInfo;
+    //}
+    
+    public function authentication($username, $password) {
+         //Local Authentication
         $this->userInfo = null;
         
+        foreach ($this->authenProviders as $aprovider) {
+            $this->userInfo = $this->providerAuthentication($username, $password, $aprovider);
+            
+            if (! is_null($this->userInfo)) {
+                break;
+            }
+        }
         
         if (is_null($this->userInfo)) {
             //Remote Authentication
             //ตัวอย่างการสร้าง Class แบบปกติ
-            $this->authenProvider = (new PSUPKTAuthenProvider());
-            $this->userInfo = $this->authentication($username, $password, $this->authenProvider);
+            $this->userInfo = $this->providerAuthentication($username, $password, $this->authenProvider);
         }
         
-        //Authentication Result, if success get User Roles
-        if (is_null($this->userInfo)) {
-            App::abort(401, 'Authentication Failed');
-        } else {
+        if (! is_null($this->userInfo)) {
             //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
-            $this->roleProvider = PSUPKTRoleProvider::getInstance();
+            
             //$userInfo->roles = [];
             $this->userInfo->roles = $this->getUserRoles($username, $this->roleProvider);
         }
+        
+        return $this->userInfo;
     }
-
-    private function authentication($username, $password, iAuthentication $provider) {
+    
+    private function providerAuthentication($username, $password, iAuthentication $provider) {
 
         return $provider->ValidateUser($username, $password);
     }

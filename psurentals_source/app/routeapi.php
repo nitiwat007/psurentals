@@ -27,4 +27,6 @@ Route::get('api/configuration/applicationKey', ['uses' => 'ConfigurationAPIContr
 Route::get('api/configuration/roleProviderURL', ['uses' => 'ConfigurationAPIController@getRoleProviderURL']);
 Route::get('api/configuration/authenServiceURL', ['uses' => 'ConfigurationAPIController@getAuthenServiceURL']);
 
+Route::get('api/aaa/authentication/{user}/{passwd}', ['uses' => 'SecurityAPIController@authentication']);
+
 Route::get('api/role/isInRoles/{urs}/{rs}', ['uses' => 'ProviderAPIController@IsInRoles']);
