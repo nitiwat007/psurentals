@@ -1,5 +1,6 @@
 $(function () {
     getRentals();
+    checkRole();
     $("#btn_newrentals").click(function (event) {
         event.preventDefault();
         window.location.href = "rentals";
@@ -10,7 +11,7 @@ function getRentals(page) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "getrentalspage?page=" + page,
+        url: "getrentalspage/"+ userInfo.name +"?page=" + page,
         success: function (d) {
             $("#divRentalList").html("");
             var resultLength = (Object.keys(d.data).length - 2);

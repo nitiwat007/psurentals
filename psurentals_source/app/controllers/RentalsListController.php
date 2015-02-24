@@ -7,12 +7,12 @@ class RentalsListController extends BaseController {
         return Response::json(array('result' => $results));
     }
     
-    public function getRentalPage() {
+    public function getRentalPage($username) {
         $ConfigurationAPIController=new ConfigurationAPIController();
         $getListPerPage=$ConfigurationAPIController->getListPerPage();
         $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
         $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
-        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','<>','rdl')->paginate($getListPerPage);       
+        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','<>','rdl')->where('ProviderID','=',$username)->paginate($getListPerPage);       
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
         return $results;

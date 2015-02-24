@@ -3,21 +3,26 @@ var bedrooms = [];
 var pictures = [];
 var RentalID = localStorage.getItem("RentalID");
 $(function () {
-    getUtilitiesIncludedInRent();
-    getWhiteGoogdsProvided();
-    getOtherFacilities();
-    getPreferredGender();
-    getPerferredTenant();
-    getSmoking();
-    getPets();
-    getStatus();
-    getProvider();
-    getRentalDataEdit();
-    $("#btn_backtolist").click(function (event) {
-        event.preventDefault();
-        window.location.href = "rentalslist";
-    });
-    updateRental();
+    //checkEdit();
+    if (userInfo.isAuthentication) {
+        getUtilitiesIncludedInRent();
+        getWhiteGoogdsProvided();
+        getOtherFacilities();
+        getPreferredGender();
+        getPerferredTenant();
+        getSmoking();
+        getPets();
+        getStatus();
+        getProvider();
+        getRentalDataEdit();
+        $("#btn_backtolist").click(function (event) {
+            event.preventDefault();
+            window.location.href = "rentalslist";
+        });
+        updateRental();
+    } else {
+        window.location.href = "home";
+    }
 });
 function updateRental() {
     $("#frmRentalsUpdate").submit(function (event) {
@@ -164,7 +169,7 @@ function getRentalDataEdit() {
                 $("#" + d.picture[i - 1].Picture).click(function (event) {
                     event.preventDefault();
                     //alert($(this).attr("id"));
-                    var pictureID=$(this).attr("id");
+                    var pictureID = $(this).attr("id");
                     $.confirm({
                         text: "Are you sure you want to delete this Picture?",
                         confirm: function (button) {
@@ -185,7 +190,7 @@ function getRentalDataEdit() {
                             //var c_value = $(this).val();
                             //pictures.splice(c_value, 1);
                             //alert(pictureID);
-                            var pictureIndex=$.inArray(pictureID,pictures);
+                            var pictureIndex = $.inArray(pictureID, pictures);
                             pictures.splice(pictureIndex, 1);
                             $("#div_" + pictureID).remove();
                             //alert(pictureIndex);

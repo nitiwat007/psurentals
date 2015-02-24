@@ -14,6 +14,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="js/jquery-ui/jquery-ui.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/myjs/rentalsEdit.js"></script>
+        <script src="/js/myjs/SecurityManager.js"></script>
         <script src="js/confirm/jquery.confirm.js"></script>
         <script src="js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="js/fileupload/js/jquery.iframe-transport.js"></script>
@@ -418,6 +419,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="ddlStatus" class="col-sm-3 control-label" style="text-align:left">Status</label>
                                     <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="txtURL" name="txtURL" disabled>
                                         <select id="ddlStatus" name="ddlStatus" class="form-control">
                                             <option>-- Select --</option>
                                         </select>
