@@ -35,6 +35,7 @@ class PagesController extends BaseController {
         {
             //do basic search
             $searchResults = $rc->basicSearchRentals($ppttype, $near, $fee);
+            //return $searchResults;
         } else
         {
             //do advance search

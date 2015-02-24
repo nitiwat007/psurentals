@@ -23,6 +23,10 @@ Route::get('/result', function() {
 Route::get('/detail', function() {
     return View::make('detail');
 });
+//NR
+Route::get('/detail/{rentalID}', function() {
+    return View::make('detail');
+});
 Route::get('/rentals', function() {
     return View::make('rentals');
 });

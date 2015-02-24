@@ -7,20 +7,22 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <script src="js/jquery-1.11.2.min.js"></script>       
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/galleria/galleria-1.4.2.js"></script>
-        <script src="js/myjs/detail.js"></script>
+        <script src="/js/jquery-1.11.2.min.js"></script>       
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/galleria/galleria-1.4.2.js"></script>
+        <script src="/js/myjs/detail.js"></script>
         <title></title>
     </head>
     <body>
+        <input id='hrentalID' type="hidden" value="<?= Input::get('rentalID') ?>" />
+        
         <header>
             <div class="container">
                 <div class="row">
                     <div class="col-md-1">
-                        <img style="max-width:60px; margin-top:10px;margin-bottom:0px;" src="images/psu-logo.png">
+                        <img style="max-width:60px; margin-top:10px;margin-bottom:0px;" src="/images/psu-logo.png">
                     </div>
                     <div class="col-md-11" style="margin-top:50px;margin-bottom:0px;">
                         <h1><strong>PSU Rentals</strong></h1>
@@ -83,9 +85,9 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-lg-9">
                             <div class="galleria">
-                                <img src="images/room/1.jpg" data-title="My title" data-description="My description">
-                                <img src="images/room/2.jpg" data-title="Another title" data-description="My <em>HTML</em> description">
-                                <img src="images/room/3.jpg" data-title="Another title" data-description="My <em>HTML</em> description">
+                                <img src="/images/room/1.jpg" data-title="My title" data-description="My description">
+                                <img src="/images/room/2.jpg" data-title="Another title" data-description="My <em>HTML</em> description">
+                                <img src="/images/room/3.jpg" data-title="Another title" data-description="My <em>HTML</em> description">
                             </div>
                         </div>
                         <div class="col-lg-3">
