@@ -16,8 +16,19 @@ class RentalsListController extends BaseController {
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
         return $results;
-    }
+    }    
 
+    public function getRentalByStatus($status) {
+        $ConfigurationAPIController=new ConfigurationAPIController();
+        $getListPerPage=$ConfigurationAPIController->getListPerPage();
+        $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
+        $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
+        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','=',$status)->paginate($getListPerPage);       
+        $results["titleLenght"]=$titleLenght;
+        $results["descLenght"]=$descLenght;
+        return $results;
+    }
+    
     public function deleteRentals($RentalID) {
         $results = DB::update("update rental set Status='rdl' where RentalID='$RentalID'");
         return Response::json(array('result' => $results));

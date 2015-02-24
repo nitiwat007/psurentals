@@ -1,5 +1,16 @@
-var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+var userInfo = null;
+userInfo = JSON.parse(localStorage.getItem("userInfo"));
 var roles = userInfo.roles;
+var activeFunction = "YourRentals";
+$(function () {
+    if (typeof (Storage) !== "undefined") {
+
+    } else {
+        alert("Not Support.");
+    }
+    checkLogin();
+    checkRole();
+});
 function checkRole() {
 
     getProviderMenu();
@@ -14,16 +25,34 @@ function checkRole() {
         }
     }
 }
+function checkLogin() {
+    if (userInfo === null) {
+        window.location.href = "login";
+    }
+    if (!userInfo.isAuthentication) {
+        localStorage.removeItem("userInfo");
+        window.location.href = "login";
+    }
+}
 function getProviderMenu() {
     if (userInfo.isAuthentication) {
         var Menu = "<div class='panel panel-default'>"
                 + "<div class='panel-heading'><strong>Provider</strong></div>"
                 + "<div class='list-group'>"
-                + "<a href='#' class='list-group-item'>Rentals</a>"
+                + "<a id='aYourRentals' href='#' class='list-group-item'>Your Rentals</a>"
                 + "<a href='#' class='list-group-item'>New Rentals</a>"
                 + "<a href='#' class='list-group-item'>Profile</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
+
+        $("#aYourRentals").click(function (event) {
+            event.preventDefault();
+            activeFunction = "YourRentals";
+            $("#panelHeadingList").html("<strong>Your Rentals / ประกาศทั้งหมดของคุณ</strong>");
+            $('#divPagination').html('');
+            $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
+            getRentals();
+        });
     }
 }
 function getInspectorMenu() {
@@ -31,10 +60,19 @@ function getInspectorMenu() {
         var Menu = "<div class='panel panel-default'>"
                 + "<div class='panel-heading'><strong>Inspector</strong></div>"
                 + "<div class='list-group'>"
-                + "<a href='#' class='list-group-item'>Wait for approve</a>"
+                + "<a id='aWaitForApprove' href='#' class='list-group-item'>Wait for approve</a>"
                 + "<a href='#' class='list-group-item'>Rentals</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
+
+        $("#aWaitForApprove").click(function (event) {
+            event.preventDefault();
+            activeFunction = "WaitForApprove";
+            $("#panelHeadingList").html("<strong>Wait for approve / รอการอนุมัติ</strong>");
+            $('#divPagination').html('');
+            $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
+            getRentalsByStatus();
+        });
     }
 }
 function getAdminMenu() {
@@ -55,7 +93,7 @@ function checkEditPermission() {
                 break;
             case "Inspector":
                 //$('#ddlStatus').attr('readonly', false);
-                $('#ddlStatus').attr("disabled", false); 
+                $('#ddlStatus').attr("disabled", false);
                 break;
         }
     }

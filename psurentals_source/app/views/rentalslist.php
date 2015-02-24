@@ -68,9 +68,7 @@ and open the template in the editor.
                                 <a href="rentalslist">Home</a>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right" style="margin-right:20px;">
-                            <li><?php include 'UserControl/LoginName.php'; ?></li>
-                        </ul>
+                        <?php include 'UserControl/LoginName.php';  ?>                        
                     </div>
                 </div>
             </nav>
@@ -78,31 +76,31 @@ and open the template in the editor.
         <div id="mainRentals" class="container">
             <div class="row">
                 <div id="divRentalRoleMenu" class="col-md-3">
-<!--                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Provider</strong></div>
-                        <div class="list-group">
-                            <a href="#" class="list-group-item">Rentals</a>
-                            <a href="#" class="list-group-item">New Rentals</a>
-                            <a href="#" class="list-group-item">Profile</a>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Inspector</strong></div>
-                        <div class="list-group">
-                            <a href="#" class="list-group-item">Wait for approve</a>
-                            <a href="#" class="list-group-item">Rentals</a>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Admin</strong></div>
-                        <div class="list-group">
-                            <a href="#" class="list-group-item">God</a>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="panel panel-default">
+                                            <div class="panel-heading"><strong>Provider</strong></div>
+                                            <div class="list-group">
+                                                <a href="#" class="list-group-item">Rentals</a>
+                                                <a href="#" class="list-group-item">New Rentals</a>
+                                                <a href="#" class="list-group-item">Profile</a>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><strong>Inspector</strong></div>
+                                            <div class="list-group">
+                                                <a href="#" class="list-group-item">Wait for approve</a>
+                                                <a href="#" class="list-group-item">Rentals</a>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><strong>Admin</strong></div>
+                                            <div class="list-group">
+                                                <a href="#" class="list-group-item">God</a>
+                                            </div>
+                                        </div>-->
                 </div>
                 <div  class="col-md-9">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Your Rentals / ประกาศทั้งหมดของคุณ</strong></div>
+                        <div id="panelHeadingList" class="panel-heading"><strong>Your Rentals / ประกาศทั้งหมดของคุณ</strong></div>
                         <div id="divRentalList" class="panel-body">
 
                         </div>
@@ -110,7 +108,7 @@ and open the template in the editor.
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9 col-md-offset-3">
+                <div id="divPagination" class="col-md-9 col-md-offset-3">
                     <ul id="pagination" class="pagination-sm"></ul>
                 </div>
             </div>              

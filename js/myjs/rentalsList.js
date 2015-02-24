@@ -1,7 +1,7 @@
 $(function () {
+
     if (userInfo.isAuthentication) {
         getRentals();
-        checkRole();
         $("#btn_newrentals").click(function (event) {
             event.preventDefault();
             window.location.href = "rentals";
@@ -11,13 +11,40 @@ $(function () {
     }
 });
 function getRentals(page) {
-    $("#tb_rentalsList tbody").html("");
+    $("#divRentalList").html("");
     $.ajax({
         type: "GET",
         dataType: "json",
         url: "getrentalspage/" + userInfo.name + "?page=" + page,
         success: function (d) {
-            $("#divRentalList").html("");
+            var resultLength = (Object.keys(d.data).length - 2);
+            for (var i = 1; i <= resultLength; i++) {
+                var RentalID = d.data[i - 1].RentalID;
+                var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
+                var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
+                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
+                $("#" + RentalID).click(function (event) {
+                    event.preventDefault();
+                    localStorage.setItem("RentalID", RentalID);
+                    window.location.href = "rentalsedit";
+                });
+            }
+            Pagination(d.total, d.per_page);
+        },
+        error: function (xhr, status, error) {
+            alert("Error1 getRentals : " + xhr.responseText);
+            alert("Error2 getRentals : " + status);
+            alert("Error3 getRentals : " + error);
+        }
+    });
+}
+function getRentalsByStatus(page) {
+    $("#divRentalList").html("");
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "getrentalsbystatus/rwt?page=" + page,
+        success: function (d) {
             var resultLength = (Object.keys(d.data).length - 2);
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
@@ -40,7 +67,6 @@ function getRentals(page) {
     });
 }
 function rentalListControl(imgPath, rentalID, Title, Detail) {
-
     var imgPath = "/psurentals_uploads/" + imgPath;
     var rentalListControl = "<div class='panel panel-default rentalList'>"
             + "<div class='panel-body'>"
@@ -58,8 +84,16 @@ function Pagination(totalData, perPage) {
         totalPages: totalPages,
         visiblePages: 7,
         onPageClick: function (event, page) {
-            getRentals(page);
-            //window.location.href = "#header";
+            //event.preventDefault();
+            switch (activeFunction) {
+                case "YourRentals":
+                    getRentals(page);
+                    break;
+                case "WaitForApprove":
+                    //alert(page);
+                    getRentalsByStatus(page);
+                    break;
+            }
             $('body,html').animate({
                 scrollTop: 0
             }, 500);

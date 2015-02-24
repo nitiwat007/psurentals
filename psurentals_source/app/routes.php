@@ -64,7 +64,7 @@ Route::get('status', array('uses' => 'RentalsController@getStatus'));
 Route::get('provider', array('uses' => 'RentalsController@getProvider'));
 Route::get('getrentals', array('uses' => 'RentalsListController@getRentals'));
 Route::get('getrentalspage/{username}', array('uses' => 'RentalsListController@getRentalPage'));
-
+Route::get('getrentalsbystatus/{status}', array('uses' => 'RentalsListController@getRentalByStatus'));
 //RENTALS EDIT
 Route::get('getrentaldataedit/{RentalID}', array('uses' => 'RentalsListController@getRentalDataEdit'));
 Route::post('updaterental/{RentalID}', array('uses' => 'RentalsListController@updateRental'));
