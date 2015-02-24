@@ -19,11 +19,27 @@ class TestRoleController extends BaseController {
         }
         return Response::json(['result' => $isInRoles]);
     }
-    
-    function authen($username,$password){
-        
+
+    function authen($username, $password) {
+
+        $opts = array(
+            'http' => array(
+                'user_agent' => 'PHPSoapClient'
+            )
+        );
+
+        $context = stream_context_create($opts);
+
         $function = "Authenticate";
-        $client = new SoapClient("https://passport.phuket.psu.ac.th/Authentication/Authentication.asmx?wsdl");
+        $client = new SoapClient("https://passport.phuket.psu.ac.th/Authentication/Authentication.asmx?wsdl", array("stream_context" => stream_context_create(
+                    array(
+                        'ssl' => array(
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                        )
+                    )
+            ),
+            'cache_wsdl' => WSDL_CACHE_NONE));
         $request = array(
             'username' => $username,
             'password' => $password
@@ -31,8 +47,6 @@ class TestRoleController extends BaseController {
         $result = $client->$function($request);
         $authen = $result->AuthenticateResult;
 
-        
-        
         return Response::json(['result' => $authen]);
     }
 
