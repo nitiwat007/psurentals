@@ -23,9 +23,8 @@
                 <div class="system_name">PSU Rentals</div>
                 <div class="form-box">
                     <form id="frmLogin" action="" method="">
-                        <input id="username" name="username" type="text" placeholder="username">
+                        <input id="username" name="username" type="text" placeholder="PSU Passport">
                         <input id="password" name="password" type="password" placeholder="password">
-                        <input id="app_id" name="app_id" type="hidden" value="">
                         <button class="btn btn-info btn-block login" type="submit">Login</button>
                     </form>
                 </div>
