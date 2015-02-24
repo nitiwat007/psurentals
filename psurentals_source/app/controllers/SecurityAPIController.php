@@ -87,8 +87,10 @@ class SecurityAPIController extends BaseController {
             $roles = [];
             foreach ($this->roleProviders as $rprovider) {                
                 $result = $this->getUserRoles($username, $rprovider);
-                
-                array_push($roles, $result);
+                foreach($result as $role) {
+                    array_push($roles, $role);
+                }
+                //return $result;
             }
             $this->userInfo->roles = $roles;
         }

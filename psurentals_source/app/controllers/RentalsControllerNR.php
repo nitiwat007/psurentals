@@ -2,17 +2,17 @@
 
 class RentalsControllerNR extends BaseController {
 
-    private function getApprovedRentals($filter, $orderby, $orderdirection) {
-        $whereStatement = "Status <> 'rap'";
-        if (!($filter == '' || ctype_space($filter))) {
-            $whereStatement = $whereStatement . " and " . $filter;
-        }
-
-        $results = DB::select("select * from vrental 
-                where ? order by ? ?", array($filter, $orderby, $orderdirection));
-
-        return Response::json(array('result' => $results));
-    }
+//    private function getApprovedRentals($filter, $orderby, $orderdirection) {
+//        $whereStatement = "Status = 'rap'";
+//        if (!($filter == '' || ctype_space($filter))) {
+//            $whereStatement = $whereStatement . " and " . $filter;
+//        }
+//
+//        $results = DB::select("select * from vrental 
+//                where ? order by ? ?", array($filter, $orderby, $orderdirection));
+//
+//        return Response::json(array('result' => $results));
+//    }
 
     public function basicSearchRentals($propTypeID, $nearCampus, $rentalFeeUnder) {
         $config = new ConfigurationAPIController();
