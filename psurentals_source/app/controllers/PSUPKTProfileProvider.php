@@ -47,6 +47,8 @@ class PSUPKTProfileProvider extends ProfileProvider {
                 $userInfo->email = $result[13];
                 $userInfo->organization = sprintf("%s %s", $result[8], $result[10]);
                 $userInfo->position = $result[3];
+                $userInfo->mailingAddress = "No Information from PSU Passport";
+                $userInfo->telephone = "No Information from PSU Passport";
                 $userInfo->ou = $result[14];
                 $result = $userInfo;
             }
