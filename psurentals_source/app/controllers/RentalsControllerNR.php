@@ -14,7 +14,7 @@ class RentalsControllerNR extends BaseController {
 //        return Response::json(array('result' => $results));
 //    }
 
-    public function basicSearchRentals($propTypeID, $nearCampus, $rentalFeeUnder) {
+    public function basicSearchRentals($propTypeID, $nearCampus, $rentalFeeUnder, $status) {
         $config = new ConfigurationAPIController();
 
         if ($nearCampus === '' || ctype_space($nearCampus) || !is_numeric($nearCampus)) {
@@ -39,30 +39,46 @@ class RentalsControllerNR extends BaseController {
         //return var_dump($amphoeObj->AmphoeID);
 
         $query = DB::table('vrental')
-                ->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')
-                ->where('Status', '=', 'rap')
-                ->where('PropertyTypeID', '=', $propTypeID)
-                ->where('AmphoeID', '=', $amphoeID);
-        if ($rentalFeeUnder > 0) {
-            $query = $query->Where('MonthlyRentalFeeFrom', '<=', $rentalFeeUnder)
-                    ->Where('MonthlyRentalFeeTo', '>=', $rentalFeeUnder);
-        }
+                ->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID');
 
-        return $query->paginate($config->getListPerPage());
+        if ($rentalFeeUnder > 0) {
+            $query = $query->Where(function($q) use ($rentalFeeUnder, $propTypeID, $amphoeID, $status) {
+                        $q->Where('MonthlyRentalFeeFrom', '<=', $rentalFeeUnder)
+                                ->where('MonthlyRentalFeeTo', '>=', $rentalFeeUnder)
+                                ->where('PropertyTypeID', '=', $propTypeID)
+                                ->where('AmphoeID', '=', $amphoeID);
+                        if ($status != "*") {
+                            $q->where('Status', '=', $status);
+                        }
+                    })
+                            
+                            ->orWhere(function($q) use ($rentalFeeUnder, $propTypeID, $amphoeID, $status) {
+                $q->Where('MonthlyRentalFeeFrom', '<=', $rentalFeeUnder)
+                        ->Where('MonthlyRentalFeeTo', '<=', $rentalFeeUnder)
+                        ->where('PropertyTypeID', '=', $propTypeID)
+                        ->where('AmphoeID', '=', $amphoeID);
+                if ($status != "*") {
+                    $q->where('Status', '=', $status);
+                }
+            });
+        }
+        
+        return $query->select("*")->paginate($config->getListPerPage());
         //return $query->select('vrental.*' , 'vrentalcover.Picture')->get();
         //return Response::json(array('result' => $results));
     }
-    
+
     public function getRentalCoverImage($rentalID) {
         $pictureObj = DB::table('rentalpictures')
-                ->where('RID','=', $rentalID)
+                ->where('RID', '=', $rentalID)
                 ->orderby('IsCover', 'desc')
                 ->first();
-        
-          if (is_null($pictureObj)) {
-              return "#";
-          }
-          
-          return $pictureObj->Picture;
+
+        if (is_null($pictureObj)) {
+            return "#";
+        }
+
+        return $pictureObj->Picture;
     }
+
 }

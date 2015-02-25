@@ -34,7 +34,7 @@ class PagesController extends BaseController {
         if (count(Input::all() <= 3))
         {
             //do basic search
-            $searchResults = $rc->basicSearchRentals($ppttype, $near, $fee);
+            $searchResults = $rc->basicSearchRentals($ppttype, $near, $fee, "rap");
             //return $searchResults;
         } else
         {

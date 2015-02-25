@@ -15,7 +15,7 @@ function authentication() {
         success: function (d) {
             if(d.userInfo.isAuthentication){
                 localStorage.setItem("userInfo",JSON.stringify(d.userInfo));
-                window.location.href = "rentalslist";
+                window.location.href = "profile";
             }else{
                 alert("Login Fail.");
             }
