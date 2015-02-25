@@ -102,9 +102,9 @@ class RentalsController extends BaseController {
 
         $rid = Uuid::generate();
         $provide_id = Input::get('ddlProvider');
-        $CreatedBy = Input::get('ddlProvider');
+        $CreatedBy = Input::get('txtUsername');
         $CreatedDate = $this->get_Datetime_Now();
-        $ModifiedBy = Input::get('ddlProvider');
+        $ModifiedBy = Input::get('txtUsername');
         $ModifiedDate = $this->get_Datetime_Now();
         $Title = Input::get('txtTitle');
         $Details = Input::get('txtDescription');

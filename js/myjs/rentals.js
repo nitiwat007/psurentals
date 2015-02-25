@@ -338,16 +338,19 @@ function getProvider() {
 function newRentals() {
     $("#frmRentals").submit(function (event) {
         event.preventDefault();
+        Pace.restart();
         $("#txtRoomsList").val(rooms);
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
+        $("#txtUsername").val(userInfo.userName);
         $.ajax({
             type: "POST",
             dataType: "json",
             data: $("#frmRentals").serialize(),
             url: "newrentals",
             success: function (d) {
-                alert(d.result);
+                alert("Rental Created.");
+                window.location.href="profile";
             },
             error: function (xhr, status, error) {
                 alert("Error1 newRentals : " + xhr.responseText);
@@ -481,8 +484,30 @@ function uploadFile() {
                         contentType: false,
                         success: function (d) {
                             pictures.push(d.result);
-                            $("#upload_thumbnail").append("<div class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                    "<img src='/psurentals_uploads/" + d.result + "' alt=''></a></div>");
+                            $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                    "<img id='"+ d.result +"' src='/psurentals_uploads/" + d.result + "' alt=''></a></div>");
+
+                            $("#div_" + d.result).click(function (event) {
+                                event.preventDefault();
+                                var pictureID = $("#" + d.result).attr("id");
+                                $.confirm({
+                                    text: "Are you sure you want to delete this Picture?",
+                                    confirm: function (button) {
+
+                                        var pictureIndex = $.inArray(pictureID, pictures);
+                                        pictures.splice(pictureIndex, 1);
+                                        $("#div_" + pictureID).remove();
+                                    },
+                                    cancel: function (button) {
+                                        // do something
+                                    },
+                                    confirmButton: "Yes I am",
+                                    cancelButton: "No",
+                                    post: true
+                                });
+                            });
+
+
                         },
                         error: function (xhr, status, error) {
                             alert("Error1 uploadFile : " + xhr.responseText);
