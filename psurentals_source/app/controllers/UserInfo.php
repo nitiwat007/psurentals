@@ -10,7 +10,8 @@ class UserInfo
 {
     public $userName;
     public $isAuthentication;
-    public $successAuthenticationProvider;
+    public $authenticationProvider;
+    public $authenticationProviderResult;
     public $profileProvider;
     public $profileProviderResult;
     public $fullName;

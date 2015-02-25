@@ -33,19 +33,17 @@ class PSUPKTProfileProvider extends ProfileProvider {
                       'cache_wsdl' => WSDL_CACHE_NONE));
         $request = array(
             'username' => $username,
-            'password' => 'Baby_beboy208'
+            'password' => $password        
         );
         
-        $result = $client->$function($request);
-        $profile = $result->GetUserDetailsResult->string;
+        try {
+            $result = $client->$function($request);
+            $result = $result->GetUserDetailsResult->string;
+        } catch (Exception $ex) {
+            $result = $ex->getMessage();
+        }
         
-//        if (is_null($profile)) {
-//            $userInfo = new UserInfo();
-//            $userInfo->name = $username;
-//        } else {
-//            return null;
-//        }
-        return $profile;
+        return $result;
     }
 
 }

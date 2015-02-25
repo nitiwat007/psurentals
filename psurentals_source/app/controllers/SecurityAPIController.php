@@ -89,9 +89,10 @@ class SecurityAPIController extends BaseController {
         foreach ($this->authenProviders as $aprovider) {
             try {
                 $result = $this->validateUser($username, $password, $aprovider);
+                $this->userInfo->authenticationProviderResult = $result;
                 if ($result) {
                     $this->userInfo->isAuthentication = TRUE;
-                    $this->userInfo->successAuthenticationProvider = get_class($aprovider);
+                    $this->userInfo->authenticationProvider = get_class($aprovider);
                     break;
                 }
             } catch (Exception $ex) {
@@ -106,8 +107,9 @@ class SecurityAPIController extends BaseController {
     private function profileLogic($username, $password) {
         $profile = '';
         foreach ($this->profileProviders as $pprovider) {
+            $result = $this->getUserDetails($username, $password, $pprovider);
             try {
-                $result = $this->getUserDetails($username, $password, $pprovider);
+                
                 if (!is_null($result)) {
                     $this->userInfo->profileProvider = get_class($pprovider);
                     $this->userInfo->profileProviderResult = $result;
