@@ -28,10 +28,13 @@ class SecurityAPIController extends BaseController {
         //ตัวอย่างการสร้าง Class และเรียกใช้แบบปกติ
         $this->authenProviders = [new LocalAuthenProvider(), new PSUPKTAuthenProvider()]; //new LocalAuthenProvider(), 
 
-        $this->profileProviders = [new PSUPKTProfileProvider()];
+        $this->profileProviders = [new PSUPKTProfileProvider()]; //new LocalProfileProvider(), 
 
         //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
         $this->roleProviders = [PSUPKTRoleProvider::getInstance()];
+        
+        //เลือกใช้โครงสร้างของข้อมูล
+        $this->userInfo = new PSUUserPassport();
        
     }
 
@@ -69,8 +72,10 @@ class SecurityAPIController extends BaseController {
     //}
 
     public function authentication($username, $password) {
+        
+        //return md5($password);
         $this->authenticationLogic($username, $password);
-
+        
         if ($this->userInfo->isAuthentication) {
             $this->profileLogic($username, $password);
             $this->roleLogic($username);
@@ -79,8 +84,6 @@ class SecurityAPIController extends BaseController {
     }
 
     private function authenticationLogic($username, $password) {
-        //เลือกใช้โครงสร้างของข้อมูล
-        $this->userInfo = new PSUUserPassport();
         
         $this->userInfo->userName = $username;
         $this->userInfo->isAuthentication = FALSE;
@@ -103,21 +106,42 @@ class SecurityAPIController extends BaseController {
         }
         //return Response::json(['userInfo' => $this->userInfo]);
     }
-
+   
     private function profileLogic($username, $password) {
-        $profile = '';
         foreach ($this->profileProviders as $pprovider) {
-            $result = $this->getUserDetails($username, $password, $pprovider);
             try {
-                
-                if (!is_null($result)) {
-                    $this->userInfo->profileProvider = get_class($pprovider);
+                $result = $this->getUserDetails($username, $password, $pprovider);
+                $this->userInfo->profileProvider = get_class($pprovider);
+                $this->userInfo->profileProviderResult = $result;
+            } catch (Exception $ex) {
+                $this->userInfo->profileProvider = get_class($pprovider);
+                $this->userInfo->profileProviderResult =  'Error from Provider';
+            }
+            
+            try {
+                if (is_null($result)) {
+                    
                     $this->userInfo->profileProviderResult = $result;
+                    
+                    if (is_a($result, 'UserInfo')) {
+                        $this->userInfo->userName = $result->userName;
+                        $this->userInfo->fullName = $result->fullName;
+                        $this->userInfo->email = $result->email;
+                        $this->userInfo->organization = $result->organization;
+                        $this->userInfo->position = $result->position;
+                        $this->userInfo->mailingAddress = $result->mailingAddress;
+                        $this->userInfo->telephone = $result->telephone;
+                        $this->userInfo->isLocalUser = $result->isLocalUser;
+                    }
+                    
+                    if (is_a($result, 'PSUUserPassport')) {
+                        $this->userInfo->ou = $result->ou;
+                    }
                     break;
                 }
             } catch (Exception $ex) {
                 //echo $ex->getTraceAsString();
-                $this->userInfo->profileProvider = 'Cannot Access Provider';
+                $this->userInfo->profileProviderResult = 'Data Error';
             }
         }
     }
@@ -136,6 +160,10 @@ class SecurityAPIController extends BaseController {
             }
         }
         $this->userInfo->roles = $roles;
+    }
+    
+    private function addLocalUser() {
+        //DB::table('user')->in
     }
 
     public function authenticationJSON($username, $password) {

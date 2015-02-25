@@ -30,7 +30,7 @@ and open the template in the editor.
                             $campus = (new CampusAPIController())->getCampusByID(Input::get('near'));
                             if (! is_null($campus)) {
                                 echo sprintf("%s (%s)", $campus[0]->ShortNameEN, $campus[0]->ShortNameTH);
-                            } else echo "PSU"
+                            } else { echo "PSU"; }
                         ?>
                         </em> 
                        returned <?= $rentals->getTotal(); ?> <strong> matches</strong>.</p>
