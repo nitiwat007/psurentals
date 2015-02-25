@@ -18,7 +18,7 @@ $(function () {
         checkEditPermission();
         $("#btn_backtolist").click(function (event) {
             event.preventDefault();
-            window.location.href = "rentalslist";
+            window.location.href = "profile";
         });
         updateRental();
     } else {

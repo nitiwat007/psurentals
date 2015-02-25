@@ -15,7 +15,35 @@ function getRentals(page) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "getrentalspage/" + userInfo.name + "?page=" + page,
+        url: "getrentalspage/" + userInfo.userName + "?page=" + page,
+        success: function (d) {
+            var resultLength = (Object.keys(d.data).length - 2);
+            for (var i = 1; i <= resultLength; i++) {
+                var RentalID = d.data[i - 1].RentalID;
+                var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
+                var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
+                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
+                $("#" + RentalID).click(function (event) {
+                    event.preventDefault();
+                    localStorage.setItem("RentalID", RentalID);
+                    window.location.href = "rentalsedit";
+                });
+            }
+            Pagination(d.total, d.per_page);
+        },
+        error: function (xhr, status, error) {
+            alert("Error1 getRentals : " + xhr.responseText);
+            alert("Error2 getRentals : " + status);
+            alert("Error3 getRentals : " + error);
+        }
+    });
+}
+function getRentalsAll(page) {
+    $("#divRentalList").html("");
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "getrentalsall?page=" + page,
         success: function (d) {
             var resultLength = (Object.keys(d.data).length - 2);
             for (var i = 1; i <= resultLength; i++) {
@@ -90,8 +118,10 @@ function Pagination(totalData, perPage) {
                     getRentals(page);
                     break;
                 case "WaitForApprove":
-                    //alert(page);
                     getRentalsByStatus(page);
+                    break;
+                case "InspectorAllRentals":
+                    getRentalsAll(page);
                     break;
             }
             $('body,html').animate({

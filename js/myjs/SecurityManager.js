@@ -2,6 +2,7 @@ var userInfo = null;
 userInfo = JSON.parse(localStorage.getItem("userInfo"));
 var roles = userInfo.roles;
 var activeFunction = "YourRentals";
+var ProfileActiveMenu="aYourRentals";
 $(function () {
     if (typeof (Storage) !== "undefined") {
 
@@ -10,6 +11,7 @@ $(function () {
     }
     checkLogin();
     checkRole();
+    $("#" + ProfileActiveMenu).addClass("active");
 });
 function checkRole() {
 
@@ -40,13 +42,15 @@ function getProviderMenu() {
                 + "<div class='panel-heading'><strong>Provider</strong></div>"
                 + "<div class='list-group'>"
                 + "<a id='aYourRentals' href='#' class='list-group-item'>Your Rentals</a>"
-                + "<a href='#' class='list-group-item'>New Rentals</a>"
-                + "<a href='#' class='list-group-item'>Profile</a>"
+                + "<a id='aNewRentals' href='rentals' class='list-group-item'>New Rentals</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
 
         $("#aYourRentals").click(function (event) {
             event.preventDefault();
+            $(this).addClass("active");
+            $("#" + ProfileActiveMenu).removeClass("active");
+            ProfileActiveMenu="aYourRentals";
             activeFunction = "YourRentals";
             $("#panelHeadingList").html("<strong>Your Rentals / ประกาศทั้งหมดของคุณ</strong>");
             $('#divPagination').html('');
@@ -61,17 +65,32 @@ function getInspectorMenu() {
                 + "<div class='panel-heading'><strong>Inspector</strong></div>"
                 + "<div class='list-group'>"
                 + "<a id='aWaitForApprove' href='#' class='list-group-item'>Wait for approve</a>"
-                + "<a href='#' class='list-group-item'>Rentals</a>"
+                + "<a id='aInspectorAllRentals' href='#' class='list-group-item'>All Rentals</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
 
         $("#aWaitForApprove").click(function (event) {
             event.preventDefault();
+            $(this).addClass("active");
+            $("#" + ProfileActiveMenu).removeClass("active");
+            ProfileActiveMenu="aWaitForApprove";
             activeFunction = "WaitForApprove";
             $("#panelHeadingList").html("<strong>Wait for approve / รอการอนุมัติ</strong>");
             $('#divPagination').html('');
             $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
             getRentalsByStatus();
+        });
+        
+        $("#aInspectorAllRentals").click(function (event) {
+            event.preventDefault();
+            $(this).addClass("active");
+            $("#" + ProfileActiveMenu).removeClass("active");
+            ProfileActiveMenu="aInspectorAllRentals";
+            activeFunction = "InspectorAllRentals";
+            $("#panelHeadingList").html("<strong>All Rentals / ประกาศทั้งหมด</strong>");
+            $('#divPagination').html('');
+            $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
+            getRentalsAll();
         });
     }
 }
@@ -92,7 +111,6 @@ function checkEditPermission() {
 
                 break;
             case "Inspector":
-                //$('#ddlStatus').attr('readonly', false);
                 $('#ddlStatus').attr("disabled", false);
                 break;
         }

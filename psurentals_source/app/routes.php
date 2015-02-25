@@ -30,7 +30,7 @@ Route::get('/detail/{rentalID}', function() {
 Route::get('/rentals', function() {
     return View::make('rentals');
 });
-Route::get('/rentalslist', function() {
+Route::get('/profile', function() {
     return View::make('rentalslist');
 });
 Route::get('/testFileUpload', function() {
@@ -63,6 +63,7 @@ Route::get('pets', array('uses' => 'RentalsController@getPets'));
 Route::get('status', array('uses' => 'RentalsController@getStatus'));
 Route::get('provider', array('uses' => 'RentalsController@getProvider'));
 Route::get('getrentals', array('uses' => 'RentalsListController@getRentals'));
+Route::get('getrentalsall', array('uses' => 'RentalsListController@getRentalAll'));
 Route::get('getrentalspage/{username}', array('uses' => 'RentalsListController@getRentalPage'));
 Route::get('getrentalsbystatus/{status}', array('uses' => 'RentalsListController@getRentalByStatus'));
 //RENTALS EDIT

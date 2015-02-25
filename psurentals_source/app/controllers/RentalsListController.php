@@ -16,7 +16,17 @@ class RentalsListController extends BaseController {
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
         return $results;
-    }    
+    } 
+    public function getRentalAll() {
+        $ConfigurationAPIController=new ConfigurationAPIController();
+        $getListPerPage=$ConfigurationAPIController->getListPerPage();
+        $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
+        $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
+        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->paginate($getListPerPage);       
+        $results["titleLenght"]=$titleLenght;
+        $results["descLenght"]=$descLenght;
+        return $results;
+    } 
 
     public function getRentalByStatus($status) {
         $ConfigurationAPIController=new ConfigurationAPIController();
