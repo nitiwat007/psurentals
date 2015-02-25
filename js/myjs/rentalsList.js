@@ -1,5 +1,6 @@
 $(function () {
-
+    checkRole();
+    $("#" + ProfileActiveMenu).addClass("active");
     if (userInfo.isAuthentication) {
         getRentals();
         $("#btn_newrentals").click(function (event) {
@@ -25,7 +26,7 @@ function getRentals(page) {
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
-                    localStorage.setItem("RentalID", RentalID);
+                    localStorage.setItem("RentalID", $(this).attr("id"));
                     window.location.href = "rentalsedit";
                 });
             }
@@ -53,7 +54,7 @@ function getRentalsAll(page) {
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
-                    localStorage.setItem("RentalID", RentalID);
+                    localStorage.setItem("RentalID", $(this).attr("id"));
                     window.location.href = "rentalsedit";
                 });
             }
@@ -81,7 +82,7 @@ function getRentalsByStatus(page) {
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
-                    localStorage.setItem("RentalID", RentalID);
+                    localStorage.setItem("RentalID", $(this).attr("id"));
                     window.location.href = "rentalsedit";
                 });
             }

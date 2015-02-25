@@ -12,7 +12,7 @@ class RentalsListController extends BaseController {
         $getListPerPage=$ConfigurationAPIController->getListPerPage();
         $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
         $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
-        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','<>','rdl')->where('ProviderID','=',$username)->paginate($getListPerPage);       
+        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','<>','rdl')->where('CreatedBy','=',$username)->orderBy('ModifiedDate')->paginate($getListPerPage);       
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
         return $results;
@@ -22,7 +22,7 @@ class RentalsListController extends BaseController {
         $getListPerPage=$ConfigurationAPIController->getListPerPage();
         $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
         $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
-        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->paginate($getListPerPage);       
+        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->orderBy('ModifiedDate')->paginate($getListPerPage);       
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
         return $results;
@@ -33,7 +33,7 @@ class RentalsListController extends BaseController {
         $getListPerPage=$ConfigurationAPIController->getListPerPage();
         $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
         $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
-        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','=',$status)->paginate($getListPerPage);       
+        $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','=',$status)->orderBy('ModifiedDate')->paginate($getListPerPage);       
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
         return $results;
@@ -63,7 +63,7 @@ class RentalsListController extends BaseController {
     public function updateRental($RentalID) {
 
         $provide_id = Input::get('ddlProvider');
-        $ModifiedBy = Input::get('ddlProvider');
+        $ModifiedBy = Input::get('txtUsername');
         $ModifiedDate = $this->get_Datetime_Now();
         $Title = Input::get('txtTitle');
         $Details = Input::get('txtDescription');

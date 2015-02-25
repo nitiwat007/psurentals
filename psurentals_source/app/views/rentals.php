@@ -13,7 +13,9 @@ and open the template in the editor.
         <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/myjs/SecurityManager.js"></script>
         <script src="/js/myjs/rentals.js"></script>
+        <script src="js/confirm/jquery.confirm.js"></script>
         <script src="/js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="/js/fileupload/js/jquery.iframe-transport.js"></script>
         <script src="/js/fileupload/js/jquery.fileupload-ui.js"></script>
@@ -48,17 +50,11 @@ and open the template in the editor.
                     <div class="collapse navbar-collapse" id="navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="#">Home</a>
-                            </li>
-                            <li>
-                                <a href="#">Menu2</a>
-                            </li>
-                            <li>
-                                <a href="#">Menu3</a>
+                                <a href="home">Home</a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" style="margin-right:20px;">
-                            <li><a href="../navbar/">Login or Register</a></li>
+                            <li><?php include 'UserControl/LoginName.php'; ?></li>
                         </ul>
                     </div>
                 </div>
@@ -75,24 +71,25 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-6">
                                     <button type="button" id="btn_backtolist" class="btn btn-defaultg col-md-offset-10 btn-primary">
-                                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
-                            </button>
+                                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
+                                    </button>
                                 </div>
-                            
+
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form id="frmRentals"  name="frmRentals" class="form-horizontal">                               
+                            <form id="frmRentals"  name="frmRentals" class="form-horizontal">  
+                                <input type="hidden" class="form-control" id="txtUsername" name="txtUsername">
                                 <div class="form-group">
                                     <label for="txtTitle" class="col-sm-3 control-label" style="text-align:left">Title <br> หัวเรื่อง</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="txtTitle" name="txtTitle" placeholder="Title / หัวเรื่อง">
+                                        <input type="text" class="form-control" id="txtTitle" name="txtTitle" placeholder="Title / หัวเรื่อง" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="ddlPropertyType" class="col-sm-3 control-label" style="text-align:left">Property Type <br> ประเภทที่พัก</label>
                                     <div class="col-sm-5">
-                                        <select id="ddlPropertyType" name="ddlPropertyType" class="form-control">
+                                        <select id="ddlPropertyType" name="ddlPropertyType" class="form-control" required>
                                             <option>-- Select / เลือก --</option>
                                         </select>
                                     </div>
@@ -100,7 +97,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="ddlProperty" class="col-sm-3 control-label" style="text-align:left">Property <br> รูปแบบที่พัก</label>
                                     <div class="col-sm-5">
-                                        <select id="ddlProperty" name="ddlProperty" class="form-control">
+                                        <select id="ddlProperty" name="ddlProperty" class="form-control" required>
                                             <option>-- Select / เลือก --</option>
                                         </select>
                                     </div>
@@ -108,47 +105,49 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtAddress" class="col-sm-3 control-label" style="text-align:left">Address <br> ที่อยู่</label>
                                     <div class="col-sm-5">
-                                        <textarea id="txtAddress" name="txtAddress" class="form-control" rows="3"></textarea>
+                                        <textarea id="txtAddress" name="txtAddress" class="form-control" rows="3" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="ddlAmphoe" class="col-sm-3 control-label" style="text-align:left">Amphoe <br> อำเภอ</label>
                                     <div class="col-sm-5">
-                                        <select id="ddlAmphoe" name="ddlAmphoe" class="form-control">
+                                        <select id="ddlAmphoe" name="ddlAmphoe" class="form-control" required>
                                             <option>-- Select / เลือก --</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtDistanceTo" class="col-sm-3 control-label" style="text-align:left">Distance to <br> ระยะทาง</label>
+                                    <label for="txtDistanceTo" class="col-sm-3 control-label" style="text-align:left">Distance(KM) to <br> ระยะทาง(กิโลเมตร)</label>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="txtDistanceTo" name="txtDistanceTo" placeholder="Distance to / ระยะทาง">
+                                        <input type="number" class="form-control" min="0" id="txtDistanceTo" name="txtDistanceTo" placeholder="Distance to / ระยะทาง" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtAvailableFrom" class="col-sm-3 control-label" style="text-align:left">Available from <br> ให้เช่าได้ตั้งแต่วันที่</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="txtAvailableFrom" name="txtAvailableFrom" placeholder="Available from / ให้เช่าได้ตั้งแต่วันที่">
+                                        <input type="text" class="form-control" id="txtAvailableFrom" name="txtAvailableFrom" placeholder="Available from / ให้เช่าได้ตั้งแต่วันที่" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtRentalFeeFrom" class="col-sm-3 control-label" style="text-align:left">Rental fee per month <br> ค่าเช่าต่อเดือน</label>
+                                    <label for="txtRentalFeeFrom" class="col-sm-3 control-label" style="text-align:left">Rental fee per month(Baht) <br> ค่าเช่าต่อเดือน(บาท)</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtRentalFeeFrom" name="txtRentalFeeFrom" placeholder="From">
+                                        <label for="txtRentalFeeFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <input type="number" class="form-control" min="0" id="txtRentalFeeFrom" name="txtRentalFeeFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtRentalFeeTo" name="txtRentalFeeTo" placeholder="To">
+                                        <label for="txtRentalFeeTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <input type="number" class="form-control" min="0" id="txtRentalFeeTo" name="txtRentalFeeTo" placeholder="To" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtLeaseFrom" class="col-sm-3 control-label" style="text-align:left">Lease <br> ระยะเวลาเช่าไม่น้อยกว่า</label>
+                                    <label for="txtLeaseFrom" class="col-sm-3 control-label" style="text-align:left">Lease(Month) <br> ระยะเวลาเช่าไม่น้อยกว่า(เดือน)</label>
                                     <div class="col-sm-2">
                                         <label for="txtLeaseFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
-                                        <input type="number" class="form-control" id="txtLeaseFrom" name="txtLeaseFrom" placeholder="From">
+                                        <input type="number" class="form-control" min="0" id="txtLeaseFrom" name="txtLeaseFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="txtLeaseTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
-                                        <input type="number" class="form-control" id="txtLeaseTo" name="txtLeaseTo" placeholder="To">
+                                        <input type="number" class="form-control" min="0" id="txtLeaseTo" name="txtLeaseTo" placeholder="To" required>
                                     </div>
                                 </div>
                                 <br>
@@ -159,26 +158,26 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtBondFrom" class="col-sm-3 control-label" style="text-align:left">Bond <br> ค่ามัดจำ</label>
+                                    <label for="txtBondFrom" class="col-sm-3 control-label" style="text-align:left">Bond(Baht) <br> ค่ามัดจำ(บาท)</label>
                                     <div class="col-sm-2">
                                         <label for="txtBondFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
-                                        <input type="number" class="form-control" id="txtBondFrom" name="txtBondFrom" placeholder="From">
+                                        <input type="number" class="form-control" min="0" id="txtBondFrom" name="txtBondFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="txtBondTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
-                                        <input type="number" class="form-control" id="txtBondTo" name="txtBondTo" placeholder="To">
+                                        <input type="number" class="form-control" min="0" id="txtBondTo" name="txtBondTo" placeholder="To" required>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label for="txtSecurityBondFrom" class="col-sm-3 control-label" style="text-align:left">Security Bond <br> ค่าประกันความเสียหาย</label>
+                                    <label for="txtSecurityBondFrom" class="col-sm-3 control-label" style="text-align:left">Security Bond(Baht) <br> ค่าประกันความเสียหาย(บาท)</label>
                                     <div class="col-sm-2">
                                         <label for="txtSecurityBondFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
-                                        <input type="number" class="form-control" id="txtSecurityBondFrom" name="txtSecurityBondFrom" placeholder="From">
+                                        <input type="number" class="form-control" min="0" id="txtSecurityBondFrom" name="txtSecurityBondFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="txtSecurityBondTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
-                                        <input type="number" class="form-control" id="txtSecurityBondTo" name="txtSecurityBondTo" placeholder="To">
+                                        <input type="number" class="form-control" min="0" id="txtSecurityBondTo" name="txtSecurityBondTo" placeholder="To" required>
                                     </div>
                                 </div>
                                 <br>
@@ -205,14 +204,14 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtRentFeePerDayFrom" class="col-sm-3 control-label" style="text-align:left">Rent fee per day <br> ค่าเช่าต่อวัน</label>
+                                    <label for="txtRentFeePerDayFrom" class="col-sm-3 control-label" style="text-align:left">Rent fee per day(Baht) <br> ค่าเช่าต่อวัน(บาท)</label>
                                     <div class="col-sm-2">
                                         <label for="txtRentFeePerDayFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
-                                        <input type="number" class="form-control" id="txtRentFeePerDayFrom" name="txtRentFeePerDayFrom" placeholder="From">
+                                        <input type="number" class="form-control" min="0" id="txtRentFeePerDayFrom" name="txtRentFeePerDayFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="txtRentFeePerDayTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
-                                        <input type="number" class="form-control" id="txtRentFeePerDayTo" name="txtRentFeePerDayTo" placeholder="To">
+                                        <input type="number" class="form-control" min="0" id="txtRentFeePerDayTo" name="txtRentFeePerDayTo" placeholder="To" required>
                                     </div>
                                 </div>
                                 <hr>
@@ -224,7 +223,7 @@ and open the template in the editor.
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtNumberRooms" name="txtNumberRooms" placeholder="Number">
+                                        <input type="number" class="form-control" min="0" id="txtNumberRooms" name="txtNumberRooms" placeholder="Number">
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" name="btnAddRooms" id="btnAddRooms" class="btn btn-default">Add</button>
@@ -258,7 +257,7 @@ and open the template in the editor.
                                         </select>                                       
                                     </div>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtNumberBedroom" name="txtNumberBedroom" placeholder="Number">
+                                        <input type="number" min="0" class="form-control" min="0" id="txtNumberBedroom" name="txtNumberBedroom" placeholder="Number" required>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" name="btnAddBedroom" id="btnAddBedroom" class="btn btn-default">Add</button>
@@ -295,7 +294,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtBathrooms" class="col-sm-3 control-label" style="text-align:left">Bathrooms <br> จำนวนห้องน้ำ</label>
                                     <div class="col-sm-3">
-                                        <input type="number" class="form-control" id="txtBathrooms" name="txtBathrooms" placeholder="Bathrooms / จำนวนห้องน้ำ">
+                                        <input type="number" class="form-control" id="txtBathrooms" name="txtBathrooms" placeholder="Bathrooms / จำนวนห้องน้ำ" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -305,13 +304,13 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtWaterRate" class="col-sm-3 control-label" style="text-align:left">Water Rate <br> ค่าน้ำ</label>
+                                    <label for="txtWaterRate" class="col-sm-3 control-label" style="text-align:left">Water Rate(Per unit) <br> ค่าน้ำ(ต่อหน่วย)</label>
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control" id="txtWaterRate" name="txtWaterRate" placeholder="Water Rate">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtPowerRate" class="col-sm-3 control-label" style="text-align:left">Power Rate <br> ค่าไฟ</label>
+                                    <label for="txtPowerRate" class="col-sm-3 control-label" style="text-align:left">Power Rate(Per unit) <br> ค่าไฟ(ต่อหน่วย)</label>
                                     <div class="col-sm-2">
                                         <input type="number" class="form-control" id="txtPowerRate" name="txtPowerRate" placeholder="Power Rate">
                                     </div>
@@ -331,22 +330,24 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtOccupants" class="col-sm-3 control-label" style="text-align:left">Occupants <br> จำนวนผู้อาศัย</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtOccupantsCurrent" name="txtOccupantsCurrent" placeholder="Current">
+                                        <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Current / จำนวนผู้ที่อาศัยอยู่ในขณะนี้</label>
+                                        <input type="number" class="form-control" min="0" id="txtOccupantsCurrent" name="txtOccupantsCurrent" placeholder="Current">
                                     </div>
-                                    <div class="col-sm-2">              
-                                        <input type="number" class="form-control" id="txtOccupantsVacancy" name="txtOccupantsVacancy" placeholder="Vacancy">
+                                    <div class="col-sm-2">
+                                        <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Vacancy / จำนวนผู้อาศัยที่ว่างอยู่/รับเพิ่ม</label>
+                                        <input type="number" class="form-control" min="0" id="txtOccupantsVacancy" name="txtOccupantsVacancy" placeholder="Vacancy">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtCurrentNumberOfMaleTenants" class="col-sm-3 control-label" style="text-align:left">Current number of male tenants<br> จำนวนผู้ชายที่อาศัยอยู่</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtCurrentNumberOfMaleTenants" name="txtCurrentNumberOfMaleTenants" placeholder="">
+                                        <input type="number" class="form-control" min="0" id="txtCurrentNumberOfMaleTenants" name="txtCurrentNumberOfMaleTenants" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtCurrentNumberOffemaleTenants" class="col-sm-3 control-label" style="text-align:left">Current number of female tenants<br> จำนวนผู้หญิงที่อาศัยอยู่</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtCurrentNumberOffemaleTenants" name="txtCurrentNumberOffemaleTenants" placeholder="">
+                                        <input type="number" class="form-control" min="0" id="txtCurrentNumberOffemaleTenants" name="txtCurrentNumberOffemaleTenants" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">

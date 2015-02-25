@@ -10,8 +10,6 @@ $(function () {
         alert("Not Support.");
     }
     checkLogin();
-    checkRole();
-    $("#" + ProfileActiveMenu).addClass("active");
 });
 function checkRole() {
 
