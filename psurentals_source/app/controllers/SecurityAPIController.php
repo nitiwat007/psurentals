@@ -45,32 +45,6 @@ class SecurityAPIController extends BaseController {
         return self::$instance;
     }
 
-    //function __construct($username, $password) {
-//        //Local Authentication
-//        $this->userInfo = null;
-//        
-//        
-//        if (is_null($this->userInfo)) {
-//            //Remote Authentication
-//            //ตัวอย่างการสร้าง Class แบบปกติ
-//            $this->authenProvider = (new PSUPKTAuthenProvider());
-//            $this->userInfo = $this->authentication($username, $password, $this->authenProvider);
-//        }
-//        
-//        //Authentication Result, if success get User Roles
-//        if (is_null($this->userInfo)) {
-//            App::abort(401, 'Authentication Failed');
-//        } else {
-//            //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
-//            $this->roleProvider = PSUPKTRoleProvider::getInstance();
-//            //$userInfo->roles = [];
-//            $this->userInfo->roles = $this->getUserRoles($username, $this->roleProvider);
-//        }
-//        
-//        //Write UserInfo to Session
-//        Session[""] = $this->userInfo;
-    //}
-
     public function authentication($username, $password) {
         
         //return md5($password);
@@ -79,6 +53,14 @@ class SecurityAPIController extends BaseController {
         if ($this->userInfo->isAuthentication) {
             $this->profileLogic($username, $password);
             $this->roleLogic($username);
+            
+            if (!$this->userInfo->isLocalUser && !is_null($this->userInfo->profileProviderResult)) {
+                
+                $this->addCurrentProfileToLocalUser();
+            } else 
+            {
+                App::abort(404,'Cannot Add Profile');
+            }
         }
         return $this->userInfo;
     }
@@ -119,7 +101,7 @@ class SecurityAPIController extends BaseController {
             }
             
             try {
-                if (is_null($result)) {
+                if (!is_null($result)) {
                     
                     $this->userInfo->profileProviderResult = $result;
                     
@@ -162,8 +144,22 @@ class SecurityAPIController extends BaseController {
         $this->userInfo->roles = $roles;
     }
     
-    private function addLocalUser() {
-        //DB::table('user')->in
+    private function addCurrentProfileToLocalUser() {
+        $nameArray = explode(' ', $this->userInfo->fullName, 2);
+        DB::table('user')->insert([
+                'UserId' => $this->userInfo->userName,
+                'IsPSUPassport' => ($this->userInfo->profileProviderResult instanceof PSUUserPassport),
+                'Password' => '',
+                'FirstName' => $nameArray[0],
+                'LastName' => $nameArray[0],
+                'Organization' => $this->userInfo->organization,
+                'Position' => $this->userInfo->position,
+                'MailingAddress' => $this->userInfo->mailingAddress,
+                'TelephoneNumber' => $this->userInfo->telephone,
+                'Email' => $this->userInfo->email
+                ]);
+        
+        
     }
 
     public function authenticationJSON($username, $password) {
