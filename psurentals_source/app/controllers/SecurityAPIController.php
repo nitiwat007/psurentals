@@ -26,12 +26,13 @@ class SecurityAPIController extends BaseController {
 
     function __construct() {
         //ตัวอย่างการสร้าง Class และเรียกใช้แบบปกติ
-        $this->authenProviders = [new PSUPKTAuthenProvider(), new LocalAuthenProvider()];
+        $this->authenProviders = [new LocalAuthenProvider(), new PSUPKTAuthenProvider()]; //new LocalAuthenProvider(), 
 
         $this->profileProviders = [new PSUPKTProfileProvider()];
 
         //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
         $this->roleProviders = [PSUPKTRoleProvider::getInstance()];
+       
     }
 
     public static function getInstance() {
@@ -78,7 +79,9 @@ class SecurityAPIController extends BaseController {
     }
 
     private function authenticationLogic($username, $password) {
+        //เลือกใช้โครงสร้างของข้อมูล
         $this->userInfo = new PSUUserPassport();
+        
         $this->userInfo->userName = $username;
         $this->userInfo->isAuthentication = FALSE;
 
@@ -86,13 +89,14 @@ class SecurityAPIController extends BaseController {
         foreach ($this->authenProviders as $aprovider) {
             try {
                 $result = $this->validateUser($username, $password, $aprovider);
-                if (!is_null($result)) {
+                if ($result) {
                     $this->userInfo->isAuthentication = TRUE;
                     $this->userInfo->successAuthenticationProvider = get_class($aprovider);
                     break;
                 }
             } catch (Exception $ex) {
                 //do noting
+                //echo $ex->getTraceAsString();
                 $this->userInfo->successAuthenticationProvider = 'Cannot Access Provider';
             }
         }
@@ -103,14 +107,14 @@ class SecurityAPIController extends BaseController {
         $profile = '';
         foreach ($this->profileProviders as $pprovider) {
             try {
-                $result = $this->getUserDetails($username, $password, $rprovider);
-                return Response::json(['userInfo' => $result]);
+                $result = $this->getUserDetails($username, $password, $pprovider);
                 if (!is_null($result)) {
-                    $this->userInfo->fullName = $result;
-                    $this->userInfo->profileProvider = et_class($rprovider);
+                    $this->userInfo->profileProvider = get_class($pprovider);
+                    $this->userInfo->profileProviderResult = $result;
                     break;
                 }
             } catch (Exception $ex) {
+                //echo $ex->getTraceAsString();
                 $this->userInfo->profileProvider = 'Cannot Access Provider';
             }
         }

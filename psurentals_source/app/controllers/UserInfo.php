@@ -12,6 +12,7 @@ class UserInfo
     public $isAuthentication;
     public $successAuthenticationProvider;
     public $profileProvider;
+    public $profileProviderResult;
     public $fullName;
     public $email;
     public $organization;

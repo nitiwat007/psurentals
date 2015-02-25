@@ -13,8 +13,9 @@
  */
 class LocalAuthenProvider implements iAuthentication  {
     //put your code here
-    public function ValidateUser($username, $password) {
-        return DB::table('user')->where('UserID', '=', $username)
+    public function validateUser($username, $password) {
+        $user = DB::table('user')->where('UserID', '=', $username)
                 ->where('Password','=', $password)->first();
+        return !is_null($user);
     }
 }

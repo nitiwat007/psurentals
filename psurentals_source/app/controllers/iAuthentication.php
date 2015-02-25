@@ -7,5 +7,5 @@
  */
 
 interface iAuthentication {
-    function ValidateUser($username, $password);
+    function validateUser($username, $password);
 }

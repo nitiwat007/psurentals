@@ -75,9 +75,9 @@ class ConfigurationAPIController extends BaseController {
         return Config::get('aaa.authenOperation');
     }
     
-    public function getAuthenResultProperty() {
-        return Config::get('aaa.authenResultProperty');
-    }
+//    public function getAuthenResultProperty() {
+//        return Config::get('aaa.authenResultProperty');
+//    }
     
     /*
      * Profile Provider
@@ -90,7 +90,7 @@ class ConfigurationAPIController extends BaseController {
         return Config::get('aaa.profileOperation');
     }
     
-    public function getProfileResultProperty() {
-        return Config::get('aaa.profileResultProperty');
-    }
+//    public function getProfileResultProperty() {
+//        return Config::get('aaa.profileResultProperty');
+//    }
 }

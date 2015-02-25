@@ -12,8 +12,9 @@ class PSUPKTAuthenProvider implements iAuthentication  {
         
     }
     
-    public function ValidateUser($username, $password) {
+    public function validateUser($username, $password) {
         $config = new ConfigurationAPIController();
+        $authen = FALSE;
         
         //do something with PSU Passport
         $opts = array(
@@ -29,30 +30,20 @@ class PSUPKTAuthenProvider implements iAuthentication  {
         $context = stream_context_create($opts);
         
         $function = $config->getAuthenOperation();
+         $config->getAuthenOperation();
+        
         $client = new SoapClient($config->getAuthenServiceURL(), 
                 array('stream_context' => $context,
                       'cache_wsdl' => WSDL_CACHE_NONE));
         $request = array(
             'username' => $username,
-            'password' => $password
+            'password' =>$password
         );
         $result = $client->$function($request);
-        $authen = $result->$config->getAuthenResultProperty();
-
-//        if ($authen) {
-//            
-//        } else {
-//            return Response::json(array('login_status' => $authen, 'username' => $username));
-//        }       
+        //$authen = $result->$config->getAuthenResultProperty();
+        $authen = $result->AuthenticateResult;
         
-        //and then
-        if ($authen) {
-            $userInfo = new UserInfo();
-            $userInfo->userName = $username;
-        } else {
-            return null;
-        }
-        return $userInfo;
+        return $authen;
     }
 }
 
