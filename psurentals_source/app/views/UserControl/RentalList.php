@@ -4,32 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//var_dump($rentals->find('RentalID' => 'cdbb4730-b71f-11e4-839b-6fb5eafd2fa8'));
-//var_dump($configs);
-//$titleLenght = 0;
-/*
-  foreach ($configs as $config) {
 
-  switch ($config->KeyName) {
-  case 'DefaultCampus':
-  $defaultCampus = $config->KeyValue;
-  echo $config->KeyName . $config->KeyValue;
-  break;
-  case 'ListPerPage':
-  $listPerPage = $config->KeyValue;
-  echo $config->KeyName . $config->KeyValue;
-  break;
-  case 'LimitTitleLength':
-  $titleLenght = $config->KeyValue;
-  echo $config->KeyName . $config->KeyValue;
-  break;
-  case 'LimitDescriptionLength':
-  $descLenght = $config->KeyValue;
-  echo $config->KeyName . $config->KeyValue;
-  default:
-  break;
-  }
-  } */
 $configs = new ConfigurationAPIController();
 $defaultCampus = $configs->getDefaultCampusID();
 $listPerPage = $configs->getListPerPage();
@@ -47,9 +22,11 @@ foreach ($rentals as $rental) {
     <div class="panel panel-default rentalList">
         <div class="panel-body">
             <div class="media">
+                <!-- ไว้สำหรับเก็บข้อมูลของรายการนั้นๆ -->
                 <input id="hrental<?= $rental->RentalID; ?>" type="hidden" value='<?= json_encode($rental) ?>' />
+
                 <span class='rentalCode'><?= $rental->RentalID; ?></span>
-                <a class="media-left" href="#">
+                <a class="media-left cover" href="/detail">
                     <?php
                     /*
                      * Prepare URL for picture
@@ -90,7 +67,7 @@ foreach ($rentals as $rental) {
                     ?>
                 </div>
                 <div id="status" class="status <?= $rental->Status ?>" style="display: none;">
-                            <?= $rental->StatusNameEN . " / " . $rental->StatusNameTH ?></div>
+                    <?= $rental->StatusNameEN . " / " . $rental->StatusNameTH ?></div>
             </div>
         </div>
     </div>
@@ -98,21 +75,25 @@ foreach ($rentals as $rental) {
 
 <?php }
 ?>
-    
+
 <script>
     $(function () {
         var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
         if (userInfo.isAuthentication) {
             $(".status").show();
         } else
             $(".status").hide();
+
+        $(".title").click(selectRental(event));
+        $("a.cover").click(selectRental(event));
         
-        $(".title").click(function(event) {
+        function selectRental(event) {
             event.preventDefault();
-            var rental =  $("#hrental" + $(this).attr('id'));
+            var rental = $("#hrental" + $(this).attr('id'));
             localStorage.setItem("currentRental", rental.val());
             alert(JSON.parse(rental.val()).Title);
             window.location.href = $(this).attr('href');
-        })
+        }
     });
 </script>

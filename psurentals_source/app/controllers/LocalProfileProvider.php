@@ -29,7 +29,10 @@ class LocalProfileProvider extends ProfileProvider {
             $userInfo->telephone = $user->TelephoneNumber;
             
             return $userInfo; // ? FALSE : TRUE);
+        }  else {
+            throw new Exception("The user name or password is incorrect or is not Local Member");
         }
-        return "The user name or password is incorrect or is not Member";
+        
+        return null; //"";
     }
 }

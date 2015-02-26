@@ -32,21 +32,24 @@ class PSUPKTAuthenProvider implements iAuthentication {
         $function = $config->getAuthenOperation();
         $config->getAuthenOperation();
 
-        $client = new SoapClient($config->getAuthenServiceURL(), array('stream_context' => $context,
-            'cache_wsdl' => WSDL_CACHE_NONE));
+        $client = new SoapClient($config->getAuthenServiceURL(), 
+                      array('stream_context' => $context,
+                            'cache_wsdl' => WSDL_CACHE_NONE));
         $request = array(
             'username' => $username,
             'password' => $password
         );
         try {
-            $result = $client->$function($request);
+            $providerResult = $client->$function($request);
             //$authen = $result->$config->getAuthenResultProperty();
-            $result = $result->AuthenticateResult;
+            $providerValues = $providerResult->AuthenticateResult;
+//            if (!is_object($providerValues)) { 
+//                throw new Exception($providerValues);                 
+//            }
         } catch (Exception $ex) {
-            $result = $ex->getMessage();
+            //throw new Exception ($ex->getMessage());
         }
-
-        return $result;
+        return (strlen($providerValues) == 1);
     }
 
 }

@@ -28,8 +28,8 @@ and open the template in the editor.
                         <em>
                         <?php
                             $campus = (new CampusAPIController())->getCampusByID(Input::get('near'));
-                            if (! is_null($campus)) {
-                                echo sprintf("%s (%s)", $campus[0]->ShortNameEN, $campus[0]->ShortNameTH);
+                            if (array_sum($campus) > 0 && !is_null($campus)) {
+                                //echo sprintf("%s (%s)", $campus[0]->ShortNameEN, $campus[0]->ShortNameTH);
                             } else { echo "PSU"; }
                         ?>
                         </em> 

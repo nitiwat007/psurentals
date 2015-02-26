@@ -116,8 +116,11 @@ header .subtitle {
     float: right;
     padding: 5px 20px;
     text-align: right;
+    border-style: solid;
+    border-width: 1px 2px 2px 1px;
     border-radius: 25px;
     color: white;
+    font-weight: bold;
 }
 
 .rentalList .status::after {
@@ -126,18 +129,39 @@ header .subtitle {
 
 .rentalList .status.rap {
     background-color: green;
+    border-color: #2b542c;
+    border-top-color: #449d44;
+    border-left-color: #449d44;
 }
 
 .rentalList .status.rco {
     background-color: gray;
+    border-color: #555;
+    border-top-color: #e4e4e4;
+    border-left-color: #e4e4e4;
 }
 
 .rentalList .status.rup {
     background-color: red;
+    border-color: darkred;
+    border-top-color: #d9534f;
+    border-left-color: #d9534f;
 }
 
 .rentalList .status.rwt {
-    background-color: yellow;
+    color: goldenrod;
+    background-color: #faebcc;
+    border-color: goldenrod;
+    border-top-color: gold;
+    border-left-color: gold;
+}
+
+.rentalList .status.rdl {
+    color: red;
+    background-color: whitesmoke;
+    border-color: darkred;
+    border-top-color: #d9534f;
+    border-left-color: #d9534f;
 }
 
 .user .status {
