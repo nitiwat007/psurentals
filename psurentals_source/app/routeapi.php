@@ -12,7 +12,10 @@ Route::get('api/campus/amphoe/{aid}', ['uses' => 'CampusAPIController@getCampuse
 
 
 //Rental
-Route::get('api/rentals/bs/{propertyType}/{near}/{rentalFeeUnder}/{status}', array('uses' => 'RentalsControllerNR@basicSearchRentals'));
+Route::get('api/rentals/bs/{propertyType}/{near}/{rentalFeeUnder}/{status}', function($pt, $near, $fee, $status) {
+    return (new RentalsControllerNR())->basicSearchRentals($pt, $near, $fee, $status)->get();
+});
+////array('uses' => 'RentalsControllerNR@basicSearchRentals'));
 Route::get('api/rentals/cover/{rentalID}', ['uses' => 'RentalsControllerNR@getRentalCoverImage']);
 
 

@@ -11,15 +11,22 @@
   |
  */
 
+//NR
+App::missing(function(exception $e) {
+    $message = $e->getMessage();
+    return (strlen($message) > 0) ? $message : $e;
+});
+
 Route::get('/', function() {
     return View::make('home');
 });
 Route::get('/home', function() {
     return View::make('home');
 });
-Route::get('/result', function() {
-    return View::make('result');
-});
+//NR
+//Route::get('/result', function() {
+//    return View::make('result');
+//});
 Route::get('/detail', function() {
     return View::make('detail');
 });

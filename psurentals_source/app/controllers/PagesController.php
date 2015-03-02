@@ -22,6 +22,8 @@ class PagesController extends BaseController {
         $ppttype = Input::get('ppttype');
         $near = Input::get('near');
         $fee = Input::get('fee');
+        $orderBy = Input::get('order');
+        
         if ($fee === '') {
             $fee = 0;
         }
@@ -33,8 +35,18 @@ class PagesController extends BaseController {
         /*Checking Request for select Search Method*/
         if (count(Input::all() <= 3))
         {
+            $pc = new PropertyController();
             //do basic search
+            $propertyType = $pc->getPropertyTypeByID($ppttype);
+            
             $searchResults = $rc->basicSearchRentals($ppttype, $near, $fee, "rap");
+            
+            if ($orderBy=='') {
+                //$searchResults
+            } else {
+                
+            }
+            
             //return $searchResults;
         } else
         {
@@ -42,7 +54,8 @@ class PagesController extends BaseController {
             //$searchResults = $rc->searchRentals(Request::all());
         }
 
-        //return $searchResults;
-        return View::make('result', ['rentals' => $searchResults ]); //DB::table('configuration')->get()]);
+        
+        return View::make('result', ['rentals' => $searchResults->paginate((new ConfigurationAPIController())->getListPerPage()), 
+            'propertyType' => $propertyType ]); //DB::table('configuration')->get()]);
     }
 }

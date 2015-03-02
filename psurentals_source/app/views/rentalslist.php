@@ -37,42 +37,9 @@ and open the template in the editor.
         <title>PSU Rentals</title>
     </head>
     <body>
-        <header id="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-1">
-                        <img style="max-width:60px; margin-top:10px;margin-bottom:0px;" src="images/psu-logo.png">
-                    </div>
-                    <div class="col-md-11" style="margin-top:50px;margin-bottom:0px;">
-                        <h1><strong>PSU Rentals</strong></h1>
-                        <h5>Prince of Songkla University Phuket Campus</h5>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div id="navbar" class="container">
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="home">Home</a>
-                            </li>
-                        </ul>
-                        <?php include 'UserControl/LoginName.php';  ?>                        
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <?php require('UserControl/Header.php'); ?>
+        <?php require('UserControl/MainNavigation.php'); ?>
+        
         <div id="mainRentals" class="container">
             <div class="row">
                 <div id="divRentalRoleMenu" class="col-md-3">
@@ -126,13 +93,7 @@ and open the template in the editor.
                 </div>
             </div>           
             <hr>
-            <footer>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h5>Copyright &copy; PSU Phuket 2015</h5>
-                    </div>
-                </div>
-            </footer>
+             <?php require('UserControl/Footer.php'); ?>
         </div>
     </body>
 </html>

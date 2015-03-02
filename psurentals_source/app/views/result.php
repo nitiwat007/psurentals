@@ -24,16 +24,27 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <h3><strong>Search Result</strong></h3>
-                    <p>Your search for rooms near 
-                        <em>
+                    <p>Your search for <strong>
                         <?php
+                        if (is_null($propertyType)) {
+                            echo "Unknown Type";
+                        } else {
+                            echo sprintf("%s (%s)", $propertyType->PropertyTypeNameEN, $propertyType->PropertyTypeNameTH);
+                        }
+                        ?>
+                        </strong>
+                        near 
+                        <strong>
+                            <?php
                             $campus = (new CampusAPIController())->getCampusByID(Input::get('near'));
                             if (array_sum($campus) > 0 && !is_null($campus)) {
                                 //echo sprintf("%s (%s)", $campus[0]->ShortNameEN, $campus[0]->ShortNameTH);
-                            } else { echo "PSU"; }
-                        ?>
-                        </em> 
-                       returned <?= $rentals->getTotal(); ?> <strong> matches</strong>.</p>
+                            } else {
+                                echo "PSU (มหาวิทยาลัยสงขลานครินทร์)";
+                            }
+                            ?>
+                        </strong> 
+                        returned <strong> <?= $rentals->getTotal(); ?></strong> matches.</p>
                 </div>
             </div>
             <br>
@@ -57,7 +68,7 @@ and open the template in the editor.
                       $data = json_decode($json, TRUE); */
                     ?>
 
-                    <?php require 'UserControl/RentalList.php'; ?>
+<?php require 'UserControl/RentalList.php'; ?>
                 </div>
 
                 <div class="col-md-3">
@@ -91,13 +102,13 @@ and open the template in the editor.
                     </p>
                 </div>
             </div>
-             <?php
-                    foreach ($_GET as $key => $value) {
-                        $rentals->appends([$key => $value]);
-                    }
-                    echo $rentals->links();
-                    ?>
-<!--            <ul id="pagination-demo" class="pagination-sm"></ul>-->
+            <?php
+            foreach ($_GET as $key => $value) {
+                $rentals->appends([$key => $value]);
+            }
+            echo $rentals->links();
+            ?>
+            <!--            <ul id="pagination-demo" class="pagination-sm"></ul>-->
             <hr>         
             <div class="row">
                 <div class="col-md-4">
@@ -117,7 +128,7 @@ and open the template in the editor.
                 </div>
             </div>
             <hr>
-            <?php require 'UserControl/Footer.php'; ?>
+<?php require 'UserControl/Footer.php'; ?>
         </div>
     </body>
 </html>
