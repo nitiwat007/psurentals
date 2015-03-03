@@ -21,12 +21,15 @@ class APISearchRentalController extends BaseController {
 
     //รับข้อมูลจาก QueryString
     private function retriveQueryString() {
+        //$q = new RentalSearchQueryString(); 
         $q = new RentalSearchArgument(); //queryString
-        $q->propertyTypeID = Input::get('proptype');
-        $q->nearCampusID = Input::get('near');
-        $q->feeUnder = Input::get('fee');
-        $q->orderBy = Input::get('order');
-
+        $q->setPropertyTypeID(Input::get('proptype'));
+        $q->setNearCampusID(Input::get('near'));
+        $q->setFeeUnder(Input::get('fee'));
+        $q->setOrderBy(Input::get('order'));
+        $q->setPageSize(Input::get('pageSize'));
+        //throw new Exception(Input::get('pageSize'));
+        //throw new Exception($q->getPageSize());
         return $q;
     }
 
@@ -40,8 +43,8 @@ class APISearchRentalController extends BaseController {
         }
 
         /* Can do search ? */
-        if (($q->propertyTypeID != '') &&
-                ($q->nearCampusID != '')) {
+        if (($q->getPropertyTypeID() != '') &&
+                ($q->getNearCampusID() != '')) {
 
             $stype = SearchType::Basic;
 
@@ -61,24 +64,29 @@ class APISearchRentalController extends BaseController {
             case true: //must do first
 
             case SearchType::Basic:
+                //throw new Exception("Basic Search");
                 $searchResults = $this->doBasicSearch($q);
+                
                 break;
             case SearchType::Advance:
+                //throw new Exception("Advance Search");
                 $searchResults = $this->doAdvanceSearch($q);
                 break;
             default:
-                $searchResults = $this->doBasicSearch($q); //เอาออกด้วย
+                //$searchResults = $this->doBasicSearch($q); //เอาออกด้วย
                 $searchResults = null;
         }
+        
+        return $searchResults;
     }
 
     //For Route
     public function forceBasicSearch($propTypeID, $nearCampus, $rentalFeeUnder, $status) {
         $q = new RentalSearchArgument(); //queryString
-        $q->propertyTypeID = $propTypeID;
-        $q->nearCampusID = $nearCampus;
+        $q->setPropertyTypeID($propTypeID);
+        $q->setNearCampusID($nearCampus);
         $q->setFeeUnder($rentalFeeUnder);
-        $q->orderBy = $this->DEFAULT_ORDER;
+        $q->setOrderBy(self::DEFAULT_ORDER);
         $q->setRentalStatus($status);
 
         $stype = $this->selectSearchType($q);
@@ -90,8 +98,6 @@ class APISearchRentalController extends BaseController {
     }
 
     private function doBasicSearch(RentalSearchArgument $args) {
-        
-
         /*
          * Main Query
          */
@@ -123,7 +129,9 @@ class APISearchRentalController extends BaseController {
         //return $query->select("*")->paginate($config->getListPerPage());
         //return $query->select('vrental.*' , 'vrentalcover.Picture')->get();
         //return Response::json(array('result' => $results));
-        return $query->select("*");
+        //return $query->where('MonthlyRentalFeeTo','>',99999)->paginate($args->getPageSize());
+        
+        return $query->paginate($args->getPageSize());
     }
 
     private function doAdvanceSearch(RentalSearchArgument $args) {

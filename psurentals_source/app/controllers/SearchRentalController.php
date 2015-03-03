@@ -29,55 +29,42 @@ class SearchRentalController extends BaseController {
 
     public function __construct() {
         $this->config = new APIConfigurationController();
-        $this->queryString = new RentalSearchQueryString();
+        //$this->queryString = new RentalSearchQueryString();
     }
 
     //เตรียมข้อมูลพื้นฐานต่างๆ หลังจากรับ QueryString แล้ว
     private function relativeLookupData() {
-        $q = $this->queryString;
-
-        if ($q->propertyTypeID != '') {
-            $this->propType = (new APIPropertyTypeController())
-                    ->getPropertyTypeByID($q->propertyTypeID);
-                    }
-
-            if ($q->nearCampusID != '') {
-                    $this->campus = (new APICampusController())
-            ->getCampusByID($q->nearCampusID);
-        }
+        $this->propType = (new APIPropertyTypeController())
+                ->getPropertyTypeByID(Input::get('proptype'));
+        $this->campus = (new APICampusController())
+                ->getCampusByID(Input::get('near'));
     }
-
 
     public function doSearch() {
 
-    $this->relativeLookupData($stype);
-
-
-    return View::make('result', [
-    'rentals' => function() {
-    if (is_null($searchResult)) {
-    return $searchResult->paginate(1);
-}
-return $searchResults->paginate($this->config->getListPerPage());
-},
- 'propertyType' => $this->propType,
- 'campus' => $this->campus]);
-}
-
-private function doBasicSearch() {
-//throw new Exception("Do Basic Search");
-$q = $this->queryString;
-//throw new Exception(sprintf("QueryString: %s %s %s", $q->propertyTypeID, $q->nearCampusID, $q->feeUnder));
-$rc = new APIRentalController();
-return $rc->doBasicSearch(
-$q->
-
-propertyTypeID, $q->nearCampusID, $q->feeUnder, "rap");
-}
-
-private function doAdvanceSearch() {
-return $this->doBasicSearch();
-}
+        $this->relativeLookupData();
+        $searchResult = (new APISearchRentalController())->SearchRental();
+        //return $searchResult;
+        //return json_encode($searchResult);
+        //return $searchResult->toJson();
+        //return Response::json(array('rentals' =>$searchResult));
+        /*
+          return [
+          'rentals' => $searchResult->toJson(),
+          'propertyType' => $this->propType,
+          'campus' => $this->campus];
+         */
+        return View::make('result', [
+                    'rentals' => $searchResult//->toJson()
+//                        if (is_null($searchResult)) {
+//                            //throw new Exception("Is Null")
+//                            return $searchResult->paginate(0); //ดูเหมือนไม่มีประโยชน์
+//                        } else {
+//                            return $searchResults->paginate($this->config->getListPerPage());
+//                        }
+                    ,
+                    'propertyType' => $this->propType,
+                    'campus' => $this->campus]);
+    }
 
 }
-
