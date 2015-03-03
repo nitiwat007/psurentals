@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-$configs = new ConfigurationAPIController();
+$configs = new APIConfigurationController();
 $defaultCampus = $configs->getDefaultCampusID();
 $listPerPage = $configs->getListPerPage();
 $titleLenght = $configs->getLimitTitleLength();

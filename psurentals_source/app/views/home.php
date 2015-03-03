@@ -23,10 +23,10 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <div class="well">
-                        <form id="frmSearch" name="frmSearch" class="form-inline" action="rentals/results" method="GET" >
+                        <form id="frmSearch" name="frmSearch" class="form-inline" action="rentals/search" method="GET" >
                             <div class="form-group">
                                 <label class="" for="exampleInputEmail2"> Find a / ค้นหา </label>
-                                <select name="ppttype" class="form-control">
+                                <select name="proptype" class="form-control">
                                     <option value="1">room</option>
                                     <option value="2">property</option>
                                 </select>

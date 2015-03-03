@@ -13,7 +13,7 @@ class PSUPKTProfileProvider extends ProfileProvider {
     }
 
     public function getUserDetails($username, $password) {
-        $config = new ConfigurationAPIController();
+        $config = new APIConfigurationController();
 
         //do something with PSU Passport
         $opts = array(

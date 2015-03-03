@@ -8,20 +8,20 @@ class RentalsListController extends BaseController {
     }
     
     public function getRentalPage($username) {
-        $ConfigurationAPIController=new ConfigurationAPIController();
-        $getListPerPage=$ConfigurationAPIController->getListPerPage();
-        $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
-        $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
+        $APIConfigurationController=new APIConfigurationController();
+        $getListPerPage=$APIConfigurationController->getListPerPage();
+        $titleLenght = $APIConfigurationController->getLimitTitleLength();
+        $descLenght = $APIConfigurationController->getLimitDescriptionLength();
         $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','<>','rdl')->where('CreatedBy','=',$username)->orderBy('ModifiedDate')->paginate($getListPerPage);       
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
         return $results;
     } 
     public function getRentalAll() {
-        $ConfigurationAPIController=new ConfigurationAPIController();
-        $getListPerPage=$ConfigurationAPIController->getListPerPage();
-        $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
-        $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
+        $APIConfigurationController=new APIConfigurationController();
+        $getListPerPage=$APIConfigurationController->getListPerPage();
+        $titleLenght = $APIConfigurationController->getLimitTitleLength();
+        $descLenght = $APIConfigurationController->getLimitDescriptionLength();
         $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->orderBy('ModifiedDate')->paginate($getListPerPage);       
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;
@@ -29,10 +29,10 @@ class RentalsListController extends BaseController {
     } 
 
     public function getRentalByStatus($status) {
-        $ConfigurationAPIController=new ConfigurationAPIController();
-        $getListPerPage=$ConfigurationAPIController->getListPerPage();
-        $titleLenght = $ConfigurationAPIController->getLimitTitleLength();
-        $descLenght = $ConfigurationAPIController->getLimitDescriptionLength();
+        $APIConfigurationController=new APIConfigurationController();
+        $getListPerPage=$APIConfigurationController->getListPerPage();
+        $titleLenght = $APIConfigurationController->getLimitTitleLength();
+        $descLenght = $APIConfigurationController->getLimitDescriptionLength();
         $results = DB::table('vrental')->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID')->where('Status','=',$status)->orderBy('ModifiedDate')->paginate($getListPerPage);       
         $results["titleLenght"]=$titleLenght;
         $results["descLenght"]=$descLenght;

@@ -10,58 +10,17 @@ and open the template in the editor.
         <script src="/js/jquery-1.11.2.min.js"></script>       
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
         <script src="/js/galleria/galleria-1.4.2.js"></script>
         <script src="/js/myjs/detail.js"></script>
-        <title></title>
+        <title>Rental Details</title>
     </head>
     <body>
         <input id='hrentalID' type="hidden" value="<?= Input::get('rentalID') ?>" />
-        
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-1">
-                        <img style="max-width:60px; margin-top:10px;margin-bottom:0px;" src="/images/psu-logo.png">
-                    </div>
-                    <div class="col-md-11" style="margin-top:50px;margin-bottom:0px;">
-                        <h1><strong>PSU Rentals</strong></h1>
-                        <h5>Prince of Songkla University Phuket Campus</h5>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="container">
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
 
-                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="#">Menu1</a>
-                            </li>
-                            <li>
-                                <a href="#">Menu2</a>
-                            </li>
-                            <li>
-                                <a href="#">Menu3</a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right" style="margin-right:20px;">
-                            <li><a href="../navbar/">Login or Register</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <?php require('UserControl/Header.php'); ?>
+        <?php require('UserControl/MainNavigation.php'); ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
@@ -218,29 +177,17 @@ and open the template in the editor.
             <hr>         
             <div class="row">
                 <div class="col-md-4">
-                    <h2>About</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                    <?php include 'UserControl/About.php'; ?>
                 </div>
                 <div class="col-md-4">
-                    <h2>Term & Condition</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                    <?php include 'UserControl/TermCondition.php'; ?>
                 </div>
                 <div class="col-md-4">
-                    <h2>Contact</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                    <?php include 'UserControl/Contact.php'; ?>
                 </div>
             </div>
             <hr>
-            <footer>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h5>Copyright &copy; PSU Phuket 2015</h5>
-                    </div>
-                </div>
-            </footer>
+            <?php require 'UserControl/Footer.php'; ?>
         </div>
     </body>
 </html>

@@ -31,7 +31,7 @@ class PSUPKTRoleProvider extends RoleProvider {
     }
 
     public static function getRoles($username) {
-        $config = new ConfigurationAPIController();
+        $config = new APIConfigurationController();
         $appKey = $config->getApplicationKey();
         $providerURL = $config->getRoleProviderURL();
         

@@ -11,7 +11,7 @@
  *
  * @author Nontapon
  */
-class PropertyController extends BaseController {
+class APIPropertyController extends BaseController {
     //put your code here
     
     public function getPropertyTypes() {

@@ -15,7 +15,7 @@ and open the template in the editor.
         <script src="/js/jquery.twbsPagination.js"></script>
         <script src="/js/myjs/result.js"></script>
 
-        <title></title>
+        <title>Search Results</title>
     </head>
     <body>
         <?php require('UserControl/Header.php'); ?>
@@ -23,22 +23,22 @@ and open the template in the editor.
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3><strong>Search Result</strong></h3>
+                    <h3>Search</h3>
                     <p>Your search for <strong>
-                        <?php
-                        if (is_null($propertyType)) {
-                            echo "Unknown Type";
-                        } else {
-                            echo sprintf("%s (%s)", $propertyType->PropertyTypeNameEN, $propertyType->PropertyTypeNameTH);
-                        }
-                        ?>
+                            <?php
+                            if (is_null($propertyType)) {
+                                echo "Unknown Type";
+                            } else {
+                                echo sprintf("%s (%s)", $propertyType->PropertyTypeNameEN, $propertyType->PropertyTypeNameTH);
+                            }
+                            ?>
                         </strong>
                         near 
                         <strong>
                             <?php
-                            $campus = (new CampusAPIController())->getCampusByID(Input::get('near'));
-                            if (array_sum($campus) > 0 && !is_null($campus)) {
-                                //echo sprintf("%s (%s)", $campus[0]->ShortNameEN, $campus[0]->ShortNameTH);
+                            $campus = (new APICampusController())->getCampusByID(Input::get('near'));
+                            if (!is_null($campus)) {
+                                echo sprintf("%s (%s)", $campus->ShortNameEN, $campus->ShortNameTH);
                             } else {
                                 echo "PSU (มหาวิทยาลัยสงขลานครินทร์)";
                             }
@@ -68,7 +68,7 @@ and open the template in the editor.
                       $data = json_decode($json, TRUE); */
                     ?>
 
-<?php require 'UserControl/RentalList.php'; ?>
+                    <?php require 'UserControl/RentalList.php'; ?>
                 </div>
 
                 <div class="col-md-3">
@@ -111,24 +111,18 @@ and open the template in the editor.
             <!--            <ul id="pagination-demo" class="pagination-sm"></ul>-->
             <hr>         
             <div class="row">
-                <div class="col-md-4">
-                    <h2>About</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                 <div class="col-md-4">
+                    <?php include 'UserControl/About.php'; ?>
                 </div>
                 <div class="col-md-4">
-                    <h2>Term & Condition</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                    <?php include 'UserControl/TermCondition.php'; ?>
                 </div>
                 <div class="col-md-4">
-                    <h2>Contact</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                    <?php include 'UserControl/Contact.php'; ?>
                 </div>
             </div>
             <hr>
-<?php require 'UserControl/Footer.php'; ?>
+            <?php require 'UserControl/Footer.php'; ?>
         </div>
     </body>
 </html>

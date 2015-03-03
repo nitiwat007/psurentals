@@ -13,7 +13,7 @@ class PSUPKTAuthenProvider implements iAuthentication {
     }
 
     public function validateUser($username, $password) {
-        $config = new ConfigurationAPIController();
+        $config = new APIConfigurationController();
         $authen = FALSE;
 
         //do something with PSU Passport
