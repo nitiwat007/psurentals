@@ -20,7 +20,7 @@ class APIConfigurationController extends BaseController {
         if (is_null($obj)){
             throw new Exception('Default Campus not found');
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     public function getListPerPage() {
@@ -30,7 +30,7 @@ class APIConfigurationController extends BaseController {
             return 999;
             //throw new Exception('Cannot get default of number items on page');
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     public function getLimitTitleLength() {
@@ -39,7 +39,7 @@ class APIConfigurationController extends BaseController {
         if (is_null($obj)){
             return 999;
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     public function getLimitDescriptionLength() {
@@ -48,7 +48,7 @@ class APIConfigurationController extends BaseController {
         if (is_null($obj)){
             return 9999;
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     /*

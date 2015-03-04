@@ -9,8 +9,17 @@ and open the template in the editor.
 */
 
 input[type="number"][class="form-control"] {
-    width: 100px;
+    width: 80px;
     text-align: right;
+}
+
+label {
+    margin-right: 5px;
+}
+
+.form-inline .form-group {
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 
 header {
