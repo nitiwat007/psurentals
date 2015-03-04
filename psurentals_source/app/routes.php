@@ -19,9 +19,12 @@ App::missing(function(exception $e) {
 
 Route::get('/', function() {
     return View::make('home');
+    //return Redirect::to('/home');
 });
 Route::get('/home', function() {
-    return View::make('home');
+    //return View::make('home');
+    return Redirect::to('/');
+    //return Redirect::route('/');
 });
 //NR
 //Route::get('/result', function() {
