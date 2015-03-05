@@ -27,7 +27,7 @@ foreach ($rentals as $rental) {
                 <input id="hrental<?= $rental->RentalID; ?>" type="hidden" value='<?= json_encode($rental) ?>' />
 
                 <span class='rentalCode'><?= $rental->RentalID; ?></span>
-                <a class="media-left cover" href="/detail">
+                <a class="media-left cover" id="<?= $rental->RentalID ?>" href="/detail">
                     <?php
                     /*
                      * Prepare URL for picture
