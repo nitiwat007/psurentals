@@ -226,7 +226,7 @@ and open the template in the editor.
                                 <hr>
                                 <div class="form-group">
                                     <label for="ddlBedroomsAvailable" class="col-sm-3 control-label" style="text-align:left">Bedrooms available <br> เตียงที่ว่าง</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-4">
                                         <select id="ddlBedroomsAvailable" name="ddlBedroomsAvailable" class="form-control">
                                             <option>-- Select / เลือก--</option>
                                         </select>                                       
@@ -274,7 +274,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="chkUtilities" class="col-sm-3 control-label" style="text-align:left">Utilities included in Rent <br> สาธารณูปโภคที่รวมในค่าเช่า</label>
-                                    <div id="divUtilities" class="col-sm-9">
+                                    <div id="divUtilities" class="col-sm-8">
 
                                     </div>
                                 </div>
@@ -292,13 +292,13 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="chkWhiteGoodsProvider" class="col-sm-3 control-label" style="text-align:left">White Goods provided <br> อุปกรณ์เครื่องใช้ในบ้าน</label>
-                                    <div id="divWhiteGoodsProvider" class="col-sm-9">
+                                    <div id="divWhiteGoodsProvider" class="col-sm-8">
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="chkOtherFacilities" class="col-sm-3 control-label" style="text-align:left">Other Facilities <br> สิ่งอำนวยความสะดวกอื่น ๆ</label>
-                                    <div id="divOtherFacilities" class="col-sm-9">
+                                    <div id="divOtherFacilities" class="col-sm-8">
 
                                     </div>
                                 </div>
@@ -325,13 +325,13 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="rdbPreferredGender" class="col-sm-3 control-label" style="text-align:left">Preferred Gender <br> ต้องการผู้เช่าที่เป็น</label>
-                                    <div id="divPreferredGender" class="col-sm-9">
+                                    <div id="divPreferredGender" class="col-sm-8">
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="chkPreferredTenant" class="col-sm-3 control-label" style="text-align:left">Preferred Tenant <br> ต้องการกลุ่มผู้เช่าที่เป็น</label>
-                                    <div id="divPreferredTenant" class="col-sm-9">
+                                    <div id="divPreferredTenant" class="col-sm-8">
 
                                     </div>
                                 </div>
@@ -353,7 +353,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="txtDescription" class="col-sm-3 control-label" style="text-align:left">Description <br> รายละเอียด</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                         <textarea id="txtDescription" name="txtDescription" class="form-control" rows="30" placeholder="Description / รายละเอียด"></textarea>
                                     </div>
                                 </div>

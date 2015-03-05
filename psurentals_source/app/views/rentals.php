@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
-<!--        <link rel="stylesheet" href="/css/psurentals.css">-->
+        <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
         <script src="/js/myjs/SecurityManager.js"></script>
         <script src="/js/myjs/rentals.js"></script>
@@ -191,7 +191,7 @@ and open the template in the editor.
                                         <input type="number" class="form-control" min="0" id="txtNumberRooms" name="txtNumberRooms" placeholder="Number">
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" name="btnAddRooms" id="btnAddRooms" class="btn btn-default">Add</button>
+                                        <button type="button" name="btnAddRooms" id="btnAddRooms" class="btn btn-sm btn-success">Add</button>
                                     </div>                                   
                                 </div>
                                 <input type="hidden" class="form-control" id="txtRoomsList" name="txtRoomsList">
@@ -216,7 +216,7 @@ and open the template in the editor.
                                 <hr>
                                 <div class="form-group">
                                     <label for="ddlBedroomsAvailable" class="col-sm-3 control-label" style="text-align:left">Bedrooms available <br> เตียงที่ว่าง</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-4">
                                         <select id="ddlBedroomsAvailable" name="ddlBedroomsAvailable" class="form-control">
                                             <option>-- Select / เลือก--</option>
                                         </select>                                       
@@ -225,7 +225,7 @@ and open the template in the editor.
                                         <input type="number" min="0" class="form-control" min="0" id="txtNumberBedroom" name="txtNumberBedroom" placeholder="Number" required>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" name="btnAddBedroom" id="btnAddBedroom" class="btn btn-default">Add</button>
+                                        <button type="button" name="btnAddBedroom" id="btnAddBedroom" class="btn btn-sm btn-success">Add</button>
                                     </div>
                                 </div>
                                 <input type="hidden" class="form-control" id="txtBedroomsList" name="txtBedroomsList">
@@ -264,7 +264,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="chkUtilities" class="col-sm-3 control-label" style="text-align:left">Utilities included in Rent <br> สาธารณูปโภคที่รวมในค่าเช่า</label>
-                                    <div id="divUtilities" class="col-sm-9">
+                                    <div id="divUtilities" class="col-sm-8">
 
                                     </div>
                                 </div>
@@ -282,25 +282,24 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="chkWhiteGoodsProvider" class="col-sm-3 control-label" style="text-align:left">White Goods provided <br> อุปกรณ์เครื่องใช้ในบ้าน</label>
-                                    <div id="divWhiteGoodsProvider" class="col-sm-9">
+                                    <div id="divWhiteGoodsProvider" class="col-sm-8">
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="chkOtherFacilities" class="col-sm-3 control-label" style="text-align:left">Other Facilities <br> สิ่งอำนวยความสะดวกอื่น ๆ</label>
-                                    <div id="divOtherFacilities" class="col-sm-9">
+                                    <div id="divOtherFacilities" class="col-sm-8">
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtOccupants" class="col-sm-3 control-label" style="text-align:left">Occupants <br> จำนวนผู้อาศัย</label>
-                                    <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Current / จำนวนผู้ที่อาศัยอยู่ในขณะนี้</label>
                                     <div class="col-sm-2">
-                                        
+                                        <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Current</label>
                                         <input type="number" class="form-control" min="0" id="txtOccupantsCurrent" name="txtOccupantsCurrent" placeholder="Current">
                                     </div>
-                                    <div class="col-sm-5">
-                                        <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Vacancy / จำนวนผู้อาศัยที่ว่างอยู่/รับเพิ่ม</label>
+                                    <div class="col-sm-2">
+                                        <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Vacancy</label>
                                         <input type="number" class="form-control" min="0" id="txtOccupantsVacancy" name="txtOccupantsVacancy" placeholder="Vacancy">
                                     </div>
                                 </div>
@@ -318,13 +317,13 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="rdbPreferredGender" class="col-sm-3 control-label" style="text-align:left">Preferred Gender <br> ต้องการผู้เช่าที่เป็น</label>
-                                    <div id="divPreferredGender" class="col-sm-9">
+                                    <div id="divPreferredGender" class="col-sm-8">
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="chkPreferredTenant" class="col-sm-3 control-label" style="text-align:left">Preferred Tenant <br> ต้องการกลุ่มผู้เช่าที่เป็น</label>
-                                    <div id="divPreferredTenant" class="col-sm-9">
+                                    <div id="divPreferredTenant" class="col-sm-8">
 
                                     </div>
                                 </div>

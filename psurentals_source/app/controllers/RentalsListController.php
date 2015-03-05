@@ -7,6 +7,15 @@ class RentalsListController extends BaseController {
         return Response::json(array('result' => $results));
     }
     
+    public function getRentalDetail($RentalID) {
+        $results = DB::select("select * from vrental where RentalID='$RentalID'");
+        $distance = DB::select("select * from vdistance where RentalID='$RentalID'");
+        $picture = DB::select("select * from rentalpictures where RID='$RentalID'");
+        $WhiteGood = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=2");
+        $Utilities = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=1");
+        return Response::json(array('result' => $results, 'distance' => $distance, 'picture' => $picture, 'whitegood' => $WhiteGood, 'utilities' => $Utilities));
+    }
+    
     public function getRentalPage($username) {
         $APIConfigurationController=new APIConfigurationController();
         $getListPerPage=$APIConfigurationController->getListPerPage();

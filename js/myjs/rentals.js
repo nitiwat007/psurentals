@@ -393,7 +393,7 @@ function showRoomsSelect() {
     $("#tb_RoomsSelected tbody").html("");
     var roomsLength = rooms.length;
     for (var i = 1; i <= roomsLength; i++) {
-        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-small confirm'>Delete</button>";
+        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-sm btn-danger'>Delete</button>";
         var rooms_split = rooms[i - 1].split("-");
         $("#tb_RoomsSelected tbody").append("<tr><td>" + i + "</td><td>" + rooms_split[1] + "</td><td>" + rooms_split[2] + "</td><td>" + action_delete + "</td></tr>");
     }

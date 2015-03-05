@@ -1,3 +1,4 @@
+<script src="/js/myjs/ucRentalList.js"></script>
 <?php
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -76,7 +77,7 @@ foreach ($rentals as $rental) {
 <?php }
 ?>
 
-<script>
+<!--<script>
     $(function () {
         var userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -96,4 +97,4 @@ foreach ($rentals as $rental) {
             window.location.href = $(this).attr('href');
         }
     });
-</script>
+</script>-->

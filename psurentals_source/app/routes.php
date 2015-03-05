@@ -87,6 +87,8 @@ Route::post('newrentals', array('uses' => 'RentalsController@newtRentals'));
 //RENTALS ACTION
 Route::delete('deleterentals/{RentalID}', array('uses' => 'RentalsListController@deleteRentals'));
 
+//DETAIL
+Route::get('getrentaldetail/{RentalID}', array('uses' => 'RentalsListController@getRentalDetail'));
 
 //UPLOAD
 Route::post('upload', array('uses' => 'RentalsController@uploadFile'));

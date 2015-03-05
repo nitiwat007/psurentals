@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 input[type="number"][class="form-control"] {
-    width: 100px;
+    width: 120px;
     text-align: right;
 }
 
