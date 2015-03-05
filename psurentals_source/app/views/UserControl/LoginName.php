@@ -22,8 +22,9 @@
             $("#loginName").html(userInfo.userName + " <span class='caret'></span>");
             $("#aLogout").click(function () {
                 localStorage.removeItem("userInfo");
-                alert("Logout.");
-                window.location.href = "/login";
+                localStorage.removeItem("ucRentalListID")
+                //alert("Logout.");
+                window.location.href = "/home";
             });
             $("#aProfile").click(function () {
                 window.location.href = "/profile";

@@ -372,8 +372,10 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-sm-3 control-label" style="text-align:left"></label>
-                                    <div id="upload_thumbnail" class="col-sm-8">
+                                    <div class="row">
+                                        <div id="upload_thumbnail" class="col-sm-8">
 
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">

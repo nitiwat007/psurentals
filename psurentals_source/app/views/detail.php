@@ -33,22 +33,19 @@ and open the template in the editor.
                                     <h3 class="panel-title"><strong>Property Type</strong></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <p id="MonthlyRentalFee">9,999 per months</p>
-                                    <p id="AvailableDate">Available from 01-01-2015</p>
+
                                 </div>
                             </div>
                         </div> 
                         <div class="col-md-8">
                             <p id="title"></p>
-<!--                            <p id="subTitle">5-bedroom shared house • Kellett Street • Auchenflower 4066</p>-->
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-9">
                             <div id="divPicture" class="galleria">
-<!--                                <img src="/images/room/1.jpg" data-title="My title" data-description="My description">
-                                <img src="/images/room/2.jpg" data-title="Another title" data-description="My <em>HTML</em> description">
-                                <img src="/images/room/3.jpg" data-title="Another title" data-description="My <em>HTML</em> description">-->
+
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -57,10 +54,7 @@ and open the template in the editor.
                                     <h3 class="panel-title"><strong>Distance</strong></h3>
                                 </div>
                                 <div id="divDistance" class="panel-body">
-<!--                                    <p><h4><strong>40 km</strong></h4> from Airport</p>
-                                    <p><h4><strong>30 km</strong></h4> from Talang</p>
-                                    <p><h4><strong>20 km</strong></h4> from Patong</p>
-                                    <p><h4><strong>10 km</strong></h4> from Kathu</p>-->
+
                                 </div>
                             </div>
                         </div>
@@ -73,7 +67,7 @@ and open the template in the editor.
                             <br>
                             <h4><strong>Contact Detail</strong></h4>
                             <p id="ContactDetail">
-                                Sign in as a student to view the provider's contact details.
+                                
                             </p>
                         </div>
                         <div class="col-lg-6">
@@ -88,15 +82,6 @@ and open the template in the editor.
                                    margin-left: 10px;
                                    margin-bottom: 10px;">
                                 <tr><td colspan="2"><strong>Information</strong></td></tr>
-<!--                                <tr><td>Rent fee per Month</td><td>50 - 100 Baht</td></tr>
-                                <tr><td>Lease</td><td>9 Month</td></tr>
-                                <tr><td>Lease End date</td><td>31-01-2015</td></tr>
-                                <tr><td>Bond</td><td>5000 Baht</td></tr>
-                                <tr><td>Security bond</td><td>5000 Baht</td></tr>
-                                <tr><td>Written tenancy agreement provided?</td><td>Yes</td></tr>
-                                <tr><td>Daily Rental</td><td>Yes</td></tr>
-                                <tr><td>Rent fee per day</td><td>500 Baht</td></tr>
-                                <tr><td>Room</td><td></td></tr>-->
                             </table>
                         </div>
                     </div>
