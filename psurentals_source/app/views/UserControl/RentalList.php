@@ -22,12 +22,11 @@ foreach ($rentals as $rental) {
                 <input id="hrental<?= $rental->RentalID; ?>" type="hidden" value='<?= json_encode($rental) ?>' />
 
                 <span class='rentalCode'><?= $rental->RentalID; ?></span>
-<<<<<<< HEAD
+
                 <span class="date"><?= (new DateTime($rental->ModifiedDate))->format('M d,Y (H:i:s)'); ?></span>
                 <a class="media-left cover" href="/detail">
-=======
                 <a class="media-left cover" id="<?= $rental->RentalID ?>" href="/detail">
->>>>>>> origin/master
+
                     <?php
                     /*
                      * Prepare URL for picture
