@@ -16,7 +16,7 @@ class RentalSearchQueryString  {
      * For basic search
      */
     const DEFAULT_FEE_UNDER = INF;
-    const DEFAULT_RENTAL_STATUS = "rap";
+    const DEFAULT_RENTAL_STATUS = RentalStatus::Approved;
     
     private $_config;
     private $_feeUnder;

@@ -19,7 +19,7 @@ class RentalSearchArgument extends RentalSearchQueryString {
     public function __construct() {
         parent::__construct();
         
-        $this->_campus = (new APICampusController())->getCampusByID($this->getNearCampusID());
+        //$this->_campus = (new APICampusController())->getCampusByID($this->getNearCampusID());
     }
     
 //    public function setNearCampusID($value) {
@@ -37,7 +37,8 @@ class RentalSearchArgument extends RentalSearchQueryString {
 //    }
     
     public function getCampus() {
-        return $this->_campus;
+        //return $this->_campus;
+        return (new APICampusController())->getCampusByID($this->getNearCampusID());
     }
     
 }

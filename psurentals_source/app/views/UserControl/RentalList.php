@@ -38,7 +38,7 @@ foreach ($rentals as $rental) {
                     //$imgCover = file_get_contents($url) ;
                     //echo $imgCover;
                     //$imgPath = $host . "/psurentals_uploads/" . $imgCover;
-                    $imgPath = $host . "/psurentals_uploads/" . $rental->Picture;
+                    $imgPath = $host . "/psurentals_uploads/" . $rental->CoverImage;
                     //echo $imgPath;
                     ?>
                     <img alt="" src='<?= $imgPath ?>' class='cover' >
