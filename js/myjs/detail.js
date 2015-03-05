@@ -64,7 +64,7 @@ function getDetails(RentalID) {
             }
             $("#tb_information").append("<tr><td>Utilities Included in Rent</td><td>" + utilities + "</td></tr>");
             
-            $("#tb_information").append("<tr><td>Bedroom Furnishing</td><td>" + d.result[0].BedroomFurnishing + "</td></tr>");
+            $("#tb_information").append("<tr><td>Bedroom Furnishing</td><td>" + d.result[0].BedroomFurnishingNameEN + "</td></tr>");
 
             var whitegoodLength = d.whitegood.length;
             var whitegood = "";
