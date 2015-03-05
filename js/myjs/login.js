@@ -1,9 +1,14 @@
+var userInfo = null;
+userInfo = JSON.parse(localStorage.getItem("userInfo"));
 $(function () {
-    $("#frmLogin").submit(function(event){
-        event.preventDefault();
-        authentication();
-    });
-    
+    if (userInfo === null) {
+        $("#frmLogin").submit(function (event) {
+            event.preventDefault();
+            authentication();
+        });
+    } else {
+        window.location.href = "profile";
+    }
 });
 function authentication() {
     var username = $("#username").val();
@@ -11,12 +16,12 @@ function authentication() {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "api/aaa/authentication/" + username + "/" + password ,
+        url: "api/aaa/authentication/" + username + "/" + password,
         success: function (d) {
-            if(d.userInfo.isAuthentication){
-                localStorage.setItem("userInfo",JSON.stringify(d.userInfo));
+            if (d.userInfo.isAuthentication) {
+                localStorage.setItem("userInfo", JSON.stringify(d.userInfo));
                 window.location.href = "profile";
-            }else{
+            } else {
                 alert("Login Fail.");
             }
         },

@@ -58,7 +58,7 @@ Route::get('/login', function() {
 
 //RENTALS GET
 Route::get('propertytype', array('uses' => 'RentalsController@getPropertyType'));
-Route::get('property/{PropertyTypeID}', array('uses' => 'RentalsController@getProperty'));
+Route::get('property2/{PropertyTypeID}', array('uses' => 'RentalsController@getProperty'));
 Route::get('amphoe', array('uses' => 'RentalsController@getAmphoe'));
 Route::get('rooms', array('uses' => 'RentalsController@getRooms'));
 Route::get('bedrooms', array('uses' => 'RentalsController@getBedroomsAvailable'));

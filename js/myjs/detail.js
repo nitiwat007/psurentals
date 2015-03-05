@@ -2,8 +2,11 @@ var userInfo = null;
 userInfo = JSON.parse(localStorage.getItem("userInfo"));
 $(function () {
     var RentalID = localStorage.getItem("ucRentalListID");
-    getDetails(RentalID);
-    //slideShow();
+    if(RentalID===null){
+        window.location.href="/home";
+    }else{
+        getDetails(RentalID);
+    }
 });
 function getDetails(RentalID) {
     $.ajax({
@@ -28,7 +31,7 @@ function getDetails(RentalID) {
             $("#divPicture").html("");
             for (var i = 1; i <= pictureLength; i++) {
                 var picturePath = "/psurentals_uploads/" + d.picture[i - 1].Picture;
-                $("#divPicture").append("<img src='" + picturePath + "' data-title='My title' data-description='My description'>");
+                $("#divPicture").append("<img src='" + picturePath + "'>");
             }
             slideShow();
 
@@ -80,12 +83,17 @@ function getDetails(RentalID) {
             $("#tb_information").append("<tr><td>Smoking</td><td>" + d.result[0].SmokingEN + "</td></tr>");
             $("#tb_information").append("<tr><td>Pets</td><td>" + d.result[0].PetEN + "</td></tr>");
             
-            if (userInfo.isAuthentication) {
-                $("#ContactDetail").html("URL : <a href='"+ d.result[0].URL +"'>"+ d.result[0].URL +"</a>");
-            }else{
-                $("#ContactDetail").html("<a href='/login'>Sign in </a> as a student to view the provider's contact details.");
-            }
-            
+//            if (userInfo.isAuthentication) {
+//                $("#ContactDetail").html("URL : <a href='"+ d.result[0].URL +"'>"+ d.result[0].URL +"</a>");
+//            }else{
+//                $("#ContactDetail").html("<a href='/login'>Sign in </a> as a student to view the provider's contact details.");
+//            }
+            $("#ContactDetail").html("");
+            $("#ContactDetail").append("<p><strong>Provider Name :</strong> "+ d.result[0].FirstName + " " + d.result[0].LastName +"</p>");
+            $("#ContactDetail").append("<p><strong>Email :</strong> "+ d.result[0].Email + "</p>");
+            $("#ContactDetail").append("<p><strong>Mailing Address :</strong> "+ d.result[0].MailingAddress + "</p>");
+            $("#ContactDetail").append("<p><strong>Telephone Number :</strong> "+ d.result[0].TelephoneNumber + "</p>");
+            $("#ContactDetail").append("<strong>URL :</strong> <a href='"+ d.result[0].URL +"'>"+ d.result[0].URL +"</a>");
         },
         error: function (xhr, status, error) {
             alert("Error1 getDetails : " + xhr.responseText);

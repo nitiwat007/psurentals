@@ -42,7 +42,7 @@ function updateRental() {
             success: function (d) {
                 //alert(d.result);
                 //Pace.stop();
-               location.reload();
+                location.reload();
             },
             error: function (xhr, status, error) {
                 alert("Error1 newRentals : " + xhr.responseText);
@@ -164,38 +164,22 @@ function getRentalDataEdit() {
 
             var pictureLength = d.picture.length;
             for (var i = 1; i <= pictureLength; i++) {
-                //$("#" + d.picture[i-1].OID).prop('checked', true);
                 pictures.push(d.picture[i - 1].Picture);
-                $("#upload_thumbnail").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                        "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''></a></div>");
-                $("#" + d.picture[i - 1].Picture).click(function (event) {
+                if (pictures.length === 5 || pictures.length === 9) {
+                    $("#upload_thumbnail").append("<br>");
+                }
+                var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
+                $("#upload_thumbnail").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-3 col-md-3'><a href='' class='thumbnail'>" +
+                        "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
+                $("#btn_delete_" + d.picture[i - 1].Picture).click(function (event) {
                     event.preventDefault();
-                    //alert($(this).attr("id"));
-                    var pictureID = $(this).attr("id");
+                    var pictureID = $(this).val();
                     $.confirm({
                         text: "Are you sure you want to delete this Picture?",
                         confirm: function (button) {
-                            // do something
-//                            $.ajax({
-//                                type: "DELETE",
-//                                dataType: "json",
-//                                url: "deleterentals/" + encodeURIComponent(RentalID),
-//                                success: function (d) {
-//                                    getRentals();
-//                                },
-//                                error: function (xhr, status, error) {
-//                                    alert("Error1 : " + xhr.responseText);
-//                                    alert("Error2 : " + status);
-//                                    alert("Error3 : " + error);
-//                                }
-//                            });
-                            //var c_value = $(this).val();
-                            //pictures.splice(c_value, 1);
-                            //alert(pictureID);
                             var pictureIndex = $.inArray(pictureID, pictures);
                             pictures.splice(pictureIndex, 1);
                             $("#div_" + pictureID).remove();
-                            //alert(pictureIndex);
                         },
                         cancel: function (button) {
                             // do something
@@ -221,39 +205,64 @@ function uploadFile() {
         var pictureCheckLimit = pictures.length + this.files.length
         if (pictureCheckLimit <= 9) {
             for (var i = 0; i < this.files.length; i++) {
-                if (this.files[i].size <= 307200) {
-                    var fd = new FormData();
-                    fd.append("file", this.files[i]);
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        data: fd,
-                        url: "upload",
-                        enctype: 'multipart/form-data',
-                        processData: false,
-                        contentType: false,
-                        success: function (d) {
-                            pictures.push(d.result);
-                            $("#upload_thumbnail").append("<div class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                    "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt=''></a></div>");
-                            $("#" + d.result).click(function (event) {
-                                event.preventDefault();
-                                alert($(this).attr("id"));
-                            });
-                        },
-                        error: function (xhr, status, error) {
-                            alert("Error1 uploadFile : " + xhr.responseText);
-                            alert("Error2 uploadFile : " + status);
-                            alert("Error3 uploadFile : " + error);
-                        }
-                    });
+                var fileExtension = this.files[i].name.split('.').pop().toLowerCase();
+                if (fileExtension === "jpg" || fileExtension === "png") {
+                    if (this.files[i].size <= 307200) {
+                        var fd = new FormData();
+                        fd.append("file", this.files[i]);
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            data: fd,
+                            url: "upload",
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            contentType: false,
+                            success: function (d) {
+                                pictures.push(d.result);
+                                if (pictures.length === 5 || pictures.length === 9) {
+                                    $("#upload_thumbnail").append("<br>");
+                                }
+                                var action_delete = "<button id='btn_delete_" + d.result + "' value='" + d.result + "' class='btn btn-sm btn-link'>Delete</button>";
+                                $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-3 col-md-3'><a href='' class='thumbnail'>" +
+                                        "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
+                                        "</div>");
+                                $("#btn_delete_" + d.result).click(function (event) {
+                                    event.preventDefault();
+                                    var pictureID = $(this).val();
+                                    $.confirm({
+                                        text: "Are you sure you want to delete this Picture?",
+                                        confirm: function (button) {
+                                            var pictureIndex = $.inArray(pictureID, pictures);
+                                            pictures.splice(pictureIndex, 1);
+                                            $("#div_" + pictureID).remove();
+                                        },
+                                        cancel: function (button) {
+                                            // do something
+                                        },
+                                        confirmButton: "Yes I am",
+                                        cancelButton: "No",
+                                        post: true
+                                    });
+                                });
+                            },
+                            error: function (xhr, status, error) {
+                                alert("Error1 uploadFile : " + xhr.responseText);
+                                alert("Error2 uploadFile : " + status);
+                                alert("Error3 uploadFile : " + error);
+                            }
+                        });
+                    } else {
+                        alert("Upload image Size limit is 300 KB.");
+                    }
                 } else {
-                    alert("Upload image Size limit is 300 KB.");
+                    alert("Not Support file type : " + fileExtension);
                 }
             }
         } else {
             alert("Upload image Max limit is 9.");
         }
+        $("#fileupload").val("");
     });
 }
 function getSmoking() {
@@ -263,7 +272,6 @@ function getSmoking() {
         dataType: "json",
         url: "smoke",
         success: function (d) {
-            //$("#ddlSmoking").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlSmoking").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].NameEN + " / " + d.result[i - 1].NameTH + "</option>");
@@ -281,7 +289,6 @@ function getPets() {
         dataType: "json",
         url: "pets",
         success: function (d) {
-            //$("#ddlPets").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlPets").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].NameEN + " / " + d.result[i - 1].NameTH + "</option>");
@@ -297,7 +304,7 @@ function getStatus() {
     $("#ddlStatus").html("");
     //$('#ddlStatus').attr('disabled', 'disabled');
     //$('#ddlStatus').attr('readonly', true);
-    $('#ddlStatus').attr("disabled", true); 
+    $('#ddlStatus').attr("disabled", true);
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -495,6 +502,26 @@ function getPropertyType(PropertyTypeID, PropertyID) {
 //            alert("Error1 getPropertyType : " + xhr.responseText);
 //            alert("Error2 getPropertyType : " + status);
 //            alert("Error3 getPropertyType : " + error);
+        }
+    });
+}
+function getProperty(PropertyTypeID, PropertyID) {
+    $("#ddlProperty").html("");
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "property2/" + PropertyTypeID,
+        success: function (d) {
+            var resultLength = d.result.length;
+            for (var i = 1; i <= resultLength; i++) {
+                $("#ddlProperty").append("<option value=" + d.result[i - 1].ID + ">" + d.result[i - 1].PropertyNameEN + " / " + d.result[i - 1].PropertyNameTH + "</option>");
+            }
+            $("#ddlProperty option[value='" + PropertyID + "']").attr("selected", "selected");
+        },
+        error: function (xhr, status, error) {
+//            alert("Error1 getProperty : " + xhr.responseText);
+//            alert("Error2 getProperty : " + status);
+//            alert("Error3 getProperty : " + error);
         }
     });
 }

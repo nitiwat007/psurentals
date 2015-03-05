@@ -1,0 +1,36 @@
+<div class='panel panel-default rentalList'>
+        <div class='panel-body'>
+            <div class='media'>
+                <span class='rentalCode'><?= $rental->RentalID; ?></span>
+                <a class='media-left' href='#'>
+                    <?php
+                    $host = explode('/', $_SERVER['SERVER_PROTOCOL'])[0] . '://' . $_SERVER['HTTP_HOST'];
+                    //$url =  $host . '/rentals/cover/' . $rental->RentalID;
+                    //echo $url;
+                    //$imgCover = file_get_contents($url) ;
+                    //echo $imgCover;
+                    //$imgPath = $host . '/psurentals_uploads/' . $imgCover;
+                    $imgPath = $host . '/psurentals_uploads/' . $rental->Picture;
+                    //echo $imgPath;
+                    ?>
+                    <img alt='' src='<?= $imgPath ?>' class='cover' >
+                </a>
+                <div class='media-body'>
+                    <h4 class='media-heading'><a href='/rentals/view/<?= $rental->RentalID ?>'>
+                            <?php
+                            if (strlen($rental->Title) > $titleLenght) {
+                                echo substr($rental->Title, 0, $titleLenght - 3) . '...';
+                            } else
+                                echo $rental->Title;
+                            ?></a></h4>
+                            <?php
+                    if (strlen($rental->Details) > $descLenght) {
+                        echo substr($rental->Details, 0, $descLenght - 3) . '...';
+                    } else
+                        echo $rental->Details;
+                    ?>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>

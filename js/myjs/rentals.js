@@ -58,7 +58,7 @@ function getProperty($PropertyTypeID) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "property/" + $PropertyTypeID,
+        url: "property2/" + $PropertyTypeID,
         success: function (d) {
             $("#ddlProperty").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
@@ -350,7 +350,7 @@ function newRentals() {
             url: "newrentals",
             success: function (d) {
                 alert("Rental Created.");
-                window.location.href="profile";
+                window.location.href = "profile";
             },
             error: function (xhr, status, error) {
                 alert("Error1 newRentals : " + xhr.responseText);
@@ -468,60 +468,68 @@ var pictures = [];
 function uploadFile() {
     $("#fileupload").change(function () {
         var file = this.files[0];
-        var pictureCheckLimit = pictures.length + this.files.length
+        var pictureCheckLimit = pictures.length + this.files.length;
         if (pictureCheckLimit <= 9) {
             for (var i = 0; i < this.files.length; i++) {
-                if (this.files[i].size <= 307200) {
-                    var fd = new FormData();
-                    fd.append("file", this.files[i]);
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        data: fd,
-                        url: "upload",
-                        enctype: 'multipart/form-data',
-                        processData: false,
-                        contentType: false,
-                        success: function (d) {
-                            pictures.push(d.result);
-                            $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                    "<img id='"+ d.result +"' src='/psurentals_uploads/" + d.result + "' alt=''></a></div>");
+                var fileExtension = this.files[i].name.split('.').pop().toLowerCase();
+                if (fileExtension === "jpg" || fileExtension === "png") {
+                    if (this.files[i].size <= 307200) {
+                        var fd = new FormData();
+                        fd.append("file", this.files[i]);
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            data: fd,
+                            url: "upload",
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            contentType: false,
+                            success: function (d) {
+                                pictures.push(d.result);
+                                if (pictures.length === 5 || pictures.length === 9) {
+                                    $("#upload_thumbnail").append("<br>");
+                                }
+                                var action_delete = "<button id='btn_delete_" + d.result + "' value='" + (i - 1) + "' class='btn btn-sm btn-link'>Delete</button>";
+                                $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-3 col-md-3'><a href='' class='thumbnail'>" +
+                                        "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
+                                        "</div>");
+                                $("#btn_delete_" + d.result).click(function (event) {
+                                    event.preventDefault();
+                                    var pictureID = $("#" + d.result).attr("id");
+                                    $.confirm({
+                                        text: "Are you sure you want to delete this Picture?",
+                                        confirm: function (button) {
 
-                            $("#div_" + d.result).click(function (event) {
-                                event.preventDefault();
-                                var pictureID = $("#" + d.result).attr("id");
-                                $.confirm({
-                                    text: "Are you sure you want to delete this Picture?",
-                                    confirm: function (button) {
-
-                                        var pictureIndex = $.inArray(pictureID, pictures);
-                                        pictures.splice(pictureIndex, 1);
-                                        $("#div_" + pictureID).remove();
-                                    },
-                                    cancel: function (button) {
-                                        // do something
-                                    },
-                                    confirmButton: "Yes I am",
-                                    cancelButton: "No",
-                                    post: true
+                                            var pictureIndex = $.inArray(pictureID, pictures);
+                                            pictures.splice(pictureIndex, 1);
+                                            $("#div_" + pictureID).remove();
+                                        },
+                                        cancel: function (button) {
+                                            // do something
+                                        },
+                                        confirmButton: "Yes I am",
+                                        cancelButton: "No",
+                                        post: true
+                                    });
                                 });
-                            });
-
-
-                        },
-                        error: function (xhr, status, error) {
-                            alert("Error1 uploadFile : " + xhr.responseText);
-                            alert("Error2 uploadFile : " + status);
-                            alert("Error3 uploadFile : " + error);
-                        }
-                    });
+                            },
+                            error: function (xhr, status, error) {
+                                alert("Error1 uploadFile : " + xhr.responseText);
+                                alert("Error2 uploadFile : " + status);
+                                alert("Error3 uploadFile : " + error);
+                            }
+                        });
+                    } else {
+                        alert("Upload image Size limit is 300 KB.");
+                    }
                 } else {
-                    alert("Upload image Size limit is 300 KB.");
+                    alert("Not Support file type : " + fileExtension);
                 }
             }
         } else {
             alert("Upload image Max limit is 9.");
         }
+        $("#fileupload").val("");
     });
 }
 

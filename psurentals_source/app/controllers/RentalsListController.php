@@ -8,7 +8,7 @@ class RentalsListController extends BaseController {
     }
     
     public function getRentalDetail($RentalID) {
-        $results = DB::select("select * from vrental where RentalID='$RentalID'");
+        $results = DB::select("select * from vrental, user where vrental.ProviderID=user.UserID and RentalID='$RentalID'");
         $distance = DB::select("select * from vdistance where RentalID='$RentalID'");
         $picture = DB::select("select * from rentalpictures where RID='$RentalID'");
         $WhiteGood = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=2");
