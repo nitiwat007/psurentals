@@ -6,17 +6,13 @@
  * and open the template in the editor.
  */
 
-class UserInfo
+class UserInfo extends UserBase
 {
-    public $userName;
+    public $isLocalUser;
     public $isAuthentication;
     public $authenticationProvider;
     public $authenticationProviderResult;
     public $profileProvider;
     public $profileProviderResult;
-    public $fullName;
-    public $email;
-    public $organization;
-    public $position;
     public $roles;
 }

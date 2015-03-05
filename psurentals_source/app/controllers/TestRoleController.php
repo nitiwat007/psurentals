@@ -3,7 +3,7 @@
 class TestRoleController extends BaseController {
 
     public function isInRoles($username, $role) {
-        $config = new ConfigurationAPIController();
+        $config = new APIConfigurationController();
         $app_key = $config->getApplicationKey();
         $role_provider_url = $config->getRoleProviderURL();
 

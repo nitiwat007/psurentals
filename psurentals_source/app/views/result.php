@@ -15,7 +15,7 @@ and open the template in the editor.
         <script src="/js/jquery.twbsPagination.js"></script>
         <script src="/js/myjs/result.js"></script>
 
-        <title></title>
+        <title>Search Results</title>
     </head>
     <body>
         <?php require('UserControl/Header.php'); ?>
@@ -23,17 +23,37 @@ and open the template in the editor.
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3><strong>Search Result</strong></h3>
-                    <p>Your search for rooms near 
-                        <em>
-                        <?php
-                            $campus = (new CampusAPIController())->getCampusByID(Input::get('near'));
-                            if (! is_null($campus)) {
-                                echo sprintf("%s (%s)", $campus[0]->ShortNameEN, $campus[0]->ShortNameTH);
-                            } else echo "PSU"
-                        ?>
-                        </em> 
-                       returned <?= $rentals->getTotal(); ?> <strong> matches</strong>.</p>
+                    <h3>Search</h3>
+                    <p>Your search for <strong>
+                            <?php
+                            if (is_null($propertyType)) {
+                                echo "Unknown Type";
+                            } else {
+                                echo sprintf("%s (%s)", $propertyType->PropertyTypeNameEN, $propertyType->PropertyTypeNameTH);
+                            }
+                            ?>
+                        </strong>
+                        near 
+                        <strong>
+                            <?php
+                            //$campus = (new APICampusController())->getCampusByID(Input::get('near'));
+                            if (!is_null($campus)) {
+                                echo sprintf("%s (%s)", $campus->ShortNameEN, $campus->ShortNameTH);
+                            } else {
+                                echo "PSU (มหาวิทยาลัยสงขลานครินทร์)";
+                            }
+                            ?>
+                        </strong> 
+                        returned <strong>
+                            
+                            <?php 
+                                // $rentals เป็นข้อมูลที่ส่งมาจาก Controller
+                                if (is_null($rentals)) {
+                                    echo '0';
+                                } else {
+                                    echo $rentals->getTotal(); 
+                                }
+                            ?></strong> matches.</p>
                 </div>
             </div>
             <br>
@@ -61,59 +81,26 @@ and open the template in the editor.
                 </div>
 
                 <div class="col-md-3">
-                    <h5><strong>SCAM WARNING</strong></h5>
-                    <hr>
-                    <p>
-                        <strong>Do not </strong>transfer money without inspecting the property and meeting the provider.
-                    </p>
-                    <br>
-                    <h5><strong>Helpful Information</strong></h5>
-                    <hr>
-                    <p>
-                        Contact us for information on your options, as well as advice on any issues that might arise during your tenancy.
-                    </p>
-                    <h5><strong>Top 5 Tips</strong></h5>
-                    <hr>
-                    <p>
-                        1. Contact us for information on your options, as well as advice on any issues that might arise during your tenancy.
-                    </p>
-                    <p>
-                        2. Contact us for information on your options, as well as advice on any issues that might arise during your tenancy.
-                    </p>
-                    <p>
-                        3. Contact us for information on your options, as well as advice on any issues that might arise during your tenancy.
-                    </p>
-                    <p>
-                        4. Contact us for information on your options, as well as advice on any issues that might arise during your tenancy.
-                    </p>
-                    <p>
-                        5. Contact us for information on your options, as well as advice on any issues that might arise during your tenancy.
-                    </p>
+                    <?php include 'UserControl/SideInformation.php'; ?>
                 </div>
             </div>
-             <?php
-                    foreach ($_GET as $key => $value) {
-                        $rentals->appends([$key => $value]);
-                    }
-                    echo $rentals->links();
-                    ?>
-<!--            <ul id="pagination-demo" class="pagination-sm"></ul>-->
+            <?php
+            foreach ($_GET as $key => $value) {
+                $rentals->appends([$key => $value]);
+            }
+            echo $rentals->links();
+            ?>
+            <!--            <ul id="pagination-demo" class="pagination-sm"></ul>-->
             <hr>         
             <div class="row">
-                <div class="col-md-4">
-                    <h2>About</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                 <div class="col-md-4">
+                    <?php include 'UserControl/About.php'; ?>
                 </div>
                 <div class="col-md-4">
-                    <h2>Term & Condition</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                    <?php include 'UserControl/TermCondition.php'; ?>
                 </div>
                 <div class="col-md-4">
-                    <h2>Contact</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                    <?php include 'UserControl/Contact.php'; ?>
                 </div>
             </div>
             <hr>

@@ -7,50 +7,48 @@
  */
 
 /**
- * Description of ConfigurationAPIController
+ * Description of APIConfigurationController
  *
  * @author Nontapon
  */
-class ConfigurationAPIController extends BaseController {
+class APIConfigurationController extends BaseController {
     //put your code here
     public function getDefaultCampusID() {
-        $obj = DB::table('configuration')
-                ->where('KeyName', '=', 'DefaultCampus')
+        $obj = Configuration::where('KeyName', '=', 'DefaultCampus')
                 ->select('KeyValue')->first();
+
         if (is_null($obj)){
-            App::abort(404, 'Default Campus not found');
+            throw new Exception('Default Campus not found');
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     public function getListPerPage() {
-        $obj = DB::table('configuration')
-                ->where('KeyName', '=', 'ListPerPage')
+        $obj = Configuration::where('KeyName', '=', 'ListPerPage')
                 ->select('KeyValue')->first();
         if (is_null($obj)){
-            App::abort(404, 'Cannot get default of number items on page');
+            return 999;
+            //throw new Exception('Cannot get default of number items on page');
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     public function getLimitTitleLength() {
-        $obj = DB::table('configuration')
-                ->where('KeyName', '=', 'LimitTitleLength')
+        $obj = Configuration::where('KeyName', '=', 'LimitTitleLength')
                 ->select('KeyValue')->first();
         if (is_null($obj)){
             return 999;
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     public function getLimitDescriptionLength() {
-        $obj = DB::table('configuration')
-                ->where('KeyName', '=', 'LimitDescriptionLength')
+        $obj = Configuration::where('KeyName', '=', 'LimitDescriptionLength')
                 ->select('KeyValue')->first();
         if (is_null($obj)){
-            return 999;
+            return 9999;
         }
-        return $obj->KeyValue;
+        return (int)$obj->KeyValue;
     }
     
     /*

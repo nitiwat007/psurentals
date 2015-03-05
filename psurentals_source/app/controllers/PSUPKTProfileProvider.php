@@ -7,43 +7,57 @@
  */
 
 class PSUPKTProfileProvider extends ProfileProvider {
+
     function __construct() {
         
     }
 
-    function getUserDetails($username, $password) {
-        $config = new ConfigurationAPIController();
-        
+    public function getUserDetails($username, $password) {
+        $config = new APIConfigurationController();
+
         //do something with PSU Passport
         $opts = array(
             'http' => array(
                 'user_agent' => 'PHPSoapClient'
             ),
             'ssl' => array(
-                'verify_peer'       => false,
-                'verify_peer_name'  => false,
+                'verify_peer' => false,
+                'verify_peer_name' => false,
             )
         );
-        
+
         $context = stream_context_create($opts);
-        
+
         $function = $config->getProfileOperation();
         $client = new SoapClient($config->getProfileServiceURL(), 
                 array('stream_context' => $context,
                       'cache_wsdl' => WSDL_CACHE_NONE));
         $request = array(
             'username' => $username,
-            'password' => $password        
+            'password' => $password
         );
+
+        $userInfo = null;
         
         try {
-            $result = $client->$function($request);
-            $result = $result->GetUserDetailsResult->string;
+            $providerResult = $client->$function($request);
+            $providerValues = $providerResult->GetUserDetailsResult->string;
+            if (!is_null($providerValues)) {
+                $userInfo = new PSUUserPassport();
+                $userInfo->userName = $username;
+                $userInfo->fullName = sprintf("%s %s", $providerValues[1], $providerValues[2]);
+                $userInfo->isLocalUser = FALSE;
+                $userInfo->email = $providerValues[13];
+                $userInfo->organization = sprintf("%s %s", $providerValues[8], $providerValues[10]);
+                $userInfo->position = $providerValues[3];
+                $userInfo->mailingAddress = "No Information from PSU Passport";
+                $userInfo->telephone = "No Information from PSU Passport";
+                $userInfo->ou = $providerValues[14];
+            }
         } catch (Exception $ex) {
-            $result = $ex->getMessage();
+            throw new Exception ($ex->getMessage());
         }
-        
-        return $result;
-    }
 
+        return $userInfo;
+    }
 }

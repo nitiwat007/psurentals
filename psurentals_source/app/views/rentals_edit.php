@@ -12,6 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="/css/psurentals.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="/js/myjs/SecurityManager.js"></script>
         <script src="js/myjs/rentalsEdit.js"></script>       
@@ -34,44 +35,8 @@ and open the template in the editor.
         <title>PSU Rentals</title>
     </head>
     <body>
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-1">
-                        <img style="max-width:60px; margin-top:10px;margin-bottom:0px;" src="images/psu-logo.png">
-                    </div>
-                    <div class="col-md-11" style="margin-top:50px;margin-bottom:0px;">
-                        <h1><strong>PSU Rentals</strong></h1>
-                        <h5>Prince of Songkla University Phuket Campus</h5>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="container">
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="home">Home</a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right" style="margin-right:20px;">
-                            <li><?php include 'UserControl/LoginName.php'; ?></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <?php require('UserControl/Header.php'); ?>
+        <?php require('UserControl/MainNavigation.php'); ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -451,13 +416,7 @@ and open the template in the editor.
                 </div>
             </div>
             <hr>
-            <footer>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h5>Copyright &copy; PSU Phuket 2015</h5>
-                    </div>
-                </div>
-            </footer>
+            <?php require('UserControl/Footer.php'); ?>
         </div>
     </body>
 </html>

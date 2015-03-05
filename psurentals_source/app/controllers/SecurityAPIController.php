@@ -22,17 +22,26 @@ class SecurityAPIController extends BaseController {
     private $authenProviders;
     private $roleProviders;
     private $profileProviders;
+    private $localAuthenProvider;
+    private $localRoleProvider;
+    private $localProfileProvider;
     private static $instance;
 
     function __construct() {
+        $this->localAuthenProvider = new LocalAuthenProvider();
+        $this->localRoleProvider = null;
+        $this->localProfileProvider = new LocalProfileProvider();
+
         //ตัวอย่างการสร้าง Class และเรียกใช้แบบปกติ
-        $this->authenProviders = [new LocalAuthenProvider(), new PSUPKTAuthenProvider()]; //new LocalAuthenProvider(), 
+        $this->authenProviders = [$this->localAuthenProvider, new PSUPKTAuthenProvider()];
 
-        $this->profileProviders = [new PSUPKTProfileProvider()];
-
+        $this->profileProviders = [$this->localProfileProvider, new PSUPKTProfileProvider()];
+        //
         //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
-        $this->roleProviders = [PSUPKTRoleProvider::getInstance()];
-       
+        $this->roleProviders = [$this->localRoleProvider, PSUPKTRoleProvider::getInstance()];
+
+        //เลือกใช้โครงสร้างของข้อมูล
+        $this->userInfo = new PSUUserPassport();
     }
 
     public static function getInstance() {
@@ -42,83 +51,97 @@ class SecurityAPIController extends BaseController {
         return self::$instance;
     }
 
-    //function __construct($username, $password) {
-//        //Local Authentication
-//        $this->userInfo = null;
-//        
-//        
-//        if (is_null($this->userInfo)) {
-//            //Remote Authentication
-//            //ตัวอย่างการสร้าง Class แบบปกติ
-//            $this->authenProvider = (new PSUPKTAuthenProvider());
-//            $this->userInfo = $this->authentication($username, $password, $this->authenProvider);
-//        }
-//        
-//        //Authentication Result, if success get User Roles
-//        if (is_null($this->userInfo)) {
-//            App::abort(401, 'Authentication Failed');
-//        } else {
-//            //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
-//            $this->roleProvider = PSUPKTRoleProvider::getInstance();
-//            //$userInfo->roles = [];
-//            $this->userInfo->roles = $this->getUserRoles($username, $this->roleProvider);
-//        }
-//        
-//        //Write UserInfo to Session
-//        Session[""] = $this->userInfo;
-    //}
-
+    //This is Main Function
     public function authentication($username, $password) {
+        //step#1
         $this->authenticationLogic($username, $password);
 
-        if ($this->userInfo->isAuthentication) {
-            $this->profileLogic($username, $password);
-            $this->roleLogic($username);
+        //if ($this->userInfo->isAuthentication) {
+        //step#2 - Get User Profile from ProfileProviders
+        $this->profileLogic($username, $password);
+
+        //step#3 - Check Exist on Local User //สามารถตรวจสอบได้ทั้งฟังก์ชั่น validateuser และ getUserDetails
+        if (!is_null($this->localAuthenProvider)) {
+            try {
+                if (!$this->validateUser($username, $password, $this->localAuthenProvider)) {
+                    $this->addCurrentProfileToLocalUser();
+                } else {
+                    //do update local user details
+                }
+            } catch (Exception $ex) {
+                
+            }
         }
+        //step#4
+        $this->roleLogic($username);
+        //}
         return $this->userInfo;
     }
 
     private function authenticationLogic($username, $password) {
-        //เลือกใช้โครงสร้างของข้อมูล
-        $this->userInfo = new PSUUserPassport();
-        
+
         $this->userInfo->userName = $username;
         $this->userInfo->isAuthentication = FALSE;
 
         //วนลูปตรวจสอบกับ Authen Provider ทั้งหมดที่ลงทะเบียนไว้
         foreach ($this->authenProviders as $aprovider) {
-            try {
-                $result = $this->validateUser($username, $password, $aprovider);
-                $this->userInfo->authenticationProviderResult = $result;
-                if ($result) {
-                    $this->userInfo->isAuthentication = TRUE;
+            $isValidUser = FALSE;
+            if (!is_null($aprovider)) {
+                try {
+                    $isValidUser = $this->validateUser($username, $password, $aprovider);
+                    $this->userInfo->authenticationProviderResult = $isValidUser;
+                    $this->userInfo->isAuthentication = $isValidUser;
                     $this->userInfo->authenticationProvider = get_class($aprovider);
-                    break;
+                } catch (Exception $ex) {
+                    throw new Exception($ex->getMessage());
                 }
-            } catch (Exception $ex) {
-                //do noting
-                //echo $ex->getTraceAsString();
-                $this->userInfo->successAuthenticationProvider = 'Cannot Access Provider';
+            }
+            if ($isValidUser) {
+                break;
             }
         }
-        //return Response::json(['userInfo' => $this->userInfo]);
     }
 
     private function profileLogic($username, $password) {
-        $profile = '';
         foreach ($this->profileProviders as $pprovider) {
-            $result = $this->getUserDetails($username, $password, $pprovider);
-            try {
-                
-                if (!is_null($result)) {
+            $userObj = null;
+            if (!is_null($pprovider)) {
+                try {
+                    $userObj = $this->getUserDetails($username, $password, $pprovider);
+                    $this->userInfo->profileProviderResult = $userObj;
+                } catch (Exception $ex) {
+                    $this->userInfo->profileProviderResult = $ex->getMessage();
+                } finally {
                     $this->userInfo->profileProvider = get_class($pprovider);
-                    $this->userInfo->profileProviderResult = $result;
-                    break;
                 }
-            } catch (Exception $ex) {
-                //echo $ex->getTraceAsString();
-                $this->userInfo->profileProvider = 'Cannot Access Provider';
+
+                try {
+                    if (!is_null($userObj)) {
+                        $this->userInfo->profileProviderResult = $userObj;
+                        $this->assignUserDetailsFromProfile($userObj);
+                        break;
+                    }
+                } catch (Exception $ex) {
+                    $this->userInfo->profileProviderResult = $ex->getMessage();
+                }
             }
+        }
+    }
+
+    private function assignUserDetailsFromProfile($userObj) {
+        if (is_a($userObj, 'UserInfo')) {
+            $this->userInfo->userName = $userObj->userName;
+            $this->userInfo->fullName = $userObj->fullName;
+            $this->userInfo->email = $userObj->email;
+            $this->userInfo->organization = $userObj->organization;
+            $this->userInfo->position = $userObj->position;
+            $this->userInfo->mailingAddress = $userObj->mailingAddress;
+            $this->userInfo->telephone = $userObj->telephone;
+            $this->userInfo->isLocalUser = $userObj->isLocalUser;
+        }
+
+        if (is_a($userObj, 'PSUUserPassport')) {
+            $this->userInfo->ou = $userObj->ou;
         }
     }
 
@@ -126,16 +149,34 @@ class SecurityAPIController extends BaseController {
         //ตัวอย่างการสร้าง Class/Function แบบ Static และวิธีการเรียกใช้
         $roles = [];
         foreach ($this->roleProviders as $rprovider) {
-            try {
-                $result = $this->getUserRoles($username, $rprovider);
-                foreach ($result as $role) {
-                    array_push($roles, $role);
+            if (!is_null($rprovider)) {
+                try {
+                    $result = $this->getUserRoles($username, $rprovider);
+                    foreach ($result as $role) {
+                        array_push($roles, $role);
+                    }
+                } catch (Exception $exc) {
+                    //do noting
                 }
-            } catch (Exception $exc) {
-                //do noting
             }
         }
         $this->userInfo->roles = $roles;
+    }
+
+    private function addCurrentProfileToLocalUser() {
+        $nameArray = explode(' ', $this->userInfo->fullName, 2);
+        DB::table('user')->insert([
+            'UserId' => $this->userInfo->userName,
+            'IsPSUPassport' => ($this->userInfo->profileProviderResult instanceof PSUUserPassport),
+            'Password' => '',
+            'FirstName' => $nameArray[0],
+            'LastName' => $nameArray[0],
+            'Organization' => '', //$this->userInfo->organization,
+            'Position' => $this->userInfo->position,
+            'MailingAddress' => $this->userInfo->mailingAddress,
+            'TelephoneNumber' => $this->userInfo->telephone,
+            'Email' => $this->userInfo->email
+        ]);
     }
 
     public function authenticationJSON($username, $password) {

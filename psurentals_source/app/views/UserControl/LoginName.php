@@ -13,7 +13,7 @@
         if (userInfo === null) {
             $("#ulLoginStatus").html(SignIn);
             $("#aSignIn").click(function () {
-                window.location.href = "login";
+                window.location.href = "/login";
             });
 
         } else {
@@ -23,10 +23,10 @@
             $("#aLogout").click(function () {
                 localStorage.removeItem("userInfo");
                 alert("Logout.");
-                window.location.href = "login";
+                window.location.href = "/login";
             });
             $("#aProfile").click(function () {
-                window.location.href = "profile";
+                window.location.href = "/profile";
             });
         }
 

@@ -7,21 +7,21 @@
  */
 
 /**
- * Description of CampusAPIController
+ * Description of APICampusController
  *
  * @author Nontapon
  */
-class CampusAPIController extends BaseController {
+class APICampusController extends BaseController {
     private function getCampusQuery() {
-        return DB::table('vcampus')->orderby('ID');
+        return Campus::orderby('ID');
     }
     
-    function getCampuses() {
+    function getAll() {
         return $this->getCampusQuery()->get();
     }
     
     function getCampusByID($CampusID) {
-        return $this->getCampusQuery()->where('ID','=',$CampusID)->get();
+        return $this->getCampusQuery()->where('ID','=',$CampusID)->first();
     }
     
     function getCampusesByAmphoeID($AmphoeID) {
