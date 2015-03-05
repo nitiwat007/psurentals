@@ -26,6 +26,7 @@ class SearchRentalController extends BaseController {
     private $queryString;
     private $propType;
     private $campus;
+    private $orders;
 
     public function __construct() {
         $this->config = new APIConfigurationController();
@@ -38,6 +39,8 @@ class SearchRentalController extends BaseController {
                 ->getPropertyTypeByID(Input::get('proptype'));
         $this->campus = (new APICampusController())
                 ->getCampusByID(Input::get('near'));
+        $this->orders = (new APISearchRentalController())
+                ->getSupportedSearchRentalOrder();
     }
 
     public function doSearch() {
@@ -64,7 +67,9 @@ class SearchRentalController extends BaseController {
 //                        }
                     ,
                     'propertyType' => $this->propType,
-                    'campus' => $this->campus]);
+                    'campus' => $this->campus,
+                    'orders' => $this->orders]
+                );
     }
 
 }

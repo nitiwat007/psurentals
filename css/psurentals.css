@@ -85,7 +85,7 @@ header .subtitle {
 
 }
 
-.rentalList .rentalCode {
+.rentalList .rentalCode, .rentalList .date {
     display: block;
     text-align: right;
     font-size: 0.7em;

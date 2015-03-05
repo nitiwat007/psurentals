@@ -24,7 +24,7 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <h3>Search</h3>
-                    <p>Your search for <strong>
+                    Your search for <strong>
                             <?php
                             if (is_null($propertyType)) {
                                 echo "Unknown Type";
@@ -45,38 +45,37 @@ and open the template in the editor.
                             ?>
                         </strong> 
                         returned <strong>
-                            
-                            <?php 
-                                // $rentals เป็นข้อมูลที่ส่งมาจาก Controller
-                                if (is_null($rentals)) {
-                                    echo '0';
-                                } else {
-                                    echo $rentals->getTotal(); 
-                                }
-                            ?></strong> matches.</p>
+
+                            <?php
+                            // $rentals เป็นข้อมูลที่ส่งมาจาก Controller
+                            if (is_null($rentals)) {
+                                echo '0';
+                            } else {
+                                echo $rentals->getTotal();
+                            }
+                            ?></strong> matches.
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-9">
-                    <form class="form-inline">
+                    <form class="form-inline" action="/rentals/search" method="GET" >
                         <div class="form-group">
+                           
+                            <input type="hidden" name="proptype" value="<?= Input::get('proptype'); ?>">
+                            <input type="hidden" name="near" value="<?=  Input::get('near'); ?>">
+                            <input type="hidden" name="fee" value="<?= Input::get('fee'); ?>">
+                            <input type="hidden" name="status" value="<?= Input::get('status'); ?>">
                             <label class="" for="order">Order by</label>
-                            <select id="order" name="order" class="form-control">
-                                <option>Cheapest</option>
-                                <option>Newest</option>
+                           
+                            <select id="order" name="order" class="form-control" onchange="this.form.submit()">
+                                <?php foreach ($orders as $k => $o) { ?>
+                                <option value="<?= $o ?>" <?= (Input::get('order')==$o)?'selected=selected' : '' ?>><?= $k ?></option>
+                                <?php } ?>
                             </select>
                         </div>                           
                     </form>
                     <br>
-                    <?php
-                    /* $ppttype = ($_GET['ppttype']==="")? 1 : $_GET['ppttype'];
-                      $near = ($_GET['near']==="")? 1 : $_GET['near'];
-                      $fee = ($_GET['fee']==="")? 0 : $_GET['fee'];
-                      $json = file_get_contents(printf("/rentals/%u/%u/%u", $ppttype, $near, $fee ));
-                      $data = json_decode($json, TRUE); */
-                    ?>
-
                     <?php require 'UserControl/RentalList.php'; ?>
                 </div>
 
@@ -93,7 +92,7 @@ and open the template in the editor.
             <!--            <ul id="pagination-demo" class="pagination-sm"></ul>-->
             <hr>         
             <div class="row">
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <?php include 'UserControl/About.php'; ?>
                 </div>
                 <div class="col-md-4">

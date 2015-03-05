@@ -27,6 +27,7 @@ foreach ($rentals as $rental) {
                 <input id="hrental<?= $rental->RentalID; ?>" type="hidden" value='<?= json_encode($rental) ?>' />
 
                 <span class='rentalCode'><?= $rental->RentalID; ?></span>
+                <span class="date"><?= (new DateTime($rental->ModifiedDate))->format('M d,Y (H:i:s)'); ?></span>
                 <a class="media-left cover" href="/detail">
                     <?php
                     /*
@@ -69,6 +70,7 @@ foreach ($rentals as $rental) {
                 </div>
                 <div id="status" class="status <?= $rental->Status ?>" style="display: none;">
                     <?= $rental->StatusNameEN . " / " . $rental->StatusNameTH ?></div>
+                
             </div>
         </div>
     </div>

@@ -87,8 +87,12 @@ class APIConfigurationController extends BaseController {
     public function getProfileOperation() {
         return Config::get('aaa.profileOperation');
     }
-    
+       
 //    public function getProfileResultProperty() {
 //        return Config::get('aaa.profileResultProperty');
 //    }
+    
+    public function getDefaultSearchRentalOrder(){
+        return SearchRentalOrderBy::Newest;
+    }
 }
