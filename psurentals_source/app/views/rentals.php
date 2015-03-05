@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
-        <link rel="stylesheet" href="/css/psurentals.css">
+<!--        <link rel="stylesheet" href="/css/psurentals.css">-->
         <script src="/bootstrap/js/bootstrap.min.js"></script>
         <script src="/js/myjs/SecurityManager.js"></script>
         <script src="/js/myjs/rentals.js"></script>
@@ -294,11 +294,12 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label for="txtOccupants" class="col-sm-3 control-label" style="text-align:left">Occupants <br> จำนวนผู้อาศัย</label>
+                                    <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Current / จำนวนผู้ที่อาศัยอยู่ในขณะนี้</label>
                                     <div class="col-sm-2">
-                                        <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Current / จำนวนผู้ที่อาศัยอยู่ในขณะนี้</label>
+                                        
                                         <input type="number" class="form-control" min="0" id="txtOccupantsCurrent" name="txtOccupantsCurrent" placeholder="Current">
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-5">
                                         <label for="txtOccupantsCurrent" class="col-sm-9 control-label" style="text-align:left">Vacancy / จำนวนผู้อาศัยที่ว่างอยู่/รับเพิ่ม</label>
                                         <input type="number" class="form-control" min="0" id="txtOccupantsVacancy" name="txtOccupantsVacancy" placeholder="Vacancy">
                                     </div>
