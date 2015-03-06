@@ -43,6 +43,15 @@ Route::get('/rentals', function() {
 Route::get('/profile', function() {
     return View::make('rentalslist');
 });
+Route::get('/term', function() { 
+    return View::make('term');
+});
+Route::get('/contact', function() { 
+    return View::make('contact');
+});
+Route::get('/about', function() { 
+    return View::make('about');
+});
 Route::get('/testFileUpload', function() {
     return View::make('testFileUpload');
 });

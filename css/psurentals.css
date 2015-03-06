@@ -194,3 +194,28 @@ header .subtitle {
 .user .status.uno {
     background-color: green;
 }
+
+.container a.readmore {
+    display: none;
+}
+
+.container > .bottom-panel {
+    
+}
+
+.container > .bottom-panel > h2 {
+    
+}
+
+.container > .bottom-panel .mainparam {
+    
+}
+
+.container .bottom-panel a.readmore {
+    display: inline;
+}
+
+.container > .bottom-panel .nextparm {
+    display: none;
+}
+
