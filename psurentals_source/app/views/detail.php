@@ -16,6 +16,18 @@ and open the template in the editor.
         <script src="/js/numberFormat/jquery.number.js"></script>
         <script src="/js/dateFormat/jquery-dateFormat.js"></script>
         <script src="/js/myjs/detail.js"></script>
+        <link href="/js/pace/CenterAtom.css" rel="stylesheet" />
+        <script src="/js/pace/pace.js"></script>
+        <script type="text/javascript">
+            paceOptions = {
+                ajax: true,
+                startOnPageLoad: false,
+                restartOnRequestAfter: false,
+                elements: {
+                    selectors: ['body']
+                }
+            };
+        </script>
         <title>Rental Details</title>
     </head>
     <body>
