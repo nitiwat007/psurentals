@@ -33,7 +33,8 @@ and open the template in the editor.
                                     <h3 class="panel-title"><strong>Property Type</strong></h3>
                                 </div>
                                 <div class="panel-body">
-
+                                     <p id="MonthlyRentalFee"></p>
+                                     <p id="AvailableDate"></p>
                                 </div>
                             </div>
                         </div> 

@@ -23,7 +23,7 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <div class="well">
-                       <?php require 'UserControl/BasicSearchPanel.php'; ?>
+                        <?php require 'UserControl/BasicSearchPanel.php'; ?>
                     </div>
                 </div>
             </div>
@@ -32,17 +32,18 @@ and open the template in the editor.
                 <div class="col-md-12">
                     <table class="table table-bordered col-md-12">
                         <tr>
-                            <td class="col-md-6"><li><a href="#psurentals_eng1">What is PSU Rentals ?</a></li></td><td class="col-md-6"><li><a href="#psurentals_thai1">PSU Rentals คืออะไร</a></li></td>
+                            <td class="col-md-6"><a href="#psurentals_eng1">What is PSU Rentals ?</a></td><td class="col-md-6"><a href="#psurentals_thai1">PSU Rentals คืออะไร</a></td>
                         </tr>
                         <tr>
-                            <td><li><a href="#psurentals_eng2">What are the benefits to students?</a></li></td><td><li><a href="#psurentals_thai2">ประโยชน์สำหรับนักศึกษา</a></li></td>
+                            <td><a href="#psurentals_eng2">What are the benefits to students?</a></td><td><a href="#psurentals_thai2">ประโยชน์สำหรับนักศึกษา</a></td>
                         </tr>
                         <tr>
-                            <td><li><a href="#psurentals_eng3">What are the benefits to accommodation providers?</a></li></td><td><li><a href="#psurentals_thai3">ประโยชน์สำหรับผู้ให้บริการห้องเช่า</a></li></td>
+                            <td><a href="#psurentals_eng3">What are the benefits to accommodation providers?</a></td><td><a href="#psurentals_thai3">ประโยชน์สำหรับผู้ให้บริการห้องเช่า</a></td>
                         </tr>
                     </table>
                 </div>
             </div>
+
 
             <div class="panel panel-default">
                 <div class="panel-body">

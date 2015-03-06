@@ -486,13 +486,17 @@ function uploadFile() {
                             contentType: false,
                             success: function (d) {
                                 pictures.push(d.result);
-                                if (pictures.length === 5 || pictures.length === 9) {
-                                    $("#upload_thumbnail").append("<br>");
-                                }
+//                                if (pictures.length === 5 || pictures.length === 9) {
+//                                    $("#upload_thumbnail").append("<br>");
+//                                }
                                 var action_delete = "<button id='btn_delete_" + d.result + "' value='" + (i - 1) + "' class='btn btn-sm btn-link'>Delete</button>";
-                                $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-3 col-md-3'><a href='' class='thumbnail'>" +
+                                $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
                                         "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
                                         "</div>");
+                                $("#div_" + d.result).click(function (event) {
+                                    event.preventDefault();
+                                });
+
                                 $("#btn_delete_" + d.result).click(function (event) {
                                     event.preventDefault();
                                     var pictureID = $("#" + d.result).attr("id");
