@@ -19,7 +19,7 @@
 */
 
 //require __DIR__.'/../psurentals_source/bootstrap/autoload.php';
-require __DIR__.'../psurentals_source/bootstrap/autoload.php';
+require __DIR__.'/psurentals_source/bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ require __DIR__.'../psurentals_source/bootstrap/autoload.php';
 */
 
 //$app = require_once __DIR__.'/../psurentals_source/bootstrap/start.php';
-$app = require_once __DIR__.'../psurentals_source/bootstrap/start.php';
+$app = require_once __DIR__.'/psurentals_source/bootstrap/start.php';
 
 /*
 |--------------------------------------------------------------------------

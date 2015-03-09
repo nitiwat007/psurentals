@@ -81,12 +81,13 @@ class APISearchRentalController extends BaseController {
                 //$searchResults = $this->doBasicSearchQuery($q); //เอาออกด้วย
                 $searchQuery = null;
         }
-        
-        if (is_null($searchQuery)) return null;
-       
+
+        if (is_null($searchQuery))
+            return null;
+
         return $this->orderSearchResult($searchQuery, $args);
     }
-    
+
     private function orderSearchResult($searchQuery, $args) {
         //throw new Exception($args->getFeeUnder());
         switch ($args->getOrderBy()) {
@@ -100,7 +101,7 @@ class APISearchRentalController extends BaseController {
                 break;
         }
         return $searchQuery->select('vrental.*', 'vrentalcover.Picture as CoverImage')
-                ->paginate($args->getPageSize());
+                        ->paginate($args->getPageSize());
     }
 
     //For Route //ยังไม่มีการเรียกใช้จาก APIRoute 
@@ -132,9 +133,14 @@ class APISearchRentalController extends BaseController {
             if ($args->getRentalStatus() != RentalStatus::All) {
                 $q->where('Status', '=', $args->getRentalStatus());
             }
-            if (!empty($args->getPropertyTypeID())) {
+            $err = $args->getPropertyTypeID();
+            //if (!empty($err))
+            if (!empty($err)) {
                 $q->where('PropertyTypeID', '=', $args->getPropertyTypeID());
             }
+//            if (!empty($args->getPropertyTypeID())) {
+//                $q->where('PropertyTypeID', '=', $args->getPropertyTypeID());
+//            }
         }
 
         $this->validateArguments($args, SearchType::Basic);
@@ -166,13 +172,13 @@ class APISearchRentalController extends BaseController {
         //return Response::json(array('result' => $results));
         //return $query->where('MonthlyRentalFeeTo','>',99999)->paginate($args->getPageSize());
         //return $query->paginate($args->getPageSize());
-        return $query;//->select('vrental.*', 'vrentalcover.Picture as CoverImage')->paginate($args->getPageSize());
+        return $query; //->select('vrental.*', 'vrentalcover.Picture as CoverImage')->paginate($args->getPageSize());
     }
 
     private function doAdvanceSearchQuery(RentalSearchArgument $args) {
-        
+
         $this->validateArguments($args, SearchType::Advance);
-        
+
         return $this->doBasicSearchQuery($args);
     }
 
@@ -229,4 +235,5 @@ class APISearchRentalController extends BaseController {
         //throw new Exception($value);
         return in_array($value, $this->getSupportedSearchRentalOrder()) ? $value : '';
     }
+
 }

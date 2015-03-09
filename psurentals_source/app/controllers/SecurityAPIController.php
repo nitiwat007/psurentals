@@ -106,14 +106,16 @@ class SecurityAPIController extends BaseController {
         foreach ($this->profileProviders as $pprovider) {
             $userObj = null;
             if (!is_null($pprovider)) {
+                $this->userInfo->profileProvider = get_class($pprovider);
                 try {
                     $userObj = $this->getUserDetails($username, $password, $pprovider);
                     $this->userInfo->profileProviderResult = $userObj;
                 } catch (Exception $ex) {
                     $this->userInfo->profileProviderResult = $ex->getMessage();
-                } finally {
-                    $this->userInfo->profileProvider = get_class($pprovider);
                 }
+//                } finally {
+//                    $this->userInfo->profileProvider = get_class($pprovider);
+//                }
 
                 try {
                     if (!is_null($userObj)) {

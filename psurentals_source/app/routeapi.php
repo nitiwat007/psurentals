@@ -21,7 +21,7 @@ Route::get('api/configuration/authenServiceURL', ['uses' => 'APIConfigurationCon
 /*
  * Security
  */
-Route::get('api/aaa/authentication/{user}/{passwd}', ['uses' => 'SecurityAPIController@authenticationJSON']);
+Route::get('/api/aaa/authentication/{user}/{passwd}', ['uses' => 'SecurityAPIController@authenticationJSON']);
 Route::get('api/aaa/isInRoles/{user}/{roles}', ['uses' => 'SecurityAPIController@isInRolesJSON']);
 
 

@@ -82,10 +82,14 @@ function getRentalDataEdit() {
                 $("#txtLeaseFrom").val(d.result[i - 1].LeaseFrom);
                 $("#txtLeaseTo").val(d.result[i - 1].LeaseTo);
                 $LeaseEndDate = d.result[i - 1].LeaseEndDate.split('-');
-                $LeaseEndDateNew = $LeaseEndDate[2] + "/" + $LeaseEndDate[1] + "/" + $LeaseEndDate[0];
+                $LeaseEndDateNew = $LeaseEndDate[2] + "/" + $LeaseEndDate[1] + "/" + $LeaseEndDate[0];                
                 $("#txtLeaseEndDate").datepicker();
                 $("#txtLeaseEndDate").datepicker("option", "dateFormat", "dd/mm/yy");
-                $("#txtLeaseEndDate").datepicker('setDate', $LeaseEndDateNew);
+                if($LeaseEndDateNew==='00/00/0000'){
+                    
+                }else{
+                    $("#txtLeaseEndDate").datepicker('setDate', $LeaseEndDateNew);
+                }
                 $("#txtBondFrom").val(d.result[i - 1].BondFrom);
                 $("#txtBondTo").val(d.result[i - 1].BondTo);
                 $("#txtSecurityBondFrom").val(d.result[i - 1].SecurityBondFrom);

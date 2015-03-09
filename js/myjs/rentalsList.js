@@ -23,10 +23,20 @@ function getRentals(page) {
                 var RentalID = d.data[i - 1].RentalID;
                 var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
                 var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
-                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
+                var StatusNameEN=d.data[i - 1].StatusNameEN;
+                var StatusNameTH=d.data[i - 1].StatusNameTH;
+                var Status=d.data[i - 1].Status;
+                var MonthlyRentalFeeFrom=d.data[i - 1].MonthlyRentalFeeFrom;
+                var MonthlyRentalFeeTo=d.data[i - 1].MonthlyRentalFeeTo;
+                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
                     localStorage.setItem("RentalID", $(this).attr("id"));
+                    window.location.href = "rentalsedit";
+                });
+                $("#a_" + RentalID).click(function (event) {
+                    event.preventDefault();
+                    localStorage.setItem("RentalID", $(this).attr("id").substring(2));
                     window.location.href = "rentalsedit";
                 });
             }
@@ -51,10 +61,20 @@ function getRentalsAll(page) {
                 var RentalID = d.data[i - 1].RentalID;
                 var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
                 var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
-                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
+                var StatusNameEN=d.data[i - 1].StatusNameEN;
+                var StatusNameTH=d.data[i - 1].StatusNameTH;
+                var Status=d.data[i - 1].Status;
+                var MonthlyRentalFeeFrom=d.data[i - 1].MonthlyRentalFeeFrom;
+                var MonthlyRentalFeeTo=d.data[i - 1].MonthlyRentalFeeTo;
+                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
                     localStorage.setItem("RentalID", $(this).attr("id"));
+                    window.location.href = "rentalsedit";
+                });
+                $("#a_" + RentalID).click(function (event) {
+                    event.preventDefault();
+                    localStorage.setItem("RentalID", $(this).attr("id").substring(2));
                     window.location.href = "rentalsedit";
                 });
             }
@@ -79,10 +99,20 @@ function getRentalsByStatus(page) {
                 var RentalID = d.data[i - 1].RentalID;
                 var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
                 var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
-                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail);
+                var StatusNameEN=d.data[i - 1].StatusNameEN;
+                var StatusNameTH=d.data[i - 1].StatusNameTH;
+                var Status=d.data[i - 1].Status;
+                var MonthlyRentalFeeFrom=d.data[i - 1].MonthlyRentalFeeFrom;
+                var MonthlyRentalFeeTo=d.data[i - 1].MonthlyRentalFeeTo;
+                rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
                     localStorage.setItem("RentalID", $(this).attr("id"));
+                    window.location.href = "rentalsedit";
+                });
+                $("#a_" + RentalID).click(function (event) {
+                    event.preventDefault();
+                    localStorage.setItem("RentalID", $(this).attr("id").substring(2));
                     window.location.href = "rentalsedit";
                 });
             }
@@ -95,16 +125,25 @@ function getRentalsByStatus(page) {
         }
     });
 }
-function rentalListControl(imgPath, rentalID, Title, Detail) {
+function rentalListControl(imgPath, rentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo) {
     var imgPath = "/psurentals_uploads/" + imgPath;
     var rentalListControl = "<div class='panel panel-default rentalList'>"
             + "<div class='panel-body'>"
             + "<div class='media'>"
-            + "<a class='media-left' href='#'><img alt='' src='" + imgPath + "' class='cover' >"
+            + "<a id='a_" + rentalID + "' class='media-left' href=''>"
+            + "<img alt='' src='" + imgPath + "' class='cover' >"
             + "</a>"
             + "<div class='media-body'><h4 class='media-heading'>"
             + "<a id='" + rentalID + "' href=''>" + Title + "</a>"
-            + "</h4>" + Detail + "</div><br></div></div></div>";
+            + "</h4>"
+            + "<div class='monthlyfee'>"
+            + "<span class='monthlyfeefrom'>" + MonthlyRentalFeeFrom + "</span>"
+            + "<span class='monthlyfeeto'>" + MonthlyRentalFeeTo + "</span>"
+            + "</div>"
+            + Detail + "</div>"
+            + "<div id='status' class='status "+ Status +"'>"
+            + StatusNameEN + " / " + StatusNameTH +"</div>"
+            + "<br></div></div></div>";
     $("#divRentalList").append(rentalListControl);
 }
 function Pagination(totalData, perPage) {

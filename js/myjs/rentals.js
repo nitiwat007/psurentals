@@ -343,6 +343,7 @@ function newRentals() {
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
         $("#txtUsername").val(userInfo.userName);
+        
         $.ajax({
             type: "POST",
             dataType: "json",

@@ -60,7 +60,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtTitle" class="col-sm-3 control-label" style="text-align:left">Title <br> หัวเรื่อง</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="txtTitle" name="txtTitle" placeholder="Title / หัวเรื่อง">
+                                        <input type="text" class="form-control" id="txtTitle" name="txtTitle" placeholder="Title / หัวเรื่อง" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -373,7 +373,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="" class="col-sm-3 control-label" style="text-align:left"></label>
                                     <div id="upload_thumbnail" class="col-sm-8">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -105,7 +105,6 @@ Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
 //TEST
 Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
 
-
 //ROLE PROVIDER
 Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
 Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
