@@ -399,7 +399,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row bottom-panel">
                 <div class="col-md-4">
                     <?php include 'UserControl/About.php'; ?>
                 </div>

@@ -114,7 +114,7 @@ header .subtitle {
 }
 
 .rentalList .monthlyfee::after {
-    content: " Baht/Month";
+    content: " Baht/Months";
 }
 
 .rentalList .monthlyfeeto::before {
