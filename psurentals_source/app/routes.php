@@ -37,77 +37,91 @@ Route::get('/detail', function() {
 Route::get('/detail/{rentalID}', function() {
     return View::make('detail');
 });
-Route::get('/rentals', function() {
-    return View::make('rentals');
-});
-Route::get('/profile', function() {
-    return View::make('rentalslist');
-});
-Route::get('/term', function() { 
+
+Route::get('/term', function() {
     return View::make('term');
 });
-Route::get('/contact', function() { 
+//Route::get('/contact', array('before' => 'auth', function() {
+//    return View::make('contact');
+//}));
+Route::get('/contact', function() {
     return View::make('contact');
 });
-Route::get('/about', function() { 
+Route::get('/about', function() {
     return View::make('about');
 });
-Route::get('/testFileUpload', function() {
-    return View::make('testFileUpload');
+Route::get('/logout', function() {
+    Auth::logout();
+    return Redirect::to('/home');
 });
-Route::post('/upload', function() {
-    return View::make('upload');
-});
-Route::get('/rentalsedit', function() {
-    return View::make('rentals_edit');
-});
+
 Route::get('/login', function() {
     return View::make('login');
 });
+Route::get('/login2/{username}', function($username) {
+    Auth::loginUsingId($username);
+    return Redirect::to('/profile');
+});
 
 //RENTALS GET
-Route::get('propertytype', array('uses' => 'RentalsController@getPropertyType'));
-Route::get('property2/{PropertyTypeID}', array('uses' => 'RentalsController@getProperty'));
-Route::get('amphoe', array('uses' => 'RentalsController@getAmphoe'));
-Route::get('rooms', array('uses' => 'RentalsController@getRooms'));
-Route::get('bedrooms', array('uses' => 'RentalsController@getBedroomsAvailable'));
-Route::get('bedroomfurnished', array('uses' => 'RentalsController@getBedroomFurnished'));
-Route::get('utility', array('uses' => 'RentalsController@getUtilityIncludedInRent'));
-Route::get('whitegoods', array('uses' => 'RentalsController@getWhiteGoogdsProvided'));
-Route::get('facility', array('uses' => 'RentalsController@getOtherFacilities'));
-Route::get('gender', array('uses' => 'RentalsController@getPreferredGender'));
-Route::get('tenant', array('uses' => 'RentalsController@getPerferredTenant'));
-Route::get('smoke', array('uses' => 'RentalsController@getSmoking'));
-Route::get('pets', array('uses' => 'RentalsController@getPets'));
-Route::get('status', array('uses' => 'RentalsController@getStatus'));
-Route::get('provider', array('uses' => 'RentalsController@getProvider'));
-Route::get('getrentals', array('uses' => 'RentalsListController@getRentals'));
-Route::get('getrentalsall', array('uses' => 'RentalsListController@getRentalAll'));
-Route::get('getrentalspage/{username}', array('uses' => 'RentalsListController@getRentalPage'));
-Route::get('getrentalsbystatus/{status}', array('uses' => 'RentalsListController@getRentalByStatus'));
+//NECESSARY AUTHORIZATION
+Route::group(array('before' => 'auth'), function() {
+
+    Route::get('/rentals', function() {
+        return View::make('rentals');
+    });
+    Route::get('/rentalsedit', function() {
+        return View::make('rentals_edit');
+    });
+    Route::get('/profile', function() {
+        return View::make('rentalslist');
+    });
+
+    Route::get('propertytype', array('uses' => 'RentalsController@getPropertyType'));
+    Route::get('property2/{PropertyTypeID}', array('uses' => 'RentalsController@getProperty'));
+    Route::get('amphoe', array('uses' => 'RentalsController@getAmphoe'));
+    Route::get('rooms', array('uses' => 'RentalsController@getRooms'));
+    Route::get('bedrooms', array('uses' => 'RentalsController@getBedroomsAvailable'));
+    Route::get('bedroomfurnished', array('uses' => 'RentalsController@getBedroomFurnished'));
+    Route::get('utility', array('uses' => 'RentalsController@getUtilityIncludedInRent'));
+    Route::get('whitegoods', array('uses' => 'RentalsController@getWhiteGoogdsProvided'));
+    Route::get('facility', array('uses' => 'RentalsController@getOtherFacilities'));
+    Route::get('gender', array('uses' => 'RentalsController@getPreferredGender'));
+    Route::get('tenant', array('uses' => 'RentalsController@getPerferredTenant'));
+    Route::get('smoke', array('uses' => 'RentalsController@getSmoking'));
+    Route::get('pets', array('uses' => 'RentalsController@getPets'));
+    Route::get('status', array('uses' => 'RentalsController@getStatus'));
+    Route::get('provider', array('uses' => 'RentalsController@getProvider'));
+    Route::get('getrentals', array('uses' => 'RentalsListController@getRentals'));
+    Route::get('getrentalsall', array('uses' => 'RentalsListController@getRentalAll'));
+    Route::get('getrentalspage/{username}', array('uses' => 'RentalsListController@getRentalPage'));
+    Route::get('getrentalsbystatus/{status}', array('uses' => 'RentalsListController@getRentalByStatus'));
 //RENTALS EDIT
-Route::get('getrentaldataedit/{RentalID}', array('uses' => 'RentalsListController@getRentalDataEdit'));
-Route::post('updaterental/{RentalID}', array('uses' => 'RentalsListController@updateRental'));
-Route::get('test', array('uses' => 'RentalsListController@test'));
+    Route::get('getrentaldataedit/{RentalID}', array('uses' => 'RentalsListController@getRentalDataEdit'));
+    Route::post('updaterental/{RentalID}', array('uses' => 'RentalsListController@updateRental'));
+    Route::get('test', array('uses' => 'RentalsListController@test'));
 
 //RENTALS INSERT
-Route::post('newrentals', array('uses' => 'RentalsController@newtRentals'));
+    Route::post('newrentals', array('uses' => 'RentalsController@newtRentals'));
 
 //RENTALS ACTION
-Route::delete('deleterentals/{RentalID}', array('uses' => 'RentalsListController@deleteRentals'));
-
-//DETAIL
-Route::get('getrentaldetail/{RentalID}', array('uses' => 'RentalsListController@getRentalDetail'));
+    Route::delete('deleterentals/{RentalID}', array('uses' => 'RentalsListController@deleteRentals'));
 
 //UPLOAD
-Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
+    Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
 
 //TEST
-Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
-
+//Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
 //ROLE PROVIDER
-Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
-Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
+    Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
+//Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
+});
+
+
+
+//UNNECESSARY AUTHORIZATION
+//DETAIL
+Route::get('getrentaldetail/{RentalID}', array('uses' => 'RentalsListController@getRentalDetail'));
 
 //NR
 include 'routes2.php';

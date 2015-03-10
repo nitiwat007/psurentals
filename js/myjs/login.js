@@ -1,14 +1,14 @@
 var userInfo = null;
 userInfo = JSON.parse(localStorage.getItem("userInfo"));
 $(function () {
-    if (userInfo === null) {
-        $("#frmLogin").submit(function (event) {
-            event.preventDefault();
-            authentication();
-        });
-    } else {
-        window.location.href = "profile";
-    }
+    //if (userInfo === null) {
+    $("#frmLogin").submit(function (event) {
+        event.preventDefault();
+        authentication();
+    });
+//    } else {
+//        window.location.href = "profile";
+//    }
 });
 function authentication() {
     var username = $("#username").val();
@@ -20,7 +20,7 @@ function authentication() {
         success: function (d) {
             if (d.userInfo.isAuthentication) {
                 localStorage.setItem("userInfo", JSON.stringify(d.userInfo));
-                window.location.href = "profile";
+                window.location.href = "login2/" + username;
             } else {
                 alert("Login Fail.");
             }

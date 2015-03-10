@@ -172,7 +172,7 @@ class SecurityAPIController extends BaseController {
             'IsPSUPassport' => ($this->userInfo->profileProviderResult instanceof PSUUserPassport),
             'Password' => '',
             'FirstName' => $nameArray[0],
-            'LastName' => $nameArray[0],
+            'LastName' => $nameArray[1],
             'Organization' => '', //$this->userInfo->organization,
             'Position' => $this->userInfo->position,
             'MailingAddress' => $this->userInfo->mailingAddress,
