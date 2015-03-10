@@ -93,40 +93,7 @@ and open the template in the editor.
                     </p>
                 </div>
             </div>
-
-            <hr>
-            <!--            <div class="row">
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4>Heading 1</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4>Heading 2</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4>Heading 3</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
+            <hr>          
             <div class="row bottom-panel">
                 <div class="col-md-4">
                     <?php include 'UserControl/About.php'; ?>

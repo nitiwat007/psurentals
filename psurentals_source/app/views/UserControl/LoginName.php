@@ -17,15 +17,13 @@
             });
 
         } else {
-            //$("#loginName").html(userInfo.name + " <span class='caret'></span>");
             $("#ulLoginStatus").html(loginName);
             $("#loginName").html(userInfo.userName + " <span class='caret'></span>");
             $("#aLogout").click(function () {
+                Pace.restart();
                 localStorage.removeItem("userInfo");
                 localStorage.removeItem("ucRentalListID");
                 window.location.href = "/logout";
-                //alert("Logout.");
-                //window.location.href = "/home";
             });
             $("#aProfile").click(function () {
                 window.location.href = "/profile";

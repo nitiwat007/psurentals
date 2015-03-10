@@ -35,7 +35,7 @@
     }
     ?>
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="form-group">
                 <div style="display: inline-block; vertical-align: middle;">
                     <!-- With Laravel Engine -->
@@ -83,11 +83,12 @@
                                         <label>บาทต่อเดือน</label>-->
                 </div>
             </div>
+            <div class="form-group">
+                <input type="hidden" id="order" name="order" value="<?= $defaultOrder ?>">
+                <button type="submit" class="btn btn-success col-md-offset-4"> Search </button>
+            </div>
         </div>
-        <div class="form-group">
-            <input type="hidden" id="order" name="order" value="<?= $defaultOrder ?>">
-            <button type="submit" class="btn btn-success"> Search </button>
-        </div>
+
     </div>
     <?php ?>
 </form>
