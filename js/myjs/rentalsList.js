@@ -1,15 +1,20 @@
 $(function () {
-    checkRole();
     $("#" + ProfileActiveMenu).addClass("active");
-    if (userInfo.isAuthentication) {
-        getRentals();
-        $("#btn_newrentals").click(function (event) {
-            event.preventDefault();
-            window.location.href = "rentals";
-        });
-    } else {
+    if (userInfo !== null) {
+        if (userInfo.isAuthentication) {
+            checkRole();
+            getRentals();
+            $("#btn_newrentals").click(function (event) {
+                event.preventDefault();
+                window.location.href = "rentals";
+            });
+        } else {
+            window.location.href = "home";
+        }
+    }else{
         window.location.href = "home";
     }
+
 });
 function getRentals(page) {
     $("#divRentalList").html("");
@@ -22,12 +27,15 @@ function getRentals(page) {
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
                 var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
-                var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
-                var StatusNameEN=d.data[i - 1].StatusNameEN;
-                var StatusNameTH=d.data[i - 1].StatusNameTH;
-                var Status=d.data[i - 1].Status;
-                var MonthlyRentalFeeFrom=d.data[i - 1].MonthlyRentalFeeFrom;
-                var MonthlyRentalFeeTo=d.data[i - 1].MonthlyRentalFeeTo;
+                //var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
+                //var Detail = d.data[i - 1].Details;
+                var myDetail = "<div id='myDetail'>" + d.data[i - 1].Details + "</div>";
+                var Detail = $(myDetail).text().substring(0, (250 - 3)) + "...";
+                var StatusNameEN = d.data[i - 1].StatusNameEN;
+                var StatusNameTH = d.data[i - 1].StatusNameTH;
+                var Status = d.data[i - 1].Status;
+                var MonthlyRentalFeeFrom = d.data[i - 1].MonthlyRentalFeeFrom;
+                var MonthlyRentalFeeTo = d.data[i - 1].MonthlyRentalFeeTo;
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
@@ -60,12 +68,15 @@ function getRentalsAll(page) {
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
                 var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
-                var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
-                var StatusNameEN=d.data[i - 1].StatusNameEN;
-                var StatusNameTH=d.data[i - 1].StatusNameTH;
-                var Status=d.data[i - 1].Status;
-                var MonthlyRentalFeeFrom=d.data[i - 1].MonthlyRentalFeeFrom;
-                var MonthlyRentalFeeTo=d.data[i - 1].MonthlyRentalFeeTo;
+                //var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
+                //var Detail = d.data[i - 1].Details;
+                var myDetail = "<div id='myDetail'>" + d.data[i - 1].Details + "</div>";
+                var Detail = $(myDetail).text().substring(0, (250 - 3)) + "...";
+                var StatusNameEN = d.data[i - 1].StatusNameEN;
+                var StatusNameTH = d.data[i - 1].StatusNameTH;
+                var Status = d.data[i - 1].Status;
+                var MonthlyRentalFeeFrom = d.data[i - 1].MonthlyRentalFeeFrom;
+                var MonthlyRentalFeeTo = d.data[i - 1].MonthlyRentalFeeTo;
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
@@ -98,12 +109,15 @@ function getRentalsByStatus(page) {
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
                 var Title = d.data[i - 1].Title.substring(0, (d.data["titleLenght"] - 3)) + "...";
-                var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
-                var StatusNameEN=d.data[i - 1].StatusNameEN;
-                var StatusNameTH=d.data[i - 1].StatusNameTH;
-                var Status=d.data[i - 1].Status;
-                var MonthlyRentalFeeFrom=d.data[i - 1].MonthlyRentalFeeFrom;
-                var MonthlyRentalFeeTo=d.data[i - 1].MonthlyRentalFeeTo;
+                //var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
+                //var Detail = d.data[i - 1].Details;
+                var myDetail = "<div id='myDetail'>" + d.data[i - 1].Details + "</div>";
+                var Detail = $(myDetail).text().substring(0, (250 - 3)) + "...";
+                var StatusNameEN = d.data[i - 1].StatusNameEN;
+                var StatusNameTH = d.data[i - 1].StatusNameTH;
+                var Status = d.data[i - 1].Status;
+                var MonthlyRentalFeeFrom = d.data[i - 1].MonthlyRentalFeeFrom;
+                var MonthlyRentalFeeTo = d.data[i - 1].MonthlyRentalFeeTo;
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
@@ -141,8 +155,8 @@ function rentalListControl(imgPath, rentalID, Title, Detail, StatusNameEN, Statu
             + "<span class='monthlyfeeto'>" + MonthlyRentalFeeTo + "</span>"
             + "</div>"
             + Detail + "</div>"
-            + "<div id='status' class='status "+ Status +"'>"
-            + StatusNameEN + " / " + StatusNameTH +"</div>"
+            + "<div id='status' class='status " + Status + "'>"
+            + StatusNameEN + " / " + StatusNameTH + "</div>"
             + "<br></div></div></div>";
     $("#divRentalList").append(rentalListControl);
 }

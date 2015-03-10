@@ -9,6 +9,8 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <script src="/js/jquery-1.11.2.min.js"></script>   
         <script src="/js/jquery-ui/jquery-ui.js"></script>
+        <script src="/js/jQueryTE/jquery-te-1.4.0.min.js"></script>
+        <link rel="stylesheet" href="/js/jQueryTE/jquery-te-1.4.0.css">
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
@@ -358,7 +360,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtDescription" class="col-sm-3 control-label" style="text-align:left">Description <br> รายละเอียด</label>
                                     <div class="col-sm-8">
-                                        <textarea id="txtDescription" name="txtDescription" class="form-control" rows="12" placeholder="Description / รายละเอียด"></textarea>
+                                        <textarea id="txtDescription"  name="txtDescription" class="form-control editor" rows="12" placeholder="Description / รายละเอียด"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -377,7 +379,8 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="" class="col-sm-3 control-label" style="text-align:left"></label>
                                     <div id="upload_thumbnail" class="col-sm-8">
-
+                                        <div id="upload_thumbnail_1" class="row"></div>
+                                        <div id="upload_thumbnail_2" class="row"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">

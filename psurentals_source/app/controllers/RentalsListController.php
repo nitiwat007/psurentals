@@ -119,43 +119,82 @@ class RentalsListController extends BaseController {
         $OtherFacilities = Input::get('chkOtherFacilities');
         $PreferredTenant = Input::get('chkPreferredTenant');
 
-        $results = DB::update("update rental set "
-                        . "ProviderID='$provide_id' "
-                        . ",ModifiedBy='$ModifiedBy' "
-                        . ",ModifiedDate='$ModifiedDate' "
-                        . ",Title='$Title' "
-                        . ",Details='$Details' "
-                        . ",PropertyID='$PropertyID' "
-                        . ",Address='$Address' "
-                        . ",AmphoeID='$AmphoeID' "
-                        . ",AvailableDate='$AvailableDate' "
-                        . ",MonthlyRentalFeeFrom='$MonthlyRentalFeeFrom' "
-                        . ",MonthlyRentalFeeTo='$MonthlyRentalFeeTo' "
-                        . ",LeaseFrom='$LeaseFrom' "
-                        . ",LeaseTo='$LeaseTo' "
-                        . ",LeaseEndDate='$LeaseEndDate' "
-                        . ",HasLeaseAgreement='$HasLeaseAgreement' "
-                        . ",BondFrom='$BondFrom' "
-                        . ",BondTo='$BondTo' "
-                        . ",SecurityBondFrom='$SecurityBondFrom' "
-                        . ",SecurityBondTo='$SecurityBondTo' "
-                        . ",CanDailyRental='$CanDailyRental' "
-                        . ",DailyRentalFeeFrom='$DailyRentalFeeFrom' "
-                        . ",DailyRentalFeeTo='$DailyRentalFeeTo' "
-                        . ",CurrentOccupant='$CurrentOccupant' "
-                        . ",Vacancy='$Vacancy' "
-                        . ",BedroomFurnishing='$BedroomFurnishing' "
-                        . ",NumOfBathrooms='$NumOfBathrooms' "
-                        . ",MaleTenant='$MaleTenant' "
-                        . ",FemaleTenant='$FemaleTenant' "
-                        . ",PreferGender='$PreferGender' "
-                        . ",Smoking='$Smoking' "
-                        . ",Pet='$Pet' "
-                        . ",URL='$URL' "
-                        . ",WaterRate='$WaterRate' "
-                        . ",PowerRate='$PowerRate' "
-                        . ",Status='$Status' "
-                        . "where RentalID='$RentalID'");
+        $results = DB::table('rental') ->where('RentalID', $RentalID)->update(
+                array('ProviderID' => $provide_id
+                    , 'ModifiedBy' => $ModifiedBy
+                    , 'ModifiedDate' => $ModifiedDate
+                    , 'Title' => $Title
+                    , 'Details' => $Details
+                    , 'PropertyID' => $PropertyID
+                    , 'Address' => $Address
+                    , 'AmphoeID' => $AmphoeID
+                    , 'AvailableDate' => $AvailableDate
+                    , 'MonthlyRentalFeeFrom' => $MonthlyRentalFeeFrom
+                    , 'MonthlyRentalFeeTo' => $MonthlyRentalFeeTo
+                    , 'LeaseFrom' => $LeaseFrom
+                    , 'LeaseTo' => $LeaseTo
+                    , 'LeaseEndDate' => $LeaseEndDate
+                    , 'HasLeaseAgreement' => $HasLeaseAgreement
+                    , 'BondFrom' => $BondFrom
+                    , 'BondTo' => $BondTo
+                    , 'SecurityBondFrom' => $SecurityBondFrom
+                    , 'SecurityBondTo' => $SecurityBondTo
+                    , 'CanDailyRental' => $CanDailyRental
+                    , 'DailyRentalFeeFrom' => $DailyRentalFeeFrom
+                    , 'DailyRentalFeeTo' => $DailyRentalFeeTo
+                    , 'CurrentOccupant' => $CurrentOccupant
+                    , 'Vacancy' => $Vacancy
+                    , 'BedroomFurnishing' => $BedroomFurnishing
+                    , 'NumOfBathrooms' => $NumOfBathrooms
+                    , 'MaleTenant' => $MaleTenant
+                    , 'FemaleTenant' => $FemaleTenant
+                    , 'PreferGender' => $PreferGender
+                    , 'Smoking' => $Smoking
+                    , 'Pet' => $Pet
+                    , 'URL' => $URL
+                    , 'WaterRate' => $WaterRate
+                    , 'PowerRate' => $PowerRate
+                    , 'Status' => $Status
+                )
+        );
+        
+//        $results = DB::update("update rental set "
+//                        . "ProviderID='$provide_id' "
+//                        . ",ModifiedBy='$ModifiedBy' "
+//                        . ",ModifiedDate='$ModifiedDate' "
+//                        . ",Title='$Title' "
+//                        . ",Details='$Details' "
+//                        . ",PropertyID='$PropertyID' "
+//                        . ",Address='$Address' "
+//                        . ",AmphoeID='$AmphoeID' "
+//                        . ",AvailableDate='$AvailableDate' "
+//                        . ",MonthlyRentalFeeFrom='$MonthlyRentalFeeFrom' "
+//                        . ",MonthlyRentalFeeTo='$MonthlyRentalFeeTo' "
+//                        . ",LeaseFrom='$LeaseFrom' "
+//                        . ",LeaseTo='$LeaseTo' "
+//                        . ",LeaseEndDate='$LeaseEndDate' "
+//                        . ",HasLeaseAgreement='$HasLeaseAgreement' "
+//                        . ",BondFrom='$BondFrom' "
+//                        . ",BondTo='$BondTo' "
+//                        . ",SecurityBondFrom='$SecurityBondFrom' "
+//                        . ",SecurityBondTo='$SecurityBondTo' "
+//                        . ",CanDailyRental='$CanDailyRental' "
+//                        . ",DailyRentalFeeFrom='$DailyRentalFeeFrom' "
+//                        . ",DailyRentalFeeTo='$DailyRentalFeeTo' "
+//                        . ",CurrentOccupant='$CurrentOccupant' "
+//                        . ",Vacancy='$Vacancy' "
+//                        . ",BedroomFurnishing='$BedroomFurnishing' "
+//                        . ",NumOfBathrooms='$NumOfBathrooms' "
+//                        . ",MaleTenant='$MaleTenant' "
+//                        . ",FemaleTenant='$FemaleTenant' "
+//                        . ",PreferGender='$PreferGender' "
+//                        . ",Smoking='$Smoking' "
+//                        . ",Pet='$Pet' "
+//                        . ",URL='$URL' "
+//                        . ",WaterRate='$WaterRate' "
+//                        . ",PowerRate='$PowerRate' "
+//                        . ",Status='$Status' "
+//                        . "where RentalID='$RentalID'");
 
         $this->updateRoomList($RoomList, $RentalID);
         $this->updateBedroomList($BedroomList, $RentalID);
@@ -382,13 +421,16 @@ class RentalsListController extends BaseController {
 
     function changeFormatDate($dateInput) {
         $tz_object = new DateTimeZone('Asia/Bangkok');
-
-        $arr = explode('/', $dateInput);
+        if($dateInput<>""){
+            $arr = explode('/', $dateInput);
         $newDate = $arr[2] . '-' . $arr[1] . '-' . $arr[0];
 
         $datetime = new DateTime($newDate);
         $datetime->setTimezone($tz_object);
         return $datetime->format('Y\-m\-d\ h:i:s');
+        }else{
+            return "";
+        }      
     }
 
     public function test() {

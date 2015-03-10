@@ -1,26 +1,38 @@
 $(function () {
-    dateTimePicker();
-    getPropertyType();
-    getAmphoe();
-    getRooms();
-    getBedroomsAvailable();
-    getBedroomFurnished();
-    getUtilitiesIncludedInRent();
-    getWhiteGoogdsProvided();
-    getOtherFacilities();
-    getPreferredGender();
-    getPerferredTenant();
-    getSmoking();
-    getPets();
-    getProvider();
-    newRentals();
-    addRoomSelected();
-    addBedroomSelected();
-    uploadFile();
-    $("#btn_backtolist").click(function (event) {
-        event.preventDefault();
-        window.location.href = "profile";
-    });
+    if (userInfo !== null) {
+        if (userInfo.isAuthentication) {
+            $("#txtDescription").jqte({
+                placeholder: "Please, write your Description",
+            });
+            dateTimePicker();
+            getPropertyType();
+            getAmphoe();
+            getRooms();
+            getBedroomsAvailable();
+            getBedroomFurnished();
+            getUtilitiesIncludedInRent();
+            getWhiteGoogdsProvided();
+            getOtherFacilities();
+            getPreferredGender();
+            getPerferredTenant();
+            getSmoking();
+            getPets();
+            getProvider();
+            newRentals();
+            addRoomSelected();
+            addBedroomSelected();
+            uploadFile();
+            $("#btn_backtolist").click(function (event) {
+                event.preventDefault();
+                window.location.href = "profile";
+            });
+        } else {
+            window.location.href = "home";
+        }
+    } else {
+        window.location.href = "home";
+    }
+
 });
 function dateTimePicker() {
     $("#txtAvailableFrom").datepicker();
@@ -343,7 +355,7 @@ function newRentals() {
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
         $("#txtUsername").val(userInfo.userName);
-        
+
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -487,13 +499,19 @@ function uploadFile() {
                             contentType: false,
                             success: function (d) {
                                 pictures.push(d.result);
-//                                if (pictures.length === 5 || pictures.length === 9) {
-//                                    $("#upload_thumbnail").append("<br>");
-//                                }
-                                var action_delete = "<button id='btn_delete_" + d.result + "' value='" + (i - 1) + "' class='btn btn-sm btn-link'>Delete</button>";
-                                $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                var divElementCount = $("#upload_thumbnail_1").children().length;
+                                if (divElementCount <= 4) {
+                                    var action_delete = "<button id='btn_delete_" + d.result + "' value='" + (i - 1) + "' class='btn btn-sm btn-link'>Delete</button>";
+                                $("#upload_thumbnail_1").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
                                         "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
                                         "</div>");
+                                }else{
+                                    var action_delete = "<button id='btn_delete_" + d.result + "' value='" + (i - 1) + "' class='btn btn-sm btn-link'>Delete</button>";
+                                $("#upload_thumbnail_2").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                        "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
+                                        "</div>");
+                                }
+                                
                                 $("#div_" + d.result).click(function (event) {
                                     event.preventDefault();
                                 });

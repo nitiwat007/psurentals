@@ -4,26 +4,34 @@ var pictures = [];
 var RentalID = localStorage.getItem("RentalID");
 $(function () {
     //checkEdit();
-    if (userInfo.isAuthentication) {
-        getUtilitiesIncludedInRent();
-        getWhiteGoogdsProvided();
-        getOtherFacilities();
-        getPreferredGender();
-        getPerferredTenant();
-        getSmoking();
-        getPets();
-        getStatus();
-        getProvider();
-        getRentalDataEdit();
-        checkEditPermission();
-        $("#btn_backtolist").click(function (event) {
-            event.preventDefault();
-            window.location.href = "profile";
-        });
-        updateRental();
+    $("#txtDescription").jqte({
+        placeholder: "Please, write your Description",
+    });
+    if (userInfo !== null) {
+        if (userInfo.isAuthentication) {
+            getUtilitiesIncludedInRent();
+            getWhiteGoogdsProvided();
+            getOtherFacilities();
+            getPreferredGender();
+            getPerferredTenant();
+            getSmoking();
+            getPets();
+            getStatus();
+            getProvider();
+            getRentalDataEdit();
+            checkEditPermission();
+            $("#btn_backtolist").click(function (event) {
+                event.preventDefault();
+                window.location.href = "profile";
+            });
+            updateRental();
+        } else {
+            window.location.href = "home";
+        }
     } else {
         window.location.href = "home";
     }
+
 });
 function updateRental() {
     $("#frmRentalsUpdate").submit(function (event) {
@@ -34,6 +42,7 @@ function updateRental() {
         $("#txtRoomsList").val(rooms);
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
+        $("#txtUsername").val(userInfo.userName);
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -82,12 +91,12 @@ function getRentalDataEdit() {
                 $("#txtLeaseFrom").val(d.result[i - 1].LeaseFrom);
                 $("#txtLeaseTo").val(d.result[i - 1].LeaseTo);
                 $LeaseEndDate = d.result[i - 1].LeaseEndDate.split('-');
-                $LeaseEndDateNew = $LeaseEndDate[2] + "/" + $LeaseEndDate[1] + "/" + $LeaseEndDate[0];                
+                $LeaseEndDateNew = $LeaseEndDate[2] + "/" + $LeaseEndDate[1] + "/" + $LeaseEndDate[0];
                 $("#txtLeaseEndDate").datepicker();
                 $("#txtLeaseEndDate").datepicker("option", "dateFormat", "dd/mm/yy");
-                if($LeaseEndDateNew==='00/00/0000'){
-                    
-                }else{
+                if ($LeaseEndDateNew === '00/00/0000') {
+
+                } else {
                     $("#txtLeaseEndDate").datepicker('setDate', $LeaseEndDateNew);
                 }
                 $("#txtBondFrom").val(d.result[i - 1].BondFrom);
@@ -112,7 +121,7 @@ function getRentalDataEdit() {
                 $("#ddlProvider option[value='" + d.result[i - 1].ProviderID + "']").attr("selected", "selected");
                 $("#ddlStatus option[value='" + d.result[i - 1].Status + "']").attr("selected", "selected");
                 $("#txtStatus").val(d.result[i - 1].Status);
-                $("#txtDescription").val(d.result[i - 1].Details);
+                $("#txtDescription").jqteVal(d.result[i - 1].Details);
                 $("#txtURL").val(d.result[i - 1].URL);
             }
             var distanceLength = d.distance.length;
@@ -169,12 +178,16 @@ function getRentalDataEdit() {
             var pictureLength = d.picture.length;
             for (var i = 1; i <= pictureLength; i++) {
                 pictures.push(d.picture[i - 1].Picture);
-//                if (i === 5 || i === 9) {
-//                    $("#upload_thumbnail").append("<br>");
-//                }
-                var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
-                $("#upload_thumbnail").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                        "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
+                if (i <= 5) {
+                    var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
+                    $("#upload_thumbnail_1").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                            "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
+                } else {
+                    var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
+                    $("#upload_thumbnail_2").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                            "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
+                }
+
                 $("#div_" + d.picture[i - 1].Picture).click(function (event) {
                     event.preventDefault();
                 });
@@ -227,13 +240,19 @@ function uploadFile() {
                             contentType: false,
                             success: function (d) {
                                 pictures.push(d.result);
-//                                if (pictures.length === 5 || pictures.length === 9) {
-//                                    $("#upload_thumbnail").append("<br>");
-//                                }
-                                var action_delete = "<button id='btn_delete_" + d.result + "' value='" + d.result + "' class='btn btn-sm btn-link'>Delete</button>";
-                                $("#upload_thumbnail").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                        "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
-                                        "</div>");
+                                //alert($("#upload_thumbnail_1").children().length);
+                                var divElementCount = $("#upload_thumbnail_1").children().length;
+                                if (divElementCount <= 4) {
+                                    var action_delete = "<button id='btn_delete_" + d.result + "' value='" + d.result + "' class='btn btn-sm btn-link'>Delete</button>";
+                                    $("#upload_thumbnail_1").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                            "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
+                                            "</div>");
+                                } else {
+                                    var action_delete = "<button id='btn_delete_" + d.result + "' value='" + d.result + "' class='btn btn-sm btn-link'>Delete</button>";
+                                    $("#upload_thumbnail_2").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                            "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
+                                            "</div>");
+                                }
                                 $("#div_" + d.result).click(function (event) {
                                     event.preventDefault();
                                 });
