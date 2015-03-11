@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
-
+        
         <title></title>
     </head>
     <body>

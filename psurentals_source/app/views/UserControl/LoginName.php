@@ -20,7 +20,7 @@
             $("#ulLoginStatus").html(loginName);
             $("#loginName").html(userInfo.userName + " <span class='caret'></span>");
             $("#aLogout").click(function () {
-                Pace.restart();
+                //Pace.restart();
                 localStorage.removeItem("userInfo");
                 localStorage.removeItem("ucRentalListID");
                 window.location.href = "/logout";
