@@ -273,7 +273,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtBathrooms" class="col-sm-3 control-label" style="text-align:left">Bathrooms <br> จำนวนห้องน้ำ</label>
                                     <div class="col-sm-3">
-                                        <input type="number" class="form-control" id="txtBathrooms" name="txtBathrooms" placeholder="Bathrooms / จำนวนห้องน้ำ" >
+                                        <input type="number" min="0" class="form-control" id="txtBathrooms" name="txtBathrooms" placeholder="Bathrooms / จำนวนห้องน้ำ" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -285,13 +285,13 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtWaterRate" class="col-sm-3 control-label" style="text-align:left">Water Rate(Per unit) <br> ค่าน้ำ(ต่อหน่วย)</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtWaterRate" name="txtWaterRate" placeholder="Water Rate">
+                                        <input type="number" min="0" class="form-control" id="txtWaterRate" name="txtWaterRate" placeholder="Water Rate">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtPowerRate" class="col-sm-3 control-label" style="text-align:left">Power Rate(Per unit) <br> ค่าไฟ(ต่อหน่วย)</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" id="txtPowerRate" name="txtPowerRate" placeholder="Power Rate">
+                                        <input type="number" min="0" class="form-control" id="txtPowerRate" name="txtPowerRate" placeholder="Power Rate">
                                     </div>
                                 </div>
                                 <div class="form-group">

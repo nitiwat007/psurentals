@@ -73,7 +73,7 @@ class RentalsController extends BaseController {
     }
     
     public function getStatus() {
-        $results = DB::select("select * from status");
+        $results = DB::select("select * from status where StatusGroup='r'");
         return Response::json(array('result' => $results));
     }
     
