@@ -2,7 +2,7 @@ var userInfo = null;
 userInfo = JSON.parse(localStorage.getItem("userInfo"));
 var roles = userInfo.roles;
 var activeFunction = "YourRentals";
-var ProfileActiveMenu="aYourRentals";
+var ProfileActiveMenu = "aYourRentals";
 $(function () {
     if (typeof (Storage) !== "undefined") {
 
@@ -12,7 +12,6 @@ $(function () {
     checkLogin();
 });
 function checkRole() {
-
     getProviderMenu();
     for (var i = 0; i < roles.length; i++) {
         switch (roles[i].nameEN) {
@@ -48,7 +47,7 @@ function getProviderMenu() {
             event.preventDefault();
             $(this).addClass("active");
             $("#" + ProfileActiveMenu).removeClass("active");
-            ProfileActiveMenu="aYourRentals";
+            ProfileActiveMenu = "aYourRentals";
             activeFunction = "YourRentals";
             $("#panelHeadingList").html("<strong>Your Rentals / ประกาศทั้งหมดของคุณ</strong>");
             $('#divPagination').html('');
@@ -71,19 +70,19 @@ function getInspectorMenu() {
             event.preventDefault();
             $(this).addClass("active");
             $("#" + ProfileActiveMenu).removeClass("active");
-            ProfileActiveMenu="aWaitForApprove";
+            ProfileActiveMenu = "aWaitForApprove";
             activeFunction = "WaitForApprove";
             $("#panelHeadingList").html("<strong>Wait for approve / รอการอนุมัติ</strong>");
             $('#divPagination').html('');
             $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
             getRentalsByStatus();
         });
-        
+
         $("#aInspectorAllRentals").click(function (event) {
             event.preventDefault();
             $(this).addClass("active");
             $("#" + ProfileActiveMenu).removeClass("active");
-            ProfileActiveMenu="aInspectorAllRentals";
+            ProfileActiveMenu = "aInspectorAllRentals";
             activeFunction = "InspectorAllRentals";
             $("#panelHeadingList").html("<strong>All Rentals / ประกาศทั้งหมด</strong>");
             $('#divPagination').html('');
@@ -103,10 +102,12 @@ function getAdminMenu() {
     }
 }
 function checkEditPermission() {
+    if(roles.length===0){
+        $("#btnStatus").show();
+    }
     for (var i = 0; i < roles.length; i++) {
         switch (roles[i].nameEN) {
             case "Admin":
-
                 break;
             case "Inspector":
                 $('#ddlStatus').attr("disabled", false);

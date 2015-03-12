@@ -385,7 +385,10 @@ and open the template in the editor.
                                         <input type="hidden" id="txtStatus" name="txtStatus" value="">
                                         <select id="ddlStatus" name="ddlStatus" class="form-control">
                                             <option>-- Select --</option>
-                                        </select>
+                                        </select>                                        
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" id="btnStatus" style="display:none;" name="btnStatus" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">Edit</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -421,5 +424,29 @@ and open the template in the editor.
             <hr>
             <?php require('UserControl/Footer.php'); ?>
         </div>
-    </body>
+    </body> 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="ddlUpdateStatus" class="control-label">Status:</label>
+                            <select id="ddlUpdateStatus" name="ddlStatus" class="form-control">
+                                
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="btnUpdateStatus" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

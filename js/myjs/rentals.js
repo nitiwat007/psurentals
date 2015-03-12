@@ -333,11 +333,12 @@ function getProvider() {
         dataType: "json",
         url: "provider",
         success: function (d) {
-            $("#ddlProvider").append("<option value=0>-- Select / เลือก --</option>");
+//            $("#ddlProvider").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlProvider").append("<option value=" + d.result[i - 1].UserID + ">" + d.result[i - 1].FirstName + " " + d.result[i - 1].LastName + "</option>");
             }
+            $("#ddlProvider option[value='" + userInfo.userName + "']").attr("selected", "selected");
         },
         error: function (xhr, status, error) {
             getProvider();

@@ -15,7 +15,7 @@ function getDetails(RentalID) {
         url: "getrentaldetail/" + RentalID,
         success: function (d) {
             var AvailableDate = $.format.date(new Date(d.result[0].AvailableDate), "dd MMMM yyyy");
-            $("#title").html("<h4><strong>" + d.result[0].Title + "</strong></h4>");
+            $("#title").html("<h3><strong>" + d.result[0].Title + "</strong></h3>");
             $("#MonthlyRentalFee").html("<strong>" + $.number(d.result[0].MonthlyRentalFeeFrom) + " - " + $.number(d.result[0].MonthlyRentalFeeTo) + "</strong> per months");
             $("#AvailableDate").html("Available from <strong>" + AvailableDate + "</strong>");
 

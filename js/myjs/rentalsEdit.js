@@ -344,10 +344,55 @@ function getStatus() {
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlStatus").append("<option value=" + d.result[i - 1].StatusCode + ">" + d.result[i - 1].StatusNameEN + " / " + d.result[i - 1].StatusNameTH + "</option>");
             }
+            dialogStatus();
         },
         error: function (xhr, status, error) {
             getStatus();
         }
+    });
+}
+function dialogStatus() {
+    $("#btnStatus").click(function (event) {
+        event.preventDefault();
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var recipient = button.data('whatever'); // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+            modal.find('.modal-title').text('New message to ' + recipient);
+            modal.find('.modal-body input').val(recipient);
+        });
+        
+        $("#btnUpdateStatus").click(function(event){
+            event.preventDefault();
+            $("#ddlStatus option[value='" + $("#ddlUpdateStatus").val() + "']").attr("selected", "selected");
+            $("#txtStatus").val($("#ddlUpdateStatus").val());
+            $('#exampleModal').modal('hide');
+        });
+        
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "status",
+            success: function (d) {
+                var resultLength = d.result.length;
+                for (var i = 1; i <= resultLength; i++) {
+                    switch(d.result[i - 1].StatusCode) {
+                        case "rco":
+                            $("#ddlUpdateStatus").append("<option value=" + d.result[i - 1].StatusCode + ">" + d.result[i - 1].StatusNameEN + " / " + d.result[i - 1].StatusNameTH + "</option>");
+                            break;
+                        case "rdl":
+                            $("#ddlUpdateStatus").append("<option value=" + d.result[i - 1].StatusCode + ">" + d.result[i - 1].StatusNameEN + " / " + d.result[i - 1].StatusNameTH + "</option>");
+                            break;
+                    }                   
+                }
+                //$("#ddlUpdateStatus option[value='" + $("#ddlStatus").val() + "']").attr("selected", "selected");
+            },
+            error: function (xhr, status, error) {
+                getStatus();
+            }
+        });
     });
 }
 function getProvider() {
