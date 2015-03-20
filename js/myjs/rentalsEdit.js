@@ -363,14 +363,14 @@ function dialogStatus() {
             modal.find('.modal-title').text('New message to ' + recipient);
             modal.find('.modal-body input').val(recipient);
         });
-        
-        $("#btnUpdateStatus").click(function(event){
+
+        $("#btnUpdateStatus").click(function (event) {
             event.preventDefault();
             $("#ddlStatus option[value='" + $("#ddlUpdateStatus").val() + "']").attr("selected", "selected");
             $("#txtStatus").val($("#ddlUpdateStatus").val());
             $('#exampleModal').modal('hide');
         });
-        
+
         $.ajax({
             type: "GET",
             dataType: "json",
@@ -378,14 +378,14 @@ function dialogStatus() {
             success: function (d) {
                 var resultLength = d.result.length;
                 for (var i = 1; i <= resultLength; i++) {
-                    switch(d.result[i - 1].StatusCode) {
+                    switch (d.result[i - 1].StatusCode) {
                         case "rco":
                             $("#ddlUpdateStatus").append("<option value=" + d.result[i - 1].StatusCode + ">" + d.result[i - 1].StatusNameEN + " / " + d.result[i - 1].StatusNameTH + "</option>");
                             break;
                         case "rdl":
                             $("#ddlUpdateStatus").append("<option value=" + d.result[i - 1].StatusCode + ">" + d.result[i - 1].StatusNameEN + " / " + d.result[i - 1].StatusNameTH + "</option>");
                             break;
-                    }                   
+                    }
                 }
                 //$("#ddlUpdateStatus option[value='" + $("#ddlStatus").val() + "']").attr("selected", "selected");
             },
@@ -397,6 +397,7 @@ function dialogStatus() {
 }
 function getProvider() {
     $("#ddlProvider").html("");
+    $('#ddlProvider').attr("disabled", true);
     $.ajax({
         type: "GET",
         dataType: "json",

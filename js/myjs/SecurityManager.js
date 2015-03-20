@@ -111,6 +111,7 @@ function checkEditPermission() {
                 break;
             case "Inspector":
                 $('#ddlStatus').attr("disabled", false);
+                $('#ddlProvider').attr("disabled", false);
                 break;
         }
     }
