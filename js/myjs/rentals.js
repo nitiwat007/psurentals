@@ -352,6 +352,7 @@ function newRentals() {
     $("#frmRentals").submit(function (event) {
         event.preventDefault();
         Pace.restart();
+        $("#submit").text("Updateing.....");
         $("#txtRoomsList").val(rooms);
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
@@ -450,7 +451,7 @@ function showBedroomsSelect() {
     $("#tb_BedroomSelected tbody").html("");
     var bedroomsLength = bedrooms.length;
     for (var i = 1; i <= bedroomsLength; i++) {
-        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-small confirm'>Delete</button>";
+        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-sm btn-danger'>Delete</button>";
         var bedrooms_split = bedrooms[i - 1].split("-");
         $("#tb_BedroomSelected tbody").append("<tr><td>" + i + "</td><td>" + bedrooms_split[1] + "</td><td>" + bedrooms_split[2] + "</td><td>" + action_delete + "</td></tr>");
     }

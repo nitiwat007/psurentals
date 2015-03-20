@@ -34,6 +34,7 @@ and open the template in the editor.
                 }
             };
         </script>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
         <title>PSU Rentals</title>
     </head>
     <body>
@@ -320,13 +321,13 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtCurrentNumberOfMaleTenants" class="col-sm-3 control-label" style="text-align:left">Current number of male tenants<br> จำนวนผู้ชายที่อาศัยอยู่</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" min="0" id="txtCurrentNumberOfMaleTenants" name="txtCurrentNumberOfMaleTenants" placeholder="">
+                                        <input type="number" class="form-control" min="0" id="txtCurrentNumberOfMaleTenants" name="txtCurrentNumberOfMaleTenants" placeholder="Male">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtCurrentNumberOffemaleTenants" class="col-sm-3 control-label" style="text-align:left">Current number of female tenants<br> จำนวนผู้หญิงที่อาศัยอยู่</label>
                                     <div class="col-sm-2">
-                                        <input type="number" class="form-control" min="0" id="txtCurrentNumberOffemaleTenants" name="txtCurrentNumberOffemaleTenants" placeholder="">
+                                        <input type="number" class="form-control" min="0" id="txtCurrentNumberOffemaleTenants" name="txtCurrentNumberOffemaleTenants" placeholder="Female">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -370,7 +371,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="fileupload" class="col-sm-3 control-label" style="text-align:left">Photo(s)(Max = 9) <br> ภาพประกอบไม่เกิน 9 ภาพ</label>
+                                    <label for="fileupload" class="col-sm-3 control-label" style="text-align:left">Photo(s)(Max = 9)<br>(Max Size = 300 KB) <br> ภาพประกอบไม่เกิน 9 ภาพ</label>
                                     <div class="col-sm-8">
                                         <input id="fileupload" type="file" class="form-control" name="files[]" multiple>
                                         <input type="hidden" class="form-control" id="txtImageList" name="txtImageList">
@@ -394,7 +395,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="ddlProvider" class="col-sm-3 control-label" style="text-align:left"></label>
                                     <div class="col-sm-5">
-                                        <button type="submit" name="submit" class="btn btn-default">Submit</button>
+                                        <button type="submit" name="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
                             </form>

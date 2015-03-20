@@ -34,6 +34,7 @@ and open the template in the editor.
                 }
             };
         </script>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
         <title>PSU Rentals</title>
     </head>
     <body>
@@ -366,7 +367,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="fileupload" class="col-sm-3 control-label" style="text-align:left">Photo(s)(Max = 9) <br> ภาพประกอบไม่เกิน 9 ภาพ</label>
+                                    <label for="fileupload" class="col-sm-3 control-label" style="text-align:left">Photo(s)(Max = 9)<br>(Max Size = 300 KB) <br> ภาพประกอบไม่เกิน 9 ภาพ</label>
                                     <div class="col-sm-8">
                                         <input id="fileupload" type="file" class="form-control" name="files[]" multiple>
                                         <input type="hidden" class="form-control" id="txtImageList" name="txtImageList">

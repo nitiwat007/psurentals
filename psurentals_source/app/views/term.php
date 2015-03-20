@@ -13,7 +13,8 @@ and open the template in the editor.
         <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
 
-        <title></title>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
+        <title>PSU Rentals</title>
     </head>
     <body>
         <?php require('UserControl/Header.php'); ?>

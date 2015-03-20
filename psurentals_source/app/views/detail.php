@@ -28,7 +28,8 @@ and open the template in the editor.
                 }
             };
         </script>
-        <title>Rental Details</title>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
+        <title>PSU Rentals</title>
     </head>
     <body>
         <input id='hrentalID' type="hidden" value="<?= Input::get('rentalID') ?>" />

@@ -26,7 +26,8 @@ and open the template in the editor.
                 }
             };
         </script>
-        <title>Search Results</title>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
+        <title>PSU Rentals</title>
     </head>
     <body>
         <?php require('UserControl/Header.php'); ?>
