@@ -2,6 +2,14 @@
 
 class RentalsController extends BaseController {
 
+//    public function testHost() {
+//        $response = file_get_contents("http://api.phuket.psu.ac.th/roleprovider/testhost");
+//        //$response = json_decode($response);
+//        //$http_host=$_SERVER['REMOTE_ADDR'];
+//        //$role=$response->result[0]->role_id;
+//        return $response;
+//    }
+    
     public function getPropertyType() {
         $results = DB::select("select * from propertytype");
         return Response::json(array('result' => $results));

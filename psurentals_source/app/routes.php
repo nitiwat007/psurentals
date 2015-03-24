@@ -117,7 +117,8 @@ Route::group(array('before' => 'auth'), function() {
 //Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
 });
 
-
+//TEST
+//Route::get('testhost', array('uses' => 'RentalsController@testHost'));
 
 //UNNECESSARY AUTHORIZATION
 //DETAIL
