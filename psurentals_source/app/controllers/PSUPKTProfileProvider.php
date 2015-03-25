@@ -51,7 +51,7 @@ class PSUPKTProfileProvider extends ProfileProvider {
                 $userInfo->organization = sprintf("%s %s", $providerValues[8], $providerValues[10]);
                 $userInfo->position = $providerValues[3];
                 $userInfo->mailingAddress = "No Information from PSU Passport";
-                $userInfo->telephone = "No Information from PSU Passport";
+                $userInfo->telephone = "-";
                 $userInfo->ou = $providerValues[14];
             }
         } catch (Exception $ex) {
