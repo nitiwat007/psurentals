@@ -89,15 +89,23 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlAmphoe" class="col-sm-3 control-label" style="text-align:left">Amphoe <br> อำเภอ</label>
+                                    <label for="ddlCampus" class="col-sm-3 control-label" style="text-align:left">Campus <br> วิทยาเขต</label>
                                     <div class="col-sm-5">
-                                        <select id="ddlAmphoe" name="ddlAmphoe" class="form-control">
+                                        <select id="ddlCampus" name="ddlCampus" class="form-control" >
                                             <option>-- Select / เลือก --</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="txtDistanceTo" class="col-sm-3 control-label" style="text-align:left">Distance to <br> ระยะทาง</label>
+                                    <label for="ddlAmphoe" class="col-sm-3 control-label" style="text-align:left">Amphoe <br> อำเภอ</label>
+                                    <div class="col-sm-5">
+                                        <select id="ddlAmphoe" name="ddlAmphoe" class="form-control" >
+                                            <option>-- Select / เลือก --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtDistanceTo" class="col-sm-3 control-label" style="text-align:left">Estimated Distance to(Km) <br> ประมาณระยะทาง(กิโลเมตร)</label>
                                     <div class="col-sm-5">
                                         <input type="number" min="0" class="form-control" id="txtDistanceTo" name="txtDistanceTo" placeholder="Distance to / ระยะทาง">
                                     </div>
@@ -160,7 +168,7 @@ and open the template in the editor.
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <label for="rdbWritenLease" class="col-sm-3 control-label" style="text-align:left">Written Lease agreement provider <br> มีสัญญาเช่าเป็นลายลักษณ์อักษรหรือไม่</label>
+                                    <label for="rdbWritenLease" class="col-sm-3 control-label" style="text-align:left">Written Lease agreement provided <br> มีสัญญาเช่าเป็นลายลักษณ์อักษรหรือไม่</label>
                                     <div class="col-sm-4">
                                         <label class="radio-inline">
                                             <input type="radio" name="rdbWritenLease" id="rdbWritenLeaseYes" value="1"> Yes / มี
@@ -171,7 +179,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="rdbCanDailyRental" class="col-sm-3 control-label" style="text-align:left">Can daily rental <br> สามารถเช่าเป็นรายวันได้</label>
+                                    <label for="rdbCanDailyRental" class="col-sm-3 control-label" style="text-align:left">Daily Rental Avaliable <br> สามารถเช่าเป็นรายวันได้</label>
                                     <div class="col-sm-4">
                                         <label class="radio-inline">
                                             <input type="radio" name="rdbCanDailyRental" id="rdbCanDailyRentalYes" value="1"> Yes / ได้
@@ -194,7 +202,7 @@ and open the template in the editor.
                                 </div>
                                 <hr>
                                 <div class="form-group">
-                                    <label for="ddlRooms" class="col-sm-3 control-label" style="text-align:left">Rooms <br> ลักษณะของห้องพัก</label>
+                                    <label for="ddlRooms" class="col-sm-3 control-label" style="text-align:left">Room <br> ลักษณะของห้องพัก</label>
                                     <div class="col-sm-4">
                                         <select id="ddlRooms" name="ddlRooms" class="form-control">
                                             <option>-- Select / เลือก--</option>
@@ -228,7 +236,7 @@ and open the template in the editor.
                                 </div>
                                 <hr>
                                 <div class="form-group">
-                                    <label for="ddlBedroomsAvailable" class="col-sm-3 control-label" style="text-align:left">Bedrooms available <br> เตียงที่ว่าง</label>
+                                    <label for="ddlBedroomsAvailable" class="col-sm-3 control-label" style="text-align:left">Avaliable Bedrooms <br> เตียงที่ว่าง</label>
                                     <div class="col-sm-4">
                                         <select id="ddlBedroomsAvailable" name="ddlBedroomsAvailable" class="form-control">
                                             <option>-- Select / เลือก--</option>
@@ -367,7 +375,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="fileupload" class="col-sm-3 control-label" style="text-align:left">Photo(s)(Max = 9)<br>(Max Size = 300 KB) <br> ภาพประกอบไม่เกิน 9 ภาพ</label>
+                                    <label for="fileupload" class="col-sm-3 control-label" style="text-align:left">Photo(s)(Max = 9 photos)<br>(Each photo max Size = 300 Kb) <br> ภาพประกอบไม่เกิน 9 ภาพ</label>
                                     <div class="col-sm-8">
                                         <input id="fileupload" type="file" class="form-control" name="files[]" multiple>
                                         <input type="hidden" class="form-control" id="txtImageList" name="txtImageList">

@@ -34,8 +34,8 @@ function getRentals(page) {
                 var StatusNameEN = d.data[i - 1].StatusNameEN;
                 var StatusNameTH = d.data[i - 1].StatusNameTH;
                 var Status = d.data[i - 1].Status;
-                var MonthlyRentalFeeFrom = d.data[i - 1].MonthlyRentalFeeFrom;
-                var MonthlyRentalFeeTo = d.data[i - 1].MonthlyRentalFeeTo;
+                var MonthlyRentalFeeFrom = $.number(d.data[i - 1].MonthlyRentalFeeFrom);
+                var MonthlyRentalFeeTo = $.number(d.data[i - 1].MonthlyRentalFeeTo);
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();

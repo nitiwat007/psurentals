@@ -51,10 +51,10 @@ foreach ($rentals as $rental) {
                                     echo $rental->Title;
                                 ?></a></h4>
                         <div class="monthlyfee">
-                            <span class="monthlyfeefrom"><?= $rental->MonthlyRentalFeeFrom ?></span>
+                            <span class="monthlyfeefrom"><?= ceil($rental->MonthlyRentalFeeFrom) ?></span>
                             <?php
                             if ($rental->MonthlyRentalFeeFrom != $rental->MonthlyRentalFeeTo) {
-                                echo '<span class="monthlyfeeto">' . $rental->MonthlyRentalFeeTo . '</span>';
+                                echo '<span class="monthlyfeeto">' . ceil($rental->MonthlyRentalFeeTo) . '</span>';
                             }
                             ?>
                         </div>

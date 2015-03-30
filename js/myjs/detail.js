@@ -2,9 +2,9 @@ var userInfo = null;
 userInfo = JSON.parse(localStorage.getItem("userInfo"));
 $(function () {
     var RentalID = localStorage.getItem("ucRentalListID");
-    if(RentalID===null){
-        window.location.href="/home";
-    }else{
+    if (RentalID === null) {
+        window.location.href = "/home";
+    } else {
         getDetails(RentalID);
     }
 });
@@ -52,12 +52,30 @@ function getDetails(RentalID) {
             var CanDailyRental = d.result[0].CanDailyRental;
             if (CanDailyRental === '1') {
                 $("#tb_information").append("<tr><td>Daily Rental</td><td>Yes</td></tr>");
+                $("#tb_information").append("<tr><td>Daily rental fee</td><td>" + $.number(d.result[0].DailyRentalFeeFrom) + " - " + $.number(d.result[0].DailyRentalFeeTo) + " Baht</td></tr>");
             } else {
                 $("#tb_information").append("<tr><td>Daily Rental</td><td>No</td></tr>");
             }
-            $("#tb_information").append("<tr><td>Daily rental fee</td><td>" + $.number(d.result[0].DailyRentalFeeFrom) + " - " + $.number(d.result[0].DailyRentalFeeTo) + " Baht</td></tr>");
+
+
+            var roomLength = d.room.length;
+            var room = "";
+            for (var i = 1; i <= roomLength; i++) {
+                room += d.room[i - 1].OptionNameEN + "(" + d.room[i - 1].Avaliable + ")" + ",<br>";
+            }
+            $("#tb_information").append("<tr><td>Room</td><td>" + room + "</td></tr>");
+
+
+            var bedroomLength = d.bedroom.length;
+            var bedroom = "";
+            for (var i = 1; i <= bedroomLength; i++) {
+                bedroom += d.bedroom[i - 1].OptionNameEN + "(" + d.bedroom[i - 1].Avaliable + ")" + ",<br>";
+            }
+            $("#tb_information").append("<tr><td>Bedroom</td><td>" + bedroom + "</td></tr>");
+
             $("#tb_information").append("<tr><td>Current Occupant</td><td>" + d.result[0].CurrentOccupant + "</td></tr>");
             $("#tb_information").append("<tr><td>Current Vacancy</td><td>" + d.result[0].Vacancy + "</td></tr>");
+            $("#tb_information").append("<tr><td>Furnishing</td><td>" + d.result[0].BedroomFurnishingNameEN + "</td></tr>");
             $("#tb_information").append("<tr><td>Bathrooms</td><td>" + d.result[0].NumOfBathrooms + "</td></tr>");
 
             var utilitiesLength = d.utilities.length;
@@ -66,7 +84,7 @@ function getDetails(RentalID) {
                 utilities += d.utilities[i - 1].OptionNameEN + ",<br>";
             }
             $("#tb_information").append("<tr><td>Utilities Included in Rent</td><td>" + utilities + "</td></tr>");
-            
+
             $("#tb_information").append("<tr><td>Water Rate</td><td>" + $.number(d.result[0].WaterRate) + "</td></tr>");
             $("#tb_information").append("<tr><td>Power Rate</td><td>" + $.number(d.result[0].PowerRate) + "</td></tr>");
 
@@ -75,26 +93,39 @@ function getDetails(RentalID) {
             for (var i = 1; i <= whitegoodLength; i++) {
                 whitegood += d.whitegood[i - 1].OptionNameEN + ",<br>";
             }
-
             $("#tb_information").append("<tr><td>White Goods Provided</td><td>" + whitegood + "</td></tr>");
+
+            var prefertanantLength = d.prefertanant.length;
+            var prefertanant = "";
+            for (var i = 1; i <= prefertanantLength; i++) {
+                prefertanant += d.prefertanant[i - 1].OptionNameEN + ",<br>";
+            }
+            $("#tb_information").append("<tr><td>Prefer Tenant</td><td>" + prefertanant + "</td></tr>");
+
 
             $("#tb_information").append("<tr><td>Current number of female tenants</td><td>" + d.result[0].FemaleTenant + "</td></tr>");
             $("#tb_information").append("<tr><td>Current number of male tenants</td><td>" + d.result[0].MaleTenant + "</td></tr>");
             $("#tb_information").append("<tr><td>Preferred Gender</td><td>" + d.result[0].PreferGenderEN + "</td></tr>");
             $("#tb_information").append("<tr><td>Smoking</td><td>" + d.result[0].SmokingEN + "</td></tr>");
             $("#tb_information").append("<tr><td>Pets</td><td>" + d.result[0].PetEN + "</td></tr>");
-            
-//            if (userInfo.isAuthentication) {
-//                $("#ContactDetail").html("URL : <a href='"+ d.result[0].URL +"'>"+ d.result[0].URL +"</a>");
-//            }else{
-//                $("#ContactDetail").html("<a href='/login'>Sign in </a> as a student to view the provider's contact details.");
-//            }
+
             $("#ContactDetail").html("");
-            $("#ContactDetail").append("<p><strong>Provider Name :</strong> "+ d.result[0].FirstName + " " + d.result[0].LastName +"</p>");
-            $("#ContactDetail").append("<p><strong>Email :</strong> "+ d.result[0].Email + "</p>");
-            $("#ContactDetail").append("<p><strong>Mailing Address :</strong> "+ d.result[0].MailingAddress + "</p>");
-            $("#ContactDetail").append("<p><strong>Telephone Number :</strong> "+ d.result[0].TelephoneNumber + "</p>");
-            $("#ContactDetail").append("<strong>URL :</strong> <a href='"+ d.result[0].URL +"'>"+ d.result[0].URL +"</a>");
+            if (userInfo !== null) {
+                if (userInfo.isAuthentication) {
+                    $("#ContactDetail").append("<p><strong>Provider Name :</strong> " + d.result[0].FirstName + " " + d.result[0].LastName + "</p>");
+                    $("#ContactDetail").append("<p><strong>Email :</strong> " + d.result[0].Email + "</p>");
+                    $("#ContactDetail").append("<p><strong>Mailing Address :</strong> " + d.result[0].MailingAddress + "</p>");
+                    $("#ContactDetail").append("<p><strong>Telephone Number :</strong> " + d.result[0].TelephoneNumber + "</p>");
+                    $("#ContactDetail").append("<strong>URL :</strong> <a href='" + d.result[0].URL + "'>" + d.result[0].URL + "</a>");
+                } else {
+                    $("#ContactDetail").html("<a href='/login'>Sign in </a> as a student to view the provider's contact details.");
+                }
+            } else {
+                $("#ContactDetail").html("<a href='/login'>Sign in </a> as a student to view the provider's contact details.");
+            }
+
+
+
         },
         error: function (xhr, status, error) {
             alert("Error1 getDetails : " + xhr.responseText);

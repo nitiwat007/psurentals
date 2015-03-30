@@ -80,7 +80,8 @@ function getRentalDataEdit() {
                 $("#txtTitle").val(d.result[i - 1].Title);
                 getPropertyType(d.result[i - 1].PropertyTypeID, d.result[i - 1].ID);
                 $("#txtAddress").val(d.result[i - 1].Address);
-                getAmphoe(d.result[i - 1].AmphoeID);
+                getCampus(d.campus[0].CampusID, d.campus[0].ProvinceCode);
+                getAmphoe(d.result[i - 1].AmphoeID,d.campus[0].ProvinceCode);
                 $AvailableDate = d.result[i - 1].AvailableDate.split('-');
                 $AvailableDateNew = $AvailableDate[2] + "/" + $AvailableDate[1] + "/" + $AvailableDate[0];
                 $("#txtAvailableFrom").datepicker();
@@ -600,12 +601,12 @@ function getProperty(PropertyTypeID, PropertyID) {
         }
     });
 }
-function getAmphoe(AmphoeID) {
+function getAmphoe(AmphoeID,ProvinceCode) {
     $("#ddlAmphoe").html("");
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "amphoe",
+        url: "amphoebycampus/" + ProvinceCode,
         success: function (d) {
             //$("#ddlAmphoe").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
@@ -619,7 +620,53 @@ function getAmphoe(AmphoeID) {
         }
     });
 }
-
+function getCampus(CampusID,ProvinceCode) {
+    $("#ddlCampus").html("");
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "campus",
+        success: function (d) {
+            $("#ddlCampus").append("<option value=0>-- Select / เลือก --</option>");
+            var resultLength = d.result.length;
+            for (var i = 1; i <= resultLength; i++) {
+                $("#ddlCampus").append("<option  value=" + d.result[i - 1].ProvinceCode + ">" + d.result[i - 1].ShortNameEN + " / " + d.result[i - 1].ShortNameTH + "</option>");
+            }
+            $("#ddlCampus option[value='" + ProvinceCode + "']").attr("selected", "selected");
+            $('#ddlCampus').change(function () {
+                var ProvinceCode = $(this).val();
+                getAmphoeByCampus(ProvinceCode);
+            });
+        },
+        error: function (xhr, status, error) {
+            getAmphoe();
+//            alert("Error1 getAmphoe : " + xhr.responseText);
+//            alert("Error2 getAmphoe : " + status);
+//            alert("Error3 getAmphoe : " + error);
+        }
+    });
+}
+function getAmphoeByCampus(ProvinceCode) {
+    $("#ddlAmphoe").html("");
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "amphoebycampus/" + ProvinceCode,
+        success: function (d) {
+            $("#ddlAmphoe").append("<option value=0>-- Select / เลือก --</option>");
+            var resultLength = d.result.length;
+            for (var i = 1; i <= resultLength; i++) {
+                $("#ddlAmphoe").append("<option value=" + d.result[i - 1].AmphoeID + ">" + d.result[i - 1].AmphoeNameEN + " / " + d.result[i - 1].AmphoeNameTH + "</option>");
+            }           
+        },
+        error: function (xhr, status, error) {
+            getAmphoe();
+//            alert("Error1 getAmphoe : " + xhr.responseText);
+//            alert("Error2 getAmphoe : " + status);
+//            alert("Error3 getAmphoe : " + error);
+        }
+    });
+}
 function getRooms() {
     $("#ddlRooms").html("");
     $.ajax({

@@ -39,7 +39,7 @@ function getProviderMenu() {
                 + "<div class='panel-heading'><strong>Provider</strong></div>"
                 + "<div class='list-group'>"
                 + "<a id='aYourRentals' href='#' class='list-group-item'>Your Rentals</a>"
-                + "<a id='aNewRentals' href='rentals' class='list-group-item'>New Rentals</a>"
+                + "<a id='aNewRentals' href='rentals' class='list-group-item'>Make new Rentals ads</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
 

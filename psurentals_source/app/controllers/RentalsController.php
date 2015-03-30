@@ -24,6 +24,15 @@ class RentalsController extends BaseController {
         $results = DB::select("select * from vamphoeprovince vap, vcampus vc where vap.AmphoeID=vc.AmphoeID");
         return Response::json(array('result' => $results));
     }
+    public function getAmphoeByCampus($ProvinceCode) {
+        $results = DB::select("select * from vamphoeprovince vap where vap.ProvinceCode='$ProvinceCode'");
+        return Response::json(array('result' => $results));
+    }
+    
+    public function getAllCampus() {
+        $results = DB::select("select * from vamphoeprovince vap, vcampus vc where vap.AmphoeID=vc.AmphoeID");
+        return Response::json(array('result' => $results));
+    }
 
     public function getRooms() {
         $results = DB::select("select * from vroom");
