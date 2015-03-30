@@ -67,7 +67,8 @@ function getDetails(RentalID) {
             }
             $("#tb_information").append("<tr><td>Utilities Included in Rent</td><td>" + utilities + "</td></tr>");
             
-            $("#tb_information").append("<tr><td>Bedroom Furnishing</td><td>" + d.result[0].BedroomFurnishingNameEN + "</td></tr>");
+            $("#tb_information").append("<tr><td>Water Rate</td><td>" + $.number(d.result[0].WaterRate) + "</td></tr>");
+            $("#tb_information").append("<tr><td>Power Rate</td><td>" + $.number(d.result[0].PowerRate) + "</td></tr>");
 
             var whitegoodLength = d.whitegood.length;
             var whitegood = "";
