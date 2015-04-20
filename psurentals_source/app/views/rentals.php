@@ -47,7 +47,7 @@ and open the template in the editor.
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h4>New rentals information</h4>
+                                    <h4>Make new Rentals ads</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <button type="button" id="btn_backtolist" class="btn btn-defaultg col-md-offset-10 btn-primary">
@@ -97,7 +97,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlAmphoe" class="col-sm-3 control-label" style="text-align:left">Amphoe <br> อำเภอ<span style="color: red">*</span></label>
+                                    <label for="ddlAmphoe" class="col-sm-3 control-label" style="text-align:left">District <br> อำเภอ<span style="color: red">*</span></label>
                                     <div class="col-sm-5">
                                         <select id="ddlAmphoe" name="ddlAmphoe" class="form-control" required>
                                             <option>-- Select / เลือก --</option>
@@ -119,22 +119,22 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtRentalFeeFrom" class="col-sm-3 control-label" style="text-align:left">Rental fee per month(Baht) <br> ค่าเช่าต่อเดือน(บาท)<span style="color: red">*</span></label>
                                     <div class="col-sm-2">
-                                        <label for="txtRentalFeeFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtRentalFeeFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtRentalFeeFrom" name="txtRentalFeeFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtRentalFeeTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtRentalFeeTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtRentalFeeTo" name="txtRentalFeeTo" placeholder="To" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtLeaseFrom" class="col-sm-3 control-label" style="text-align:left">Lease(Month) <br> ระยะเวลาเช่าไม่น้อยกว่า(เดือน)<span style="color: red">*</span></label>
                                     <div class="col-sm-2">
-                                        <label for="txtLeaseFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtLeaseFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtLeaseFrom" name="txtLeaseFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtLeaseTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtLeaseTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtLeaseTo" name="txtLeaseTo" placeholder="To" required>
                                     </div>
                                 </div>
@@ -148,11 +148,11 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtBondFrom" class="col-sm-3 control-label" style="text-align:left">Bond(Baht) <br> ค่ามัดจำ(บาท)<span style="color: red">*</span></label>
                                     <div class="col-sm-2">
-                                        <label for="txtBondFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtBondFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtBondFrom" name="txtBondFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtBondTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtBondTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtBondTo" name="txtBondTo" placeholder="To" required>
                                     </div>
                                 </div>
@@ -160,11 +160,11 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtSecurityBondFrom" class="col-sm-3 control-label" style="text-align:left">Security Bond(Baht) <br> ค่าประกันความเสียหาย(บาท)<span style="color: red">*</span></label>
                                     <div class="col-sm-2">
-                                        <label for="txtSecurityBondFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtSecurityBondFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtSecurityBondFrom" name="txtSecurityBondFrom" placeholder="From" required>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtSecurityBondTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtSecurityBondTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtSecurityBondTo" name="txtSecurityBondTo" placeholder="To" required>
                                     </div>
                                 </div>
@@ -194,11 +194,11 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtRentFeePerDayFrom" class="col-sm-3 control-label" style="text-align:left">Rent fee per day(Baht) <br> ค่าเช่าต่อวัน(บาท)</label>
                                     <div class="col-sm-2">
-                                        <label for="txtRentFeePerDayFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtRentFeePerDayFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtRentFeePerDayFrom" name="txtRentFeePerDayFrom" placeholder="From" >
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtRentFeePerDayTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtRentFeePerDayTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" class="form-control" min="0" id="txtRentFeePerDayTo" name="txtRentFeePerDayTo" placeholder="To" >
                                     </div>
                                 </div>

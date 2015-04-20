@@ -4,6 +4,7 @@
             + "<a id='loginName' href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'></a>"
             + "<ul class='dropdown-menu' role='menu'>"
             + "<li><a id='aProfile' href='#'>My Profile</a></li>"
+            + "<li><a id='aMakeNewRentals' href='#'>Make new Rentals ads</a></li>"
             + "<li class='divider'></li>"
             + "<li><a id='aLogout' href='#'>Logout</a></li>"
             + "</ul></li>";
@@ -27,6 +28,9 @@
             });
             $("#aProfile").click(function () {
                 window.location.href = "/profile";
+            });
+            $("#aMakeNewRentals").click(function () {
+                window.location.href = "/rentals";
             });
         }
 

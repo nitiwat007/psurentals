@@ -97,7 +97,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ddlAmphoe" class="col-sm-3 control-label" style="text-align:left">Amphoe <br> อำเภอ</label>
+                                    <label for="ddlAmphoe" class="col-sm-3 control-label" style="text-align:left">District <br> อำเภอ</label>
                                     <div class="col-sm-5">
                                         <select id="ddlAmphoe" name="ddlAmphoe" class="form-control" >
                                             <option>-- Select / เลือก --</option>
@@ -128,11 +128,11 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtLeaseFrom" class="col-sm-3 control-label" style="text-align:left">Lease <br> ระยะเวลาเช่าไม่น้อยกว่า</label>
                                     <div class="col-sm-2">
-                                        <label for="txtLeaseFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtLeaseFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" min="0" class="form-control" id="txtLeaseFrom" name="txtLeaseFrom" placeholder="From">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtLeaseTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtLeaseTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" min="0" class="form-control" id="txtLeaseTo" name="txtLeaseTo" placeholder="To">
                                     </div>
                                 </div>
@@ -146,11 +146,11 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtBondFrom" class="col-sm-3 control-label" style="text-align:left">Bond <br> ค่ามัดจำ</label>
                                     <div class="col-sm-2">
-                                        <label for="txtBondFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtBondFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" min="0" class="form-control" id="txtBondFrom" name="txtBondFrom" placeholder="From">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtBondTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtBondTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" min="0" class="form-control" id="txtBondTo" name="txtBondTo" placeholder="To">
                                     </div>
                                 </div>
@@ -158,11 +158,11 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtSecurityBondFrom" class="col-sm-3 control-label" style="text-align:left">Security Bond <br> ค่าประกันความเสียหาย</label>
                                     <div class="col-sm-2">
-                                        <label for="txtSecurityBondFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtSecurityBondFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" min="0" class="form-control" id="txtSecurityBondFrom" name="txtSecurityBondFrom" placeholder="From">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtSecurityBondTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtSecurityBondTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" min="0" class="form-control" id="txtSecurityBondTo" name="txtSecurityBondTo" placeholder="To">
                                     </div>
                                 </div>
@@ -192,11 +192,11 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="txtRentFeePerDayFrom" class="col-sm-3 control-label" style="text-align:left">Rent fee per day <br> ค่าเช่าต่อวัน</label>
                                     <div class="col-sm-2">
-                                        <label for="txtRentFeePerDayFrom" class="col-sm-9 control-label" style="text-align:left">From / ตั้งแต่</label>
+                                        <label for="txtRentFeePerDayFrom" class="col-sm-9 control-label" style="text-align:left">Min / ต่ำสุด</label>
                                         <input type="number" class="form-control" id="txtRentFeePerDayFrom" name="txtRentFeePerDayFrom" placeholder="From">
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="txtRentFeePerDayTo" class="col-sm-9 control-label" style="text-align:left">To / ถึง</label>
+                                        <label for="txtRentFeePerDayTo" class="col-sm-9 control-label" style="text-align:left">Max / สูงสุด</label>
                                         <input type="number" min="0" class="form-control" id="txtRentFeePerDayTo" name="txtRentFeePerDayTo" placeholder="To">
                                     </div>
                                 </div>
