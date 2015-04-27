@@ -14,7 +14,10 @@ function getDetails(RentalID) {
         dataType: "json",
         url: "getrentaldetail/" + RentalID,
         success: function (d) {
+            
+            
             var AvailableDate = $.format.date(new Date(d.result[0].AvailableDate), "dd MMMM yyyy");
+            
             $("#title").html("<h3><strong>" + d.result[0].Title + "</strong></h3>");
             $("#MonthlyRentalFee").html("<strong>" + $.number(d.result[0].MonthlyRentalFeeFrom) + " - " + $.number(d.result[0].MonthlyRentalFeeTo) + "</strong> per months");
             $("#AvailableDate").html("Available from <strong>" + AvailableDate + "</strong>");
@@ -28,9 +31,16 @@ function getDetails(RentalID) {
             }
 
             var pictureLength = d.picture.length;
+            
             $("#divPicture").html("");
             for (var i = 1; i <= pictureLength; i++) {
-                var picturePath = "/psurentals_uploads/" + d.picture[i - 1].Picture;
+                if(d.picture[i - 1].Picture===""){
+                    var picturePath = "/images/no_image.jpg";
+                }else{
+                    var picturePath = "/psurentals_uploads/" + d.picture[i - 1].Picture;
+                }
+                
+                
                 $("#divPicture").append("<img src='" + picturePath + "'>");
             }
             slideShow();
@@ -39,7 +49,13 @@ function getDetails(RentalID) {
 
             $("#tb_information").append("<tr><td>Rent fee per Month</td><td>" + $.number(d.result[0].MonthlyRentalFeeFrom) + " - " + $.number(d.result[0].MonthlyRentalFeeTo) + " Baht</td></tr>");
             $("#tb_information").append("<tr><td>Lease</td><td>" + $.number(d.result[0].LeaseFrom) + " - " + $.number(d.result[0].LeaseTo) + " Month</td></tr>");
-            var LeaseEndDate = $.format.date(new Date(d.result[0].LeaseEndDate), "dd MMMM yyyy");
+            
+            var LeaseEndDate;
+            if(d.result[0].LeaseEndDate=='0000-00-00'){
+                LeaseEndDate = "-";
+            }else{
+                LeaseEndDate =$.format.date(new Date(d.result[0].LeaseEndDate), "dd MMMM yyyy");
+            }
             $("#tb_information").append("<tr><td>Lease End date</td><td>" + LeaseEndDate + "</td></tr>");
             $("#tb_information").append("<tr><td>Bond</td><td>" + $.number(d.result[0].BondFrom) + " - " + $.number(d.result[0].BondTo) + " Baht</td></tr>");
             $("#tb_information").append("<tr><td>Security bond</td><td>" + $.number(d.result[0].SecurityBondFrom) + " - " + $.number(d.result[0].SecurityBondTo) + " Baht</td></tr>");

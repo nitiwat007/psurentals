@@ -37,7 +37,13 @@ foreach ($rentals as $rental) {
                         //$imgCover = file_get_contents($url) ;
                         //echo $imgCover;
                         //$imgPath = $host . "/psurentals_uploads/" . $imgCover;
-                        $imgPath = $host . "/psurentals_uploads/" . $rental->CoverImage;
+                        if($rental->CoverImage==""){
+                            $imgPath = $host . "/images/no_image.jpg";
+                        }else{
+                            $imgPath = $host . "/psurentals_uploads/" . $rental->CoverImage;
+                        }
+                        
+                        
                         //echo $imgPath;
                         ?>
                         <img alt="" src='<?= $imgPath ?>' class='cover' >

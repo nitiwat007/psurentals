@@ -81,7 +81,7 @@ function getRentalDataEdit() {
                 getPropertyType(d.result[i - 1].PropertyTypeID, d.result[i - 1].ID);
                 $("#txtAddress").val(d.result[i - 1].Address);
                 getCampus(d.campus[0].CampusID, d.campus[0].ProvinceCode);
-                getAmphoe(d.result[i - 1].AmphoeID,d.campus[0].ProvinceCode);
+                getAmphoe(d.result[i - 1].AmphoeID, d.campus[0].ProvinceCode);
                 $AvailableDate = d.result[i - 1].AvailableDate.split('-');
                 $AvailableDateNew = $AvailableDate[2] + "/" + $AvailableDate[1] + "/" + $AvailableDate[0];
                 $("#txtAvailableFrom").datepicker();
@@ -178,38 +178,42 @@ function getRentalDataEdit() {
 
             var pictureLength = d.picture.length;
             for (var i = 1; i <= pictureLength; i++) {
-                pictures.push(d.picture[i - 1].Picture);
-                if (i <= 5) {
-                    var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
-                    $("#upload_thumbnail_1").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                            "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
-                } else {
-                    var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
-                    $("#upload_thumbnail_2").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                            "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
-                }
+                if (d.picture[i - 1].Picture == "") {
 
-                $("#div_" + d.picture[i - 1].Picture).click(function (event) {
-                    event.preventDefault();
-                });
-                $("#btn_delete_" + d.picture[i - 1].Picture).click(function (event) {
-                    event.preventDefault();
-                    var pictureID = $(this).val();
-                    $.confirm({
-                        text: "Are you sure you want to delete this Picture?",
-                        confirm: function (button) {
-                            var pictureIndex = $.inArray(pictureID, pictures);
-                            pictures.splice(pictureIndex, 1);
-                            $("#div_" + pictureID).remove();
-                        },
-                        cancel: function (button) {
-                            // do something
-                        },
-                        confirmButton: "Yes I am",
-                        cancelButton: "No",
-                        post: true
+                } else {
+                    pictures.push(d.picture[i - 1].Picture);
+                    if (i <= 5) {
+                        var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
+                        $("#upload_thumbnail_1").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
+                    } else {
+                        var action_delete = "<button id='btn_delete_" + d.picture[i - 1].Picture + "' value='" + d.picture[i - 1].Picture + "' class='btn btn-sm btn-link'>Delete</button>";
+                        $("#upload_thumbnail_2").append("<div id='div_" + d.picture[i - 1].Picture + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                "<img id='" + d.picture[i - 1].Picture + "' src='/psurentals_uploads/" + d.picture[i - 1].Picture + "' alt=''>" + action_delete + "</a></div>");
+                    }
+
+                    $("#div_" + d.picture[i - 1].Picture).click(function (event) {
+                        event.preventDefault();
                     });
-                });
+                    $("#btn_delete_" + d.picture[i - 1].Picture).click(function (event) {
+                        event.preventDefault();
+                        var pictureID = $(this).val();
+                        $.confirm({
+                            text: "Are you sure you want to delete this Picture?",
+                            confirm: function (button) {
+                                var pictureIndex = $.inArray(pictureID, pictures);
+                                pictures.splice(pictureIndex, 1);
+                                $("#div_" + pictureID).remove();
+                            },
+                            cancel: function (button) {
+                                // do something
+                            },
+                            confirmButton: "Yes I am",
+                            cancelButton: "No",
+                            post: true
+                        });
+                    });
+                }
             }
             uploadFile();
         },
@@ -601,7 +605,7 @@ function getProperty(PropertyTypeID, PropertyID) {
         }
     });
 }
-function getAmphoe(AmphoeID,ProvinceCode) {
+function getAmphoe(AmphoeID, ProvinceCode) {
     $("#ddlAmphoe").html("");
     $.ajax({
         type: "GET",
@@ -620,7 +624,7 @@ function getAmphoe(AmphoeID,ProvinceCode) {
         }
     });
 }
-function getCampus(CampusID,ProvinceCode) {
+function getCampus(CampusID, ProvinceCode) {
     $("#ddlCampus").html("");
     $.ajax({
         type: "GET",
@@ -657,7 +661,7 @@ function getAmphoeByCampus(ProvinceCode) {
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlAmphoe").append("<option value=" + d.result[i - 1].AmphoeID + ">" + d.result[i - 1].AmphoeNameEN + " / " + d.result[i - 1].AmphoeNameTH + "</option>");
-            }           
+            }
         },
         error: function (xhr, status, error) {
             getAmphoe();
