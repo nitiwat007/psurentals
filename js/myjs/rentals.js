@@ -4,6 +4,7 @@ $(function () {
             $("#txtDescription").jqte({
                 placeholder: "Please, write your Description",
             });
+            checkRoleMakeRentals();
             dateTimePicker();
             getPropertyType();
             getCampus();
@@ -22,6 +23,7 @@ $(function () {
             addRoomSelected();
             addBedroomSelected();
             uploadFile();
+            
             $("#btn_backtolist").click(function (event) {
                 event.preventDefault();
                 window.location.href = "profile";
@@ -364,6 +366,7 @@ function getProvider() {
                 $("#ddlProvider").append("<option value=" + d.result[i - 1].UserID + ">" + d.result[i - 1].FirstName + " " + d.result[i - 1].LastName + "</option>");
             }
             $("#ddlProvider option[value='" + userInfo.userName + "']").attr("selected", "selected");
+            $("#lblProvider").text($("#ddlProvider :selected").text());
         },
         error: function (xhr, status, error) {
             getProvider();

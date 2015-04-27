@@ -395,6 +395,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label for="ddlProvider" class="col-sm-3 control-label" style="text-align:left">Provider</label>
                                     <div class="col-sm-5">
+                                        <label id="lblProvider"  class="form-control" hidden></label>
                                         <select id="ddlProvider" name="ddlProvider" class="form-control">
                                             <option>-- Select --</option>
                                         </select>

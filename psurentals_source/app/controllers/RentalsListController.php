@@ -66,6 +66,7 @@ class RentalsListController extends BaseController {
         $Facility = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=3");
         $PreferredTenant = DB::select("select * from vrentalmultioptions where RID='$RentalID' and OptionTypeID=4");
         $Picture = DB::select("select * from rentalpictures where RID='$RentalID'");
+        //$Campus = DB::select("select vc.ID as CampusID,vc.ShortNameEN,vc.ShortNameTH, vc.ProvinceCode as ProvinceCode from vrental vr, vcampus vc where vr.AmphoeID=vc.AmphoeID and vr.RentalID='$RentalID'");
         $Campus = DB::select("select vc.ID as CampusID,vc.ShortNameEN,vc.ShortNameTH, vc.ProvinceCode as ProvinceCode from vrental vr, vcampus vc where vr.AmphoeID=vc.AmphoeID and vr.RentalID='$RentalID'");
         return Response::json(array('result' => $results, 'distance' => $distance
                     , 'rooms' => $rooms, 'bedrooms' => $bedrooms

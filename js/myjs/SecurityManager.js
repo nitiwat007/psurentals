@@ -14,6 +14,7 @@ $(function () {
 function checkRole() {
     getProviderMenu();
     for (var i = 0; i < roles.length; i++) {
+        //alert(roles[i].nameEN);
         switch (roles[i].nameEN) {
             case "Admin":
                 getAdminMenu();
@@ -21,7 +22,20 @@ function checkRole() {
             case "Inspector":
                 getInspectorMenu();
                 break;
+            default:
+                $("#ddlProvider").hide();
+                break;
+                    
         }
+    }
+}
+function checkRoleMakeRentals() {
+    if(roles.length===0){
+        $("#ddlProvider").hide();
+        $("#lblProvider").show();
+    }else{
+        $("#ddlProvider").show();
+        $("#lblProvider").hide();
     }
 }
 function checkLogin() {
