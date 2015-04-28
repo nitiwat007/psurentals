@@ -58,6 +58,9 @@ Route::get('/logout', function() {
 Route::get('/login', function() {
     return View::make('login');
 });
+Route::get('/test/login', function() {
+    return View::make('testlogin');
+});
 Route::get('/login2/{username}', function($username) {
     Auth::loginUsingId($username);
     return Redirect::to('/profile');
@@ -113,9 +116,10 @@ Route::group(array('before' => 'auth'), function() {
     Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
 
 //TEST
+
 //Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
 //ROLE PROVIDER
-    Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
+Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
 //Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
 });
 
