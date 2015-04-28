@@ -5,4 +5,4 @@
 /*  http://javascriptobfuscator.com                                        */
 /*                                                                         */
 /***************************************************************************/
-var _$_6234=["Page ","text","#page-content","twbsPagination","#pagination-demo","ready"];$(document)[_$_6234[5]](function(){$(_$_6234[4])[_$_6234[3]]({totalPages:35,visiblePages:7,onPageClick:function(a,b){$(_$_6234[2])[_$_6234[1]](_$_6234[0]+b)}})});
+var _$_56d9=["Page ","text","#page-content","twbsPagination","#pagination-demo","ready"];$(document)[_$_56d9[5]](function(){$(_$_56d9[4])[_$_56d9[3]]({totalPages:35,visiblePages:7,onPageClick:function(a,b){$(_$_56d9[2])[_$_56d9[1]](_$_56d9[0]+b)}})});

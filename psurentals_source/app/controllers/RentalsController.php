@@ -128,6 +128,7 @@ class RentalsController extends BaseController {
         $PropertyID = Input::get('ddlProperty');
         $Address = Input::get('txtAddress');
         $AmphoeID = Input::get('ddlAmphoe');
+        $CampusID = Input::get('ddlCampus');
         $AvailableDate = $this->changeFormatDate(Input::get('txtAvailableFrom'));
         $MonthlyRentalFeeFrom = Input::get('txtRentalFeeFrom');
         $MonthlyRentalFeeTo = Input::get('txtRentalFeeTo');
@@ -165,6 +166,15 @@ class RentalsController extends BaseController {
         $OtherFacilities = Input::get('chkOtherFacilities');
         $PreferredTenant = Input::get('chkPreferredTenant');
 
+        $this->addRoomList($RoomList, $rid);
+        $this->addBedroomList($BedroomList, $rid);
+        $this->addImageList($ImageList, $rid);
+        $this->addUtilitiesList($Utilities, $rid);
+        $this->addWhiteGoodProvideredList($WhiteGoodProvidered, $rid);
+        $this->addOtherFacilitiesList($OtherFacilities, $rid);
+        $this->addPreferredTenantList($PreferredTenant, $rid);
+        $this->addDistance($DistanceTo,$rid,$CampusID);
+        
         $results = DB::table('rental')->insert(
                 array('RentalID' => $rid
                     , 'ProviderID' => $provide_id
@@ -206,14 +216,15 @@ class RentalsController extends BaseController {
                     , 'Status' => $Status
                 )
         );
-        $this->addRoomList($RoomList, $rid);
-        $this->addBedroomList($BedroomList, $rid);
-        $this->addImageList($ImageList, $rid);
-        $this->addUtilitiesList($Utilities, $rid);
-        $this->addWhiteGoodProvideredList($WhiteGoodProvidered, $rid);
-        $this->addOtherFacilitiesList($OtherFacilities, $rid);
-        $this->addPreferredTenantList($PreferredTenant, $rid);
-        $this->addDistance($DistanceTo,$rid,$this->getCampusByAmphoe($AmphoeID));
+//        $this->addRoomList($RoomList, $rid);
+//        $this->addBedroomList($BedroomList, $rid);
+//        $this->addImageList($ImageList, $rid);
+//        $this->addUtilitiesList($Utilities, $rid);
+//        $this->addWhiteGoodProvideredList($WhiteGoodProvidered, $rid);
+//        $this->addOtherFacilitiesList($OtherFacilities, $rid);
+//        $this->addPreferredTenantList($PreferredTenant, $rid);
+//        $this->addDistance($DistanceTo,$rid,$CampusID);
+        //$this->addDistance($DistanceTo,$rid,$this->getCampusByAmphoe($AmphoeID));
 
         return Response::json(array('result' => $results));
     }

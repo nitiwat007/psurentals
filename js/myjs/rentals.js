@@ -4,6 +4,7 @@ $(function () {
             $("#txtDescription").jqte({
                 placeholder: "Please, write your Description",
             });
+            clearData();
             checkRoleMakeRentals();
             dateTimePicker();
             getPropertyType();
@@ -36,6 +37,9 @@ $(function () {
     }
 
 });
+function clearData(){
+    $("#frmRentals").trigger("reset");
+}
 function dateTimePicker() {
     $("#txtAvailableFrom").datepicker();
     $("#txtAvailableFrom").datepicker("option", "dateFormat", "dd/mm/yy");

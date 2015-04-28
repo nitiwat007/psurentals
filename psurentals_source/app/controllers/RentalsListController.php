@@ -84,6 +84,7 @@ class RentalsListController extends BaseController {
         $PropertyID = Input::get('ddlProperty');
         $Address = Input::get('txtAddress');
         $AmphoeID = Input::get('ddlAmphoe');
+        $CampusID = Input::get('ddlCampus');
         $AvailableDate = $this->changeFormatDate(Input::get('txtAvailableFrom'));
         $MonthlyRentalFeeFrom = Input::get('txtRentalFeeFrom');
         $MonthlyRentalFeeTo = Input::get('txtRentalFeeTo');
@@ -124,6 +125,15 @@ class RentalsListController extends BaseController {
         $OtherFacilities = Input::get('chkOtherFacilities');
         $PreferredTenant = Input::get('chkPreferredTenant');
 
+        $this->updateRoomList($RoomList, $RentalID);
+        $this->updateBedroomList($BedroomList, $RentalID);
+        $this->updateUtilitiesList($Utilities, $RentalID);
+        $this->updateOtherFacilitiesList($OtherFacilities, $RentalID);
+        $this->updateWhiteGoodProvideredList($WhiteGoodProvidered, $RentalID);
+        $this->updatePreferredTenantList($PreferredTenant, $RentalID);
+        $this->updateImageList($ImageList, $RentalID);
+        $this->updateDistance($DistanceTo,$RentalID,$CampusID);
+        
         $results = DB::table('rental') ->where('RentalID', $RentalID)->update(
                 array('ProviderID' => $provide_id
                     , 'ModifiedBy' => $ModifiedBy
@@ -201,14 +211,15 @@ class RentalsListController extends BaseController {
 //                        . ",Status='$Status' "
 //                        . "where RentalID='$RentalID'");
 
-        $this->updateRoomList($RoomList, $RentalID);
-        $this->updateBedroomList($BedroomList, $RentalID);
-        $this->updateUtilitiesList($Utilities, $RentalID);
-        $this->updateOtherFacilitiesList($OtherFacilities, $RentalID);
-        $this->updateWhiteGoodProvideredList($WhiteGoodProvidered, $RentalID);
-        $this->updatePreferredTenantList($PreferredTenant, $RentalID);
-        $this->updateImageList($ImageList, $RentalID);
-        $this->updateDistance($DistanceTo,$RentalID,$this->getCampusByAmphoe($AmphoeID));
+//        $this->updateRoomList($RoomList, $RentalID);
+//        $this->updateBedroomList($BedroomList, $RentalID);
+//        $this->updateUtilitiesList($Utilities, $RentalID);
+//        $this->updateOtherFacilitiesList($OtherFacilities, $RentalID);
+//        $this->updateWhiteGoodProvideredList($WhiteGoodProvidered, $RentalID);
+//        $this->updatePreferredTenantList($PreferredTenant, $RentalID);
+//        $this->updateImageList($ImageList, $RentalID);
+//        $this->updateDistance($DistanceTo,$RentalID,$CampusID);
+        //$this->updateDistance($DistanceTo,$RentalID,$this->getCampusByAmphoe($AmphoeID));
 
         $this->updateRoomList($RoomList, $RentalID);
         $this->updateBedroomList($BedroomList, $RentalID);
