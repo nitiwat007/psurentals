@@ -24,7 +24,7 @@ $(function () {
             addRoomSelected();
             addBedroomSelected();
             uploadFile();
-            
+
             $("#btn_backtolist").click(function (event) {
                 event.preventDefault();
                 window.location.href = "profile";
@@ -37,7 +37,7 @@ $(function () {
     }
 
 });
-function clearData(){
+function clearData() {
     $("#frmRentals").trigger("reset");
 }
 function dateTimePicker() {
@@ -127,7 +127,7 @@ function getAmphoeByCampus(ProvinceCode) {
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlAmphoe").append("<option value=" + d.result[i - 1].AmphoeID + ">" + d.result[i - 1].AmphoeNameEN + " / " + d.result[i - 1].AmphoeNameTH + "</option>");
-            }           
+            }
         },
         error: function (xhr, status, error) {
             getAmphoe();
@@ -389,7 +389,8 @@ function newRentals() {
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
         $("#txtUsername").val(userInfo.userName);
-
+        $("#ddlProvider").show();
+        $("#lblProvider").hide();
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -400,9 +401,12 @@ function newRentals() {
                 window.location.href = "profile";
             },
             error: function (xhr, status, error) {
+                $("#ddlProvider").hide();
+                $("#lblProvider").show();
                 alert("Error1 newRentals : " + xhr.responseText);
                 alert("Error2 newRentals : " + status);
                 alert("Error3 newRentals : " + error);
+
             }
         });
     });
@@ -536,16 +540,16 @@ function uploadFile() {
                                 var divElementCount = $("#upload_thumbnail_1").children().length;
                                 if (divElementCount <= 4) {
                                     var action_delete = "<button id='btn_delete_" + d.result + "' value='" + (i - 1) + "' class='btn btn-sm btn-link'>Delete</button>";
-                                $("#upload_thumbnail_1").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                        "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
-                                        "</div>");
-                                }else{
+                                    $("#upload_thumbnail_1").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                            "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
+                                            "</div>");
+                                } else {
                                     var action_delete = "<button id='btn_delete_" + d.result + "' value='" + (i - 1) + "' class='btn btn-sm btn-link'>Delete</button>";
-                                $("#upload_thumbnail_2").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
-                                        "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
-                                        "</div>");
+                                    $("#upload_thumbnail_2").append("<div id='div_" + d.result + "' class='col-xs-2 col-md-2'><a href='' class='thumbnail'>" +
+                                            "<img id='" + d.result + "' src='/psurentals_uploads/" + d.result + "' alt='Click to delete'>" + action_delete + "</a>" +
+                                            "</div>");
                                 }
-                                
+
                                 $("#div_" + d.result).click(function (event) {
                                     event.preventDefault();
                                 });

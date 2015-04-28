@@ -43,6 +43,7 @@ function updateRental() {
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
         $("#txtUsername").val(userInfo.userName);
+        $('#ddlProvider').removeAttr("disabled");
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -51,7 +52,8 @@ function updateRental() {
             success: function (d) {
                 //alert(d.result);
                 //Pace.stop();
-                location.reload();
+                //location.reload();
+                window.location.href = "profile";
             },
             error: function (xhr, status, error) {
                 alert("Error1 newRentals : " + xhr.responseText);
@@ -119,7 +121,9 @@ function getRentalDataEdit() {
                 $("#" + d.result[i - 1].PreferGender).prop('checked', true);
                 $("#ddlSmoking option[value='" + d.result[i - 1].Smoking + "']").attr("selected", "selected");
                 $("#ddlPets option[value='" + d.result[i - 1].Pet + "']").attr("selected", "selected");
+                localStorage.setItem("provider_id",d.result[i - 1].ProviderID);
                 $("#ddlProvider option[value='" + d.result[i - 1].ProviderID + "']").attr("selected", "selected");
+                $('#ddlProvider').attr("disabled", true);
                 $("#ddlStatus option[value='" + d.result[i - 1].Status + "']").attr("selected", "selected");
                 $("#txtStatus").val(d.result[i - 1].Status);
                 $("#txtDescription").jqteVal(d.result[i - 1].Details);
@@ -365,7 +369,7 @@ function dialogStatus() {
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this);
-            modal.find('.modal-title').text('New message to ' + recipient);
+            modal.find('.modal-title').text('Update ');
             modal.find('.modal-body input').val(recipient);
         });
 
@@ -382,6 +386,7 @@ function dialogStatus() {
             url: "status",
             success: function (d) {
                 var resultLength = d.result.length;
+                $("#ddlUpdateStatus").html("");
                 for (var i = 1; i <= resultLength; i++) {
                     switch (d.result[i - 1].StatusCode) {
                         case "rco":
@@ -402,7 +407,7 @@ function dialogStatus() {
 }
 function getProvider() {
     $("#ddlProvider").html("");
-    $('#ddlProvider').attr("disabled", true);
+    //$('#ddlProvider').attr("disabled", true);
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -413,6 +418,7 @@ function getProvider() {
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlProvider").append("<option value=" + d.result[i - 1].UserID + ">" + d.result[i - 1].FirstName + " " + d.result[i - 1].LastName + "</option>");
             }
+            $("#ddlProvider option[value='" + localStorage.getItem("provider_id") + "']").attr("selected", "selected");
         },
         error: function (xhr, status, error) {
             getProvider();
