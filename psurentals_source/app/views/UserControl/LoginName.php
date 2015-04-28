@@ -4,6 +4,7 @@
             + "<a id='loginName' href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'></a>"
             + "<ul class='dropdown-menu' role='menu'>"
             + "<li><a id='aProfile' href='#'>My Profile</a></li>"
+            + "<li><a id='aMakeNewRentals' href='#'>Make new Rentals ads</a></li>"
             + "<li class='divider'></li>"
             + "<li><a id='aLogout' href='#'>Logout</a></li>"
             + "</ul></li>";
@@ -20,13 +21,16 @@
             $("#ulLoginStatus").html(loginName);
             $("#loginName").html(userInfo.userName + " <span class='caret'></span>");
             $("#aLogout").click(function () {
-                Pace.restart();
+                //Pace.restart();
                 localStorage.removeItem("userInfo");
                 localStorage.removeItem("ucRentalListID");
                 window.location.href = "/logout";
             });
             $("#aProfile").click(function () {
                 window.location.href = "/profile";
+            });
+            $("#aMakeNewRentals").click(function () {
+                window.location.href = "/rentals";
             });
         }
 

@@ -17,7 +17,8 @@ and open the template in the editor.
         <script src="js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="js/fileupload/js/jquery.iframe-transport.js"></script>
         <script src="js/fileupload/js/jquery.fileupload-ui.js"></script>
-        <title></title>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
+        <title>PSU Rentals</title>
     </head>
     <body>
         <header>

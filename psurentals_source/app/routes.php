@@ -58,6 +58,9 @@ Route::get('/logout', function() {
 Route::get('/login', function() {
     return View::make('login');
 });
+Route::get('/test/login', function() {
+    return View::make('testlogin');
+});
 Route::get('/login2/{username}', function($username) {
     Auth::loginUsingId($username);
     return Redirect::to('/profile');
@@ -80,6 +83,8 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('propertytype', array('uses' => 'RentalsController@getPropertyType'));
     Route::get('property2/{PropertyTypeID}', array('uses' => 'RentalsController@getProperty'));
     Route::get('amphoe', array('uses' => 'RentalsController@getAmphoe'));
+    Route::get('campus', array('uses' => 'RentalsController@getAllCampus'));
+    Route::get('amphoebycampus/{ProvinceCode}', array('uses' => 'RentalsController@getAmphoeByCampus'));
     Route::get('rooms', array('uses' => 'RentalsController@getRooms'));
     Route::get('bedrooms', array('uses' => 'RentalsController@getBedroomsAvailable'));
     Route::get('bedroomfurnished', array('uses' => 'RentalsController@getBedroomFurnished'));
@@ -111,13 +116,15 @@ Route::group(array('before' => 'auth'), function() {
     Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
 
 //TEST
+
 //Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
 //ROLE PROVIDER
-    Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
+Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
 //Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
 });
 
-
+//TEST
+//Route::get('testhost', array('uses' => 'RentalsController@testHost'));
 
 //UNNECESSARY AUTHORIZATION
 //DETAIL

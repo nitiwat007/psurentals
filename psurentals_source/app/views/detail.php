@@ -28,7 +28,8 @@ and open the template in the editor.
                 }
             };
         </script>
-        <title>Rental Details</title>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
+        <title>PSU Rentals</title>
     </head>
     <body>
         <input id='hrentalID' type="hidden" value="<?= Input::get('rentalID') ?>" />
@@ -64,7 +65,7 @@ and open the template in the editor.
                         <div class="col-lg-3">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><strong>Distance</strong></h3>
+                                    <h3 class="panel-title"><strong>Estimated Distance</strong></h3>
                                 </div>
                                 <div id="divDistance" class="panel-body">
 

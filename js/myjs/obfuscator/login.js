@@ -1,0 +1,8 @@
+/***************************************************************************/
+/*                                                                         */
+/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
+/*  Javascript Obfuscator Free Version can be downloaded here              */
+/*  http://javascriptobfuscator.com                                        */
+/*                                                                         */
+/***************************************************************************/
+var _$_fd34=["userInfo","getItem","parse","preventDefault","submit","#frmLogin","val","#username","#password","GET","json","api/aaa/authentication/","/","isAuthentication","stringify","setItem","href","location","login2/","Login Fail.","Error1 authentication : ","responseText","Error2 authentication : ","Error3 authentication : ","ajax"];var userInfo=null;userInfo=JSON[_$_fd34[2]](localStorage[_$_fd34[1]](_$_fd34[0]));$(function(){$(_$_fd34[5])[_$_fd34[4]](function(a){a[_$_fd34[3]]();authentication();})});function authentication(){var k=$(_$_fd34[7])[_$_fd34[6]]();var j=$(_$_fd34[8])[_$_fd34[6]]();$[_$_fd34[24]]({type:_$_fd34[9],dataType:_$_fd34[10],url:_$_fd34[11]+k+_$_fd34[12]+j,success:function(l){if(l[_$_fd34[0]][_$_fd34[13]]){localStorage[_$_fd34[15]](_$_fd34[0],JSON[_$_fd34[14]](l[_$_fd34[0]]));window[_$_fd34[17]][_$_fd34[16]]=_$_fd34[18]+k;}else {alert(_$_fd34[19])}},error:function(o,n,m){alert(_$_fd34[20]+o[_$_fd34[21]]);alert(_$_fd34[22]+n);alert(_$_fd34[23]+m);}});}

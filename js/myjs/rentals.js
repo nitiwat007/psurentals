@@ -4,9 +4,11 @@ $(function () {
             $("#txtDescription").jqte({
                 placeholder: "Please, write your Description",
             });
+            clearData();
+            checkRoleMakeRentals();
             dateTimePicker();
             getPropertyType();
-            getAmphoe();
+            getCampus();
             getRooms();
             getBedroomsAvailable();
             getBedroomFurnished();
@@ -22,6 +24,7 @@ $(function () {
             addRoomSelected();
             addBedroomSelected();
             uploadFile();
+            
             $("#btn_backtolist").click(function (event) {
                 event.preventDefault();
                 window.location.href = "profile";
@@ -34,6 +37,9 @@ $(function () {
     }
 
 });
+function clearData(){
+    $("#frmRentals").trigger("reset");
+}
 function dateTimePicker() {
     $("#txtAvailableFrom").datepicker();
     $("#txtAvailableFrom").datepicker("option", "dateFormat", "dd/mm/yy");
@@ -85,18 +91,43 @@ function getProperty($PropertyTypeID) {
         }
     });
 }
-function getAmphoe() {
+function getCampus() {
+    $("#ddlCampus").html("");
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "campus",
+        success: function (d) {
+            $("#ddlCampus").append("<option value=0>-- Select / เลือก --</option>");
+            var resultLength = d.result.length;
+            for (var i = 1; i <= resultLength; i++) {
+                $("#ddlCampus").append("<option value=" + d.result[i - 1].ProvinceCode + ">" + d.result[i - 1].ShortNameEN + " / " + d.result[i - 1].ShortNameTH + "</option>");
+            }
+            $('#ddlCampus').change(function () {
+                var ProvinceCode = $(this).val();
+                getAmphoeByCampus(ProvinceCode);
+            });
+        },
+        error: function (xhr, status, error) {
+            getAmphoe();
+//            alert("Error1 getAmphoe : " + xhr.responseText);
+//            alert("Error2 getAmphoe : " + status);
+//            alert("Error3 getAmphoe : " + error);
+        }
+    });
+}
+function getAmphoeByCampus(ProvinceCode) {
     $("#ddlAmphoe").html("");
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "amphoe",
+        url: "amphoebycampus/" + ProvinceCode,
         success: function (d) {
             $("#ddlAmphoe").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlAmphoe").append("<option value=" + d.result[i - 1].AmphoeID + ">" + d.result[i - 1].AmphoeNameEN + " / " + d.result[i - 1].AmphoeNameTH + "</option>");
-            }
+            }           
         },
         error: function (xhr, status, error) {
             getAmphoe();
@@ -333,11 +364,13 @@ function getProvider() {
         dataType: "json",
         url: "provider",
         success: function (d) {
-            $("#ddlProvider").append("<option value=0>-- Select / เลือก --</option>");
+//            $("#ddlProvider").append("<option value=0>-- Select / เลือก --</option>");
             var resultLength = d.result.length;
             for (var i = 1; i <= resultLength; i++) {
                 $("#ddlProvider").append("<option value=" + d.result[i - 1].UserID + ">" + d.result[i - 1].FirstName + " " + d.result[i - 1].LastName + "</option>");
             }
+            $("#ddlProvider option[value='" + userInfo.userName + "']").attr("selected", "selected");
+            $("#lblProvider").text($("#ddlProvider :selected").text());
         },
         error: function (xhr, status, error) {
             getProvider();
@@ -351,6 +384,7 @@ function newRentals() {
     $("#frmRentals").submit(function (event) {
         event.preventDefault();
         Pace.restart();
+        $("#submit").text("Updateing.....");
         $("#txtRoomsList").val(rooms);
         $("#txtBedroomsList").val(bedrooms);
         $("#txtImageList").val(pictures);
@@ -449,7 +483,7 @@ function showBedroomsSelect() {
     $("#tb_BedroomSelected tbody").html("");
     var bedroomsLength = bedrooms.length;
     for (var i = 1; i <= bedroomsLength; i++) {
-        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-small confirm'>Delete</button>";
+        var action_delete = "<button id='delete' value='" + (i - 1) + "' class='btn btn-sm btn-danger'>Delete</button>";
         var bedrooms_split = bedrooms[i - 1].split("-");
         $("#tb_BedroomSelected tbody").append("<tr><td>" + i + "</td><td>" + bedrooms_split[1] + "</td><td>" + bedrooms_split[2] + "</td><td>" + action_delete + "</td></tr>");
     }

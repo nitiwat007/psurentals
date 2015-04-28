@@ -12,8 +12,8 @@ and open the template in the editor.
         <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
-
-        <title></title>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
+        <title>PSU Rentals</title>
     </head>
     <body>
         <?php require('UserControl/Header.php'); ?>
@@ -69,7 +69,7 @@ and open the template in the editor.
                     </p>
                     <div class="text-center">
                         <h3></h3>
-                        <img src="images/image1.jpg" alt="..." class="img-thumbnail">
+                        <img src="images/image2.jpg" alt="..." class="img-thumbnail">
                     </div>
                     <h3 id="psurentals_thai1">PSU Rentals คืออะไร</h3>
                     <p>PSU Rentals is a website featuring vacant rooms and properties that are suitable for PSU students. Owners, </p>
@@ -93,7 +93,7 @@ and open the template in the editor.
                     </p>
                 </div>
             </div>
-            <hr>          
+                    
             <div class="row bottom-panel">
                 <div class="col-md-4">
                     <?php include 'UserControl/About.php'; ?>

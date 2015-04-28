@@ -15,6 +15,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="/css/psurentals.css">
         <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/numberFormat/jquery.number.js"></script>
         <script src="/js/myjs/SecurityManager.js"></script>
         <script src="/js/myjs/rentalsList.js"></script>
         <script src="/js/confirm/jquery.confirm.js"></script>
@@ -34,6 +35,7 @@ and open the template in the editor.
                 }
             };
         </script>
+        <link rel="icon" type="image/ico" href="/images/title/Property.ico" />
         <title>PSU Rentals</title>
     </head>
     <body>

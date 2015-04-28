@@ -9,7 +9,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/home">
                         <img alt="Brand" width="40" height="40" style="margin-top: -10px; margin-left: -5px;" src="/images/Home.ico">
                     </a>
                 </div>

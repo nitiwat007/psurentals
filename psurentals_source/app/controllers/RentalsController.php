@@ -2,6 +2,14 @@
 
 class RentalsController extends BaseController {
 
+//    public function testHost() {
+//        $response = file_get_contents("http://api.phuket.psu.ac.th/roleprovider/testhost");
+//        //$response = json_decode($response);
+//        //$http_host=$_SERVER['REMOTE_ADDR'];
+//        //$role=$response->result[0]->role_id;
+//        return $response;
+//    }
+    
     public function getPropertyType() {
         $results = DB::select("select * from propertytype");
         return Response::json(array('result' => $results));
@@ -13,6 +21,15 @@ class RentalsController extends BaseController {
     }
 
     public function getAmphoe() {
+        $results = DB::select("select * from vamphoeprovince vap, vcampus vc where vap.AmphoeID=vc.AmphoeID");
+        return Response::json(array('result' => $results));
+    }
+    public function getAmphoeByCampus($ProvinceCode) {
+        $results = DB::select("select * from vamphoeprovince vap where vap.ProvinceCode='$ProvinceCode'");
+        return Response::json(array('result' => $results));
+    }
+    
+    public function getAllCampus() {
         $results = DB::select("select * from vamphoeprovince vap, vcampus vc where vap.AmphoeID=vc.AmphoeID");
         return Response::json(array('result' => $results));
     }
@@ -73,7 +90,7 @@ class RentalsController extends BaseController {
     }
     
     public function getStatus() {
-        $results = DB::select("select * from status");
+        $results = DB::select("select * from status where StatusGroup='r'");
         return Response::json(array('result' => $results));
     }
     
@@ -111,6 +128,7 @@ class RentalsController extends BaseController {
         $PropertyID = Input::get('ddlProperty');
         $Address = Input::get('txtAddress');
         $AmphoeID = Input::get('ddlAmphoe');
+        $CampusID = Input::get('ddlCampus');
         $AvailableDate = $this->changeFormatDate(Input::get('txtAvailableFrom'));
         $MonthlyRentalFeeFrom = Input::get('txtRentalFeeFrom');
         $MonthlyRentalFeeTo = Input::get('txtRentalFeeTo');
@@ -148,6 +166,15 @@ class RentalsController extends BaseController {
         $OtherFacilities = Input::get('chkOtherFacilities');
         $PreferredTenant = Input::get('chkPreferredTenant');
 
+        $this->addRoomList($RoomList, $rid);
+        $this->addBedroomList($BedroomList, $rid);
+        $this->addImageList($ImageList, $rid);
+        $this->addUtilitiesList($Utilities, $rid);
+        $this->addWhiteGoodProvideredList($WhiteGoodProvidered, $rid);
+        $this->addOtherFacilitiesList($OtherFacilities, $rid);
+        $this->addPreferredTenantList($PreferredTenant, $rid);
+        $this->addDistance($DistanceTo,$rid,$CampusID);
+        
         $results = DB::table('rental')->insert(
                 array('RentalID' => $rid
                     , 'ProviderID' => $provide_id
@@ -189,14 +216,15 @@ class RentalsController extends BaseController {
                     , 'Status' => $Status
                 )
         );
-        $this->addRoomList($RoomList, $rid);
-        $this->addBedroomList($BedroomList, $rid);
-        $this->addImageList($ImageList, $rid);
-        $this->addUtilitiesList($Utilities, $rid);
-        $this->addWhiteGoodProvideredList($WhiteGoodProvidered, $rid);
-        $this->addOtherFacilitiesList($OtherFacilities, $rid);
-        $this->addPreferredTenantList($PreferredTenant, $rid);
-        $this->addDistance($DistanceTo,$rid,$this->getCampusByAmphoe($AmphoeID));
+//        $this->addRoomList($RoomList, $rid);
+//        $this->addBedroomList($BedroomList, $rid);
+//        $this->addImageList($ImageList, $rid);
+//        $this->addUtilitiesList($Utilities, $rid);
+//        $this->addWhiteGoodProvideredList($WhiteGoodProvidered, $rid);
+//        $this->addOtherFacilitiesList($OtherFacilities, $rid);
+//        $this->addPreferredTenantList($PreferredTenant, $rid);
+//        $this->addDistance($DistanceTo,$rid,$CampusID);
+        //$this->addDistance($DistanceTo,$rid,$this->getCampusByAmphoe($AmphoeID));
 
         return Response::json(array('result' => $results));
     }

@@ -34,8 +34,8 @@ function getRentals(page) {
                 var StatusNameEN = d.data[i - 1].StatusNameEN;
                 var StatusNameTH = d.data[i - 1].StatusNameTH;
                 var Status = d.data[i - 1].Status;
-                var MonthlyRentalFeeFrom = d.data[i - 1].MonthlyRentalFeeFrom;
-                var MonthlyRentalFeeTo = d.data[i - 1].MonthlyRentalFeeTo;
+                var MonthlyRentalFeeFrom = $.number(d.data[i - 1].MonthlyRentalFeeFrom);
+                var MonthlyRentalFeeTo = $.number(d.data[i - 1].MonthlyRentalFeeTo);
                 rentalListControl(d.data[i - 1].Picture, RentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo);
                 $("#" + RentalID).click(function (event) {
                     event.preventDefault();
@@ -140,7 +140,13 @@ function getRentalsByStatus(page) {
     });
 }
 function rentalListControl(imgPath, rentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo) {
-    var imgPath = "/psurentals_uploads/" + imgPath;
+    var imgPath;
+    if(imgPath===""){
+        imgPath = "/images/no_image.jpg";
+    }else{
+        imgPath = "/psurentals_uploads/" + imgPath;
+    }
+    
     var rentalListControl = "<div class='panel panel-default rentalList'>"
             + "<div class='panel-body'>"
             + "<div class='media'>"
@@ -151,8 +157,8 @@ function rentalListControl(imgPath, rentalID, Title, Detail, StatusNameEN, Statu
             + "<a id='" + rentalID + "' href=''>" + Title + "</a>"
             + "</h4>"
             + "<div class='monthlyfee'>"
-            + "<span class='monthlyfeefrom'>" + MonthlyRentalFeeFrom + "</span>"
-            + "<span class='monthlyfeeto'>" + MonthlyRentalFeeTo + "</span>"
+            + "<span class='monthlyfeefrom'>" + $.number(MonthlyRentalFeeFrom) + "</span>"
+            + "<span class='monthlyfeeto'>" + $.number(MonthlyRentalFeeTo) + "</span>"
             + "</div>"
             + Detail + "</div>"
             + "<div id='status' class='status " + Status + "'>"

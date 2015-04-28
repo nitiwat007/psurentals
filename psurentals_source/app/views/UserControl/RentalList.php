@@ -37,7 +37,13 @@ foreach ($rentals as $rental) {
                         //$imgCover = file_get_contents($url) ;
                         //echo $imgCover;
                         //$imgPath = $host . "/psurentals_uploads/" . $imgCover;
-                        $imgPath = $host . "/psurentals_uploads/" . $rental->CoverImage;
+                        if($rental->CoverImage==""){
+                            $imgPath = $host . "/images/no_image.jpg";
+                        }else{
+                            $imgPath = $host . "/psurentals_uploads/" . $rental->CoverImage;
+                        }
+                        
+                        
                         //echo $imgPath;
                         ?>
                         <img alt="" src='<?= $imgPath ?>' class='cover' >
@@ -51,10 +57,10 @@ foreach ($rentals as $rental) {
                                     echo $rental->Title;
                                 ?></a></h4>
                         <div class="monthlyfee">
-                            <span class="monthlyfeefrom"><?= $rental->MonthlyRentalFeeFrom ?></span>
+                            <span class="monthlyfeefrom"><?= ceil($rental->MonthlyRentalFeeFrom) ?></span>
                             <?php
                             if ($rental->MonthlyRentalFeeFrom != $rental->MonthlyRentalFeeTo) {
-                                echo '<span class="monthlyfeeto">' . $rental->MonthlyRentalFeeTo . '</span>';
+                                echo '<span class="monthlyfeeto">' . ceil($rental->MonthlyRentalFeeTo) . '</span>';
                             }
                             ?>
                         </div>
