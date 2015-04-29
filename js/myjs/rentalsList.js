@@ -23,6 +23,7 @@ function getRentals(page) {
         dataType: "json",
         url: "getrentalspage/" + userInfo.userName + "?page=" + page,
         success: function (d) {
+            $("#panelHeadingList").html("<strong>Your Rentals / ประกาศทั้งหมดของคุณ" + " (" + d.total + " Results)</strong>");
             var resultLength = (Object.keys(d.data).length - 2);
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
@@ -30,7 +31,7 @@ function getRentals(page) {
                 //var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
                 //var Detail = d.data[i - 1].Details;
                 var myDetail = "<div id='myDetail'>" + d.data[i - 1].Details + "</div>";
-                var Detail = $(myDetail).text().substring(0, (250 - 3)) + "...";
+                var Detail = $(myDetail).text().substring(0, (d.data["descLenght"] - 3)) + "...";
                 var StatusNameEN = d.data[i - 1].StatusNameEN;
                 var StatusNameTH = d.data[i - 1].StatusNameTH;
                 var Status = d.data[i - 1].Status;
@@ -64,6 +65,7 @@ function getRentalsAll(page) {
         dataType: "json",
         url: "getrentalsall?page=" + page,
         success: function (d) {
+            $("#panelHeadingList").html("<strong>Your Rentals / ประกาศทั้งหมดของคุณ" + " (" + d.total + " Results)</strong>");
             var resultLength = (Object.keys(d.data).length - 2);
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
@@ -71,7 +73,7 @@ function getRentalsAll(page) {
                 //var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
                 //var Detail = d.data[i - 1].Details;
                 var myDetail = "<div id='myDetail'>" + d.data[i - 1].Details + "</div>";
-                var Detail = $(myDetail).text().substring(0, (250 - 3)) + "...";
+                var Detail = $(myDetail).text().substring(0, (d.data["descLenght"] - 3)) + "...";
                 var StatusNameEN = d.data[i - 1].StatusNameEN;
                 var StatusNameTH = d.data[i - 1].StatusNameTH;
                 var Status = d.data[i - 1].Status;
@@ -105,6 +107,7 @@ function getRentalsByStatus(page) {
         dataType: "json",
         url: "getrentalsbystatus/rwt?page=" + page,
         success: function (d) {
+            $("#panelHeadingList").html("<strong>Wait for approve / รอการอนุมัติ" + " (" + d.total + " Results)</strong>");
             var resultLength = (Object.keys(d.data).length - 2);
             for (var i = 1; i <= resultLength; i++) {
                 var RentalID = d.data[i - 1].RentalID;
@@ -112,7 +115,7 @@ function getRentalsByStatus(page) {
                 //var Detail = d.data[i - 1].Details.substring(0, (250 - 3)) + "...";
                 //var Detail = d.data[i - 1].Details;
                 var myDetail = "<div id='myDetail'>" + d.data[i - 1].Details + "</div>";
-                var Detail = $(myDetail).text().substring(0, (250 - 3)) + "...";
+                var Detail = $(myDetail).text().substring(0, (d.data["descLenght"] - 3)) + "...";
                 var StatusNameEN = d.data[i - 1].StatusNameEN;
                 var StatusNameTH = d.data[i - 1].StatusNameTH;
                 var Status = d.data[i - 1].Status;
@@ -140,8 +143,10 @@ function getRentalsByStatus(page) {
     });
 }
 function rentalListControl(imgPath, rentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo) {
-    var imgPath;
+    //var imgPath;
     if(imgPath===""){
+        imgPath = "/images/no_image.jpg";
+    } else if(imgPath===null){
         imgPath = "/images/no_image.jpg";
     }else{
         imgPath = "/psurentals_uploads/" + imgPath;

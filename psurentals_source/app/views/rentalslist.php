@@ -48,7 +48,7 @@ and open the template in the editor.
                 </div>
                 <div  class="col-md-9">
                     <div class="panel panel-default">
-                        <div id="panelHeadingList" class="panel-heading"><strong>Your Rentals / ประกาศทั้งหมดของคุณ</strong></div>
+                        <div id="panelHeadingList" class="panel-heading"><strong>Your Rentals / ประกาศทั้งหมดของคุณ<span id="adsTotal"></span></strong></div>
                         <div id="divRentalList" class="panel-body">
 
                         </div>
