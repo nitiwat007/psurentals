@@ -130,6 +130,11 @@ Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleControl
 //DETAIL
 Route::get('getrentaldetail/{RentalID}', array('uses' => 'RentalsListController@getRentalDetail'));
 
+
+//SEND MAIL
+Route::get('sendmail', array('uses' => 'SendMailController@sendMail'));
+
+
 //NR
 include 'routes2.php';
 include 'routeapi.php';

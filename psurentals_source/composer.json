@@ -8,7 +8,9 @@
 		"laravel/framework": "4.2.*",
 		"webpatser/laravel-uuid": "1.*",
 		"maatwebsite/excel": "~1.2.1",
-		"nathanmac/laravel-guid": "dev-master"
+		"nathanmac/laravel-guid": "dev-master",
+		"guzzlehttp/guzzle": "~5.0",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [
