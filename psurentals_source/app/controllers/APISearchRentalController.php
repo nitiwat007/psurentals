@@ -149,7 +149,7 @@ class APISearchRentalController extends BaseController {
          * Main Query
          */
         $query = DB::table('vrental')
-                ->join('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID');
+                ->leftjoin('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID');
 
         if ($args->getFeeUnder() > 0) {
             $query = $query->Where(function($q) use ($args) {
