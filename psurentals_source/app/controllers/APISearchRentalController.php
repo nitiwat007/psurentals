@@ -151,7 +151,8 @@ class APISearchRentalController extends BaseController {
         $query = DB::table('vrental')
                 ->leftjoin('vrentalcover', 'vrental.RentalID', '=', 'vrentalcover.RID');
 
-        if ($args->getFeeUnder() > 0) {
+        if ($args->getFeeUnder() >= 0) {
+            //Log::info("getFeeUnder -> ".$args->getFeeUnder());
             $query = $query->Where(function($q) use ($args) {
                         queryBuinder($args, $q);
                         $q->Where('MonthlyRentalFeeFrom', '<=', $args->getFeeUnder())
