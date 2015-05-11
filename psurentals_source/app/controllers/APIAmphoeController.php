@@ -28,4 +28,5 @@ class APIAmphoeController extends BaseController {
 ////                        ->select('AmphoeID')->first();
 ////         return $amphoeObj;
 //    }
+    
 }

@@ -128,8 +128,26 @@ class APISearchRentalController extends BaseController {
             $amphoe = (is_null($campus)) ? null : $campus->amphoe;
 
             if (!is_null($amphoe)) {
-                $q = $q->where('AmphoeID', '=', $amphoe->ID);
+                //$q = $q->where('AmphoeID', '=', $amphoe->ID);
+                
+                $province = $amphoe->province;
+                // หา อำเภอ ใน จังหวัด
+                if (!is_null($province)) {
+                    $amphoes = (is_null($province)) ? null : $province->amphoes;
+                    // เอาเฉพาะ ID ของ อำเภอ
+                    if (!is_null($amphoes)) {
+                        $amphoeIDs = array();
+                        
+                        foreach ($amphoes as $key => $value) {
+                            //echo($value->ID);
+                            array_push($amphoeIDs, $value->ID);
+                        }
+                        
+                        $q = $q->whereIn('AmphoeID', $amphoeIDs);
+                    }
+                }
             }
+
             if ($args->getRentalStatus() != RentalStatus::All) {
                 $q->where('Status', '=', $args->getRentalStatus());
             }
@@ -195,6 +213,13 @@ class APISearchRentalController extends BaseController {
 
         return $pictureObj->Picture;
     }
+
+    /*
+      public function getAmphoeByProvince($provinceCode) {
+      $amphoes = DB::table('amphoe')
+      ->where('ProvinceCode', '=', $provinceCode)->get();
+      return $amphoes;
+      } */
 
     private function validateArguments(RentalSearchArgument &$args, $searchType) {
         switch ($searchType) {
