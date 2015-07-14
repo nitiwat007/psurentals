@@ -110,7 +110,7 @@ class APISearchRentalController extends BaseController {
         $args->setPropertyTypeID($propTypeID);
         $args->setNearCampusID($nearCampus);
         $args->setFeeUnder($rentalFeeUnder);
-        $args->setOrderBy($his->config->getDefaultSearchRentalOrder());
+        $args->setOrderBy($this->config->getDefaultSearchRentalOrder());
         $args->setRentalStatus($status);
 
         $stype = $this->selectSearchType($args);

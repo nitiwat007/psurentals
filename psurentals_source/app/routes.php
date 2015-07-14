@@ -109,6 +109,8 @@ Route::group(array('before' => 'auth'), function() {
 //RENTALS INSERT
     Route::post('newrentals', array('uses' => 'RentalsController@newtRentals'));
 
+
+
 //RENTALS ACTION
     Route::delete('deleterentals/{RentalID}', array('uses' => 'RentalsListController@deleteRentals'));
 
@@ -116,16 +118,14 @@ Route::group(array('before' => 'auth'), function() {
     Route::post('upload', array('uses' => 'RentalsController@uploadFile'));
 
 //TEST
-
 //Route::get('test/{AmphoeID}', array('uses' => 'RentalsController@getCampusByAmphoe'));
 //ROLE PROVIDER
-Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
+    Route::get('roles/isinroles/{username}/{role}', array('uses' => 'TestRoleController@isInRoles'));
 //Route::get('authen/{username}/{password}', array('uses' => 'TestRoleController@authen'));
 });
 
 //TEST
 //Route::get('testhost', array('uses' => 'RentalsController@testHost'));
-
 //UNNECESSARY AUTHORIZATION
 //DETAIL
 Route::get('getrentaldetail/{RentalID}', array('uses' => 'RentalsListController@getRentalDetail'));
@@ -134,6 +134,8 @@ Route::get('getrentaldetail/{RentalID}', array('uses' => 'RentalsListController@
 //SEND MAIL
 Route::get('sendmail', array('uses' => 'SendMailController@sendMail'));
 
+//RENTALS REGISTER
+Route::post('userregister', array('uses' => 'UserRegisterController@UserRegister'));
 
 //NR
 include 'routes2.php';
