@@ -33,6 +33,9 @@ Route::get('/home', function() {
 Route::get('/detail', function() {
     return View::make('detail');
 });
+Route::get('/signup', function() {
+    return View::make('signup');
+});
 //NR
 Route::get('/detail/{rentalID}', function() {
     return View::make('detail');
