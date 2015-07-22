@@ -18,6 +18,7 @@ and open the template in the editor.
         <script src="/js/numberFormat/jquery.number.js"></script>
         <script src="/js/myjs/SecurityManager.js"></script>
         <script src="/js/myjs/rentalsList.js"></script>
+        <script src="/js/myjs/member.js"></script>
         <script src="/js/confirm/jquery.confirm.js"></script>
         <script src="/js/fileupload/js/vendor/jquery.ui.widget.js"></script>
         <script src="/js/fileupload/js/jquery.iframe-transport.js"></script>

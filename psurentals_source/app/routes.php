@@ -112,6 +112,8 @@ Route::group(array('before' => 'auth'), function() {
 //RENTALS INSERT
     Route::post('newrentals', array('uses' => 'RentalsController@newtRentals'));
 
+//RENTALS MEMBER
+    Route::get('getmemberall', array('uses' => 'MemberController@getMemberAll'));
 
 
 //RENTALS ACTION
