@@ -120,6 +120,10 @@ function getAdminMenu() {
             ProfileActiveMenu = "aMember";
             activeFunction = "Member";
             $("#panelHeadingList").html("<strong>Member / สมาชิก</strong>");
+            $('#divPagination').html('');
+            $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
+            
+            
             getMember();
         });
     }

@@ -11,7 +11,7 @@ $(function () {
         } else {
             window.location.href = "home";
         }
-    }else{
+    } else {
         window.location.href = "home";
     }
 
@@ -144,14 +144,14 @@ function getRentalsByStatus(page) {
 }
 function rentalListControl(imgPath, rentalID, Title, Detail, StatusNameEN, StatusNameTH, Status, MonthlyRentalFeeFrom, MonthlyRentalFeeTo) {
     //var imgPath;
-    if(imgPath===""){
+    if (imgPath === "") {
         imgPath = "/images/no_image.jpg";
-    } else if(imgPath===null){
+    } else if (imgPath === null) {
         imgPath = "/images/no_image.jpg";
-    }else{
+    } else {
         imgPath = "/psurentals_uploads/" + imgPath;
     }
-    
+
     var rentalListControl = "<div class='panel panel-default rentalList'>"
             + "<div class='panel-body'>"
             + "<div class='media'>"
@@ -187,6 +187,9 @@ function Pagination(totalData, perPage) {
                     break;
                 case "InspectorAllRentals":
                     getRentalsAll(page);
+                    break;
+                case "Member":
+                    getMember(page);
                     break;
             }
             $('body,html').animate({
