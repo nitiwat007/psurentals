@@ -16,7 +16,7 @@
     <div class="form-group">
         <label for="txtComfirmPassword" class="col-sm-3 control-label" style="text-align:left">Comfirm Password</label>
         <div class="col-sm-7">
-            <input type="password" class="form-control" id="txtPassword" name="txtComfirmPassword" placeholder="Comfirm Password" required>
+            <input type="password" class="form-control" id="txtConfirmPassword" name="txtComfirmPassword" placeholder="Comfirm Password" required>
         </div>
     </div>
     <div class="form-group">
@@ -52,14 +52,14 @@
     <div class="form-group">
         <label class="col-sm-3 control-label" style="text-align:left"></label>
         <div class="col-sm-7">
-            <input type="checkbox" id="chkTermCondition" value="">
+            <input type="checkbox" id="chkTermCondition" value="1">
             I have read and agree to the <a href="#">terms and conditions</a> 
         </div>
     </div>
     <div clasfhs="form-group">
         <label class="col-sm-3 control-label" style="text-align:left"></label>
         <div class="col-sm-5">
-            <button type="submit" name="submit" class="btn btn-success">Register</button>
+            <button type="submit" id="submit" name="submit" class="btn btn-success" data-loading-text="Loading..." autocomplete="off">Register</button>
         </div>
     </div>
 </form>

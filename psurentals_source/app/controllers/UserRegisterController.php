@@ -32,13 +32,17 @@ class UserRegisterController extends BaseController {
                 'Email' => $Email,
                 'updated_at' => $updated_at
             ]);
+        } catch (Exception $exc) {
+            $results = "duplicate user";
+        }
 
+        try {
             Mail::send('emails.registration', array('fullname' => $Fullname), function($message) use($Email, $Fullname) {
                 $message->to($Email, $Fullname)
                         ->subject('Confirmation Email of successful registration for PSU Rentals');
             });
-        } catch (Exception $exc) {
-            $results = "duplicate user";
+        } catch (Exception $ex) {
+            
         }
 
         return Response::json(array('result' => $results));
