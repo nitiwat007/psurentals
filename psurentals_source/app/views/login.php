@@ -39,9 +39,12 @@
                         <input id="username" name="username" type="text" placeholder="PSU Passport">
                         <input id="password" name="password" type="password" placeholder="password">
                         <button class="btn btn-info btn-block login" type="submit">Login</button>
-                    </form>
+                    </form>                 
                 </div>
+                <br>
+                <div class="row"><a href="/signup">Create account</a></div>
             </div>
+            
         </div>
     </body>
 </html>
