@@ -54,6 +54,7 @@ function getProviderMenu() {
                 + "<div class='list-group'>"
                 + "<a id='aYourRentals' href='#' class='list-group-item'>Your Rentals</a>"
                 + "<a id='aNewRentals' href='rentals' class='list-group-item'>Make new Rentals ads</a>"
+                + "<a id='aUserManual' href='https://goo.gl/sURs4F' class='list-group-item'>User manual</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
 
@@ -77,6 +78,7 @@ function getInspectorMenu() {
                 + "<div class='list-group'>"
                 + "<a id='aWaitForApprove' href='#' class='list-group-item'>Wait for approve</a>"
                 + "<a id='aInspectorAllRentals' href='#' class='list-group-item'>All Rentals</a>"
+                + "<a id='aUserManual' href='https://goo.gl/sURs4F' class='list-group-item'>User manual</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
 
@@ -111,6 +113,7 @@ function getAdminMenu() {
                 + "<div class='panel-heading'><strong>Admin</strong></div>"
                 + "<div class='list-group'>"
                 + "<a id='aMember' href='#' class='list-group-item'>Member</a>"
+                + "<a id='aUserManual' href='https://goo.gl/sURs4F' class='list-group-item'>User manual</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
         $("#aMember").click(function (event) {
@@ -122,8 +125,8 @@ function getAdminMenu() {
             $("#panelHeadingList").html("<strong>Member / สมาชิก</strong>");
             $('#divPagination').html('');
             $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
-            
-            
+
+
             getMember();
         });
     }
