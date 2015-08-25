@@ -25,15 +25,15 @@ function checkRole() {
             default:
                 $("#ddlProvider").hide();
                 break;
-                    
+
         }
     }
 }
 function checkRoleMakeRentals() {
-    if(roles.length===0){
+    if (roles.length === 0) {
         $("#ddlProvider").hide();
         $("#lblProvider").show();
-    }else{
+    } else {
         $("#ddlProvider").show();
         $("#lblProvider").hide();
     }
@@ -54,6 +54,7 @@ function getProviderMenu() {
                 + "<div class='list-group'>"
                 + "<a id='aYourRentals' href='#' class='list-group-item'>Your Rentals</a>"
                 + "<a id='aNewRentals' href='rentals' class='list-group-item'>Make new Rentals ads</a>"
+                + "<a id='aUserManual' href='https://goo.gl/sURs4F' class='list-group-item'>User manual</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
 
@@ -77,6 +78,7 @@ function getInspectorMenu() {
                 + "<div class='list-group'>"
                 + "<a id='aWaitForApprove' href='#' class='list-group-item'>Wait for approve</a>"
                 + "<a id='aInspectorAllRentals' href='#' class='list-group-item'>All Rentals</a>"
+                + "<a id='aUserManual' href='https://goo.gl/sURs4F' class='list-group-item'>User manual</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
 
@@ -110,13 +112,27 @@ function getAdminMenu() {
         var Menu = "<div class='panel panel-default'>"
                 + "<div class='panel-heading'><strong>Admin</strong></div>"
                 + "<div class='list-group'>"
-                + "<a href='#' class='list-group-item'>Manage</a>"
+                + "<a id='aMember' href='#' class='list-group-item'>Member</a>"
+                + "<a id='aUserManual' href='https://goo.gl/sURs4F' class='list-group-item'>User manual</a>"
                 + "</div></div>";
         $("#divRentalRoleMenu").append(Menu);
+        $("#aMember").click(function (event) {
+            event.preventDefault();
+            $(this).addClass("active");
+            $("#" + ProfileActiveMenu).removeClass("active");
+            ProfileActiveMenu = "aMember";
+            activeFunction = "Member";
+            $("#panelHeadingList").html("<strong>Member / สมาชิก</strong>");
+            $('#divPagination').html('');
+            $('#divPagination').html('<ul id="pagination" class="pagination-sm"></ul>');
+
+
+            getMember();
+        });
     }
 }
 function checkEditPermission() {
-    if(roles.length===0){
+    if (roles.length === 0) {
         $("#btnStatus").show();
     }
     for (var i = 0; i < roles.length; i++) {

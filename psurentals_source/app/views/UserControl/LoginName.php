@@ -16,6 +16,9 @@
             $("#aSignIn").click(function () {
                 window.location.href = "/login";
             });
+            $("#aSignUp").click(function () {
+                window.location.href = "/signup";
+            });
 
         } else {
             $("#ulLoginStatus").html(loginName);
